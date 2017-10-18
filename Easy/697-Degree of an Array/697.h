@@ -2,7 +2,7 @@ class Solution {
 public:
     int findShortestSubArray(vector<int>& nums) {
         
-        vector<int> left(50000, -1), right(50000, -1, degree(50000, 0));
+        vector<int> left(50000, -1), right(50000, -1), degree(50000, 0);
         int len = 99999, max_degree = 0;
         for(int i = 0; i < nums.size(); ++i)
         {
