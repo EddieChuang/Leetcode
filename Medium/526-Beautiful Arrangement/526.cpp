@@ -13,7 +13,7 @@ public:
         
         if(vec.size() == 0)
             return 1;
-        
+
         int count = 0;
         for(int i = 0; i < vec.size(); ++i){
             int val = vec[i];
@@ -23,7 +23,6 @@ public:
                 vec.insert(vec.begin()+i, val);
             }
         }
-        
         return count;
     }
 };
