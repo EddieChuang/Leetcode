@@ -12,7 +12,8 @@ import os
 from pymongo import MongoClient
 import json
 
-client = MongoClient('mongodb://yzu_digiedu:yzu_digiedu_2017@140.138.77.91/digiedu?authMechanism=SCRAM-SHA-1')
+# client = MongoClient('mongodb://yzu_digiedu:yzu_digiedu_2017@140.138.77.91/digiedu?authMechanism=SCRAM-SHA-1')
+client = MongoClient('mongodb://localhost:27017/digiedu')
 db = client['digiedu']
 media_dir = 'media/'
 
@@ -31,8 +32,10 @@ def handle_uploaded_file(f,GameName,FileType): # ensure that large file doesn't 
 def hello(request):
     return HttpResponse("hello")
 
+@csrf_exempt
 @require_POST
 def login(request):
+    print(request)
     name = request.POST.get('username','') # 如果沒有這個key 則使用default
     password = request.POST.get('password','')
     user = auth.authenticate(username=name, password=password)
@@ -41,29 +44,38 @@ def login(request):
         message = '登入成功'
     else:
         message = '登入失敗！'
+    response = HttpResponse(message)
+    response["Access-Control-Allow-Origin"] = "*"
     return HttpResponse(message)
 
 def logout(request):
     auth.logout(request)
     return HttpResponse('登出')
 
+@csrf_exempt
 @require_POST
 def addUser(request):
+    
     name = request.POST.get('username','')
-    mail = request.POST.get('e-mail','')
+    mail = request.POST.get('email','')
     password = request.POST.get('password','')
     try:
         user = User.objects.get(username=name)
     except:
         user = None
+
     if user != None: # 帳號存在
         message = user.username + " 帳號已存在!"
-        return HttpResponse(message)
+        response = HttpResponse(message)
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
     else:	# create account			
         user = User.objects.create_user(name,mail,password)
         user.is_staff = True	# 可否登入後台
         user.save()
-        return HttpResponse('建立成功')
+        response = HttpResponse("建立成功")
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
 
 @login_required
 @require_GET

@@ -13,7 +13,9 @@ def transformObjectId(func):
 
 class MongoCollection:
     def __init__(self, collection):
-        client = MongoClient('mongodb://yzu_digiedu:yzu_digiedu_2017@140.138.77.91/authMechanism=SCRAM-SHA-1')
+        # client = MongoClient('mongodb://yzu_digiedu:yzu_digiedu_2017@140.138.77.91/authMechanism=SCRAM-SHA-1')
+        client = MongoClient('mongodb://localhost:27017/digiedu')
+
         db = client['digiedu']
         self.collection = db[collection]
 

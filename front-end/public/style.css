@@ -1,0 +1,14 @@
+body {
+  height: 100%;
+  font-size: 25px;
+}
+
+.container {
+    width: 90% !important;
+    /* margin: 10px !important;
+    padding: 0 15px !important; */
+}
+
+.container .footer-text {
+    margin: 20px 0 !important;
+}

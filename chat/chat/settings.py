@@ -25,9 +25,14 @@ SECRET_KEY = 'u$3f7)me)u0%%hyvbgfh07p#%$-#v)!d+(6iqxg_kgvr+sr)ih'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = False
 
+# CORS_ORIGIN_WHITELIST = (
+#     'http//:localhost:8000',
+# )
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,11 +45,14 @@ INSTALLED_APPS = [
     'channels',
     'system',
     'chat',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
