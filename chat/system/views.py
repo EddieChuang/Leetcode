@@ -32,7 +32,7 @@ def handle_uploaded_file(f,GameName,FileType): # ensure that large file doesn't 
 def hello(request):
     return HttpResponse("hello")
 
-@csrf_exempt
+# @csrf_exempt
 @require_POST
 def login(request):
     print(request)
@@ -44,8 +44,6 @@ def login(request):
         message = '登入成功'
     else:
         message = '登入失敗！'
-    response = HttpResponse(message)
-    response["Access-Control-Allow-Origin"] = "*"
     return HttpResponse(message)
 
 def logout(request):
@@ -66,16 +64,12 @@ def addUser(request):
 
     if user != None: # 帳號存在
         message = user.username + " 帳號已存在!"
-        response = HttpResponse(message)
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
+        return HttpResponse(message)
     else:	# create account			
         user = User.objects.create_user(name,mail,password)
         user.is_staff = True	# 可否登入後台
         user.save()
-        response = HttpResponse("建立成功")
-        response["Access-Control-Allow-Origin"] = "*"
-        return response
+        return HttpResponse("建立成功")
 
 @login_required
 @require_GET

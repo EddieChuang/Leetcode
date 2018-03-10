@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import {Nav, NavItem, Navbar, Modal, Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {Card, Nav, NavItem, Navbar, Modal, Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
 
 
 
@@ -17,10 +17,13 @@ class Header extends React.Component {
             emailVal: null,
             passwordVal: null,
             confirmPwdVal: null,
+            usernameSigninVal: null,
+            passwordSigninVal: null,
             usernameErrMsg: "",
             emailErrMsg: "",
             passwordErrMsg: "",
-            confirmPwdErrMsg: ""
+            confirmPwdErrMsg: "",
+            
         }
         
     }
@@ -43,7 +46,6 @@ class Header extends React.Component {
         case 'email':
           this.setState({emailVal: null});
           this.setState({emailErrMsg: ""});
-          
           break;
         case 'password':
           this.setState({passwordVal: null});
@@ -164,7 +166,7 @@ class Header extends React.Component {
                 {/* <NavItem eventKey={2} onClick={this.open.bind(this)}>Sign up</NavItem> */}
               </Navbar.Form>
               <Navbar.Form pullRight>
-                <FormGroup controlId="usernameSignin" validationState={this.state.usernameVal}>
+                <FormGroup controlId="usernameSignin" >
                   <ControlLabel>Username</ControlLabel>
                   <FormControl 
                     type="text"
@@ -173,7 +175,7 @@ class Header extends React.Component {
                   <FormControl.Feedback />
                   {/* {this.state.usernameErrMsg !== "" && <HelpBlock><font color="red">{this.state.usernameErrMsg}</font></HelpBlock>} */}
                 </FormGroup>
-                <FormGroup controlId="passwordSignin" validationState={this.state.emailVal}>
+                <FormGroup controlId="passwordSignin" >
                   <ControlLabel>Password</ControlLabel>
                   <FormControl 
                     type="Password"
@@ -206,7 +208,7 @@ class Header extends React.Component {
                             placeholder="Chiamin"
                             ref="username"/>
                           <FormControl.Feedback />
-                          {this.state.usernameErrMsg !== "" && <HelpBlock><font color="red">{this.state.usernameErrMsg}</font></HelpBlock>}
+                          {this.state.usernameErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.usernameErrMsg}</font></HelpBlock>}
                         </FormGroup>
                         <FormGroup controlId="email" validationState={this.state.emailVal}>
                           <ControlLabel>Email address</ControlLabel>
@@ -216,7 +218,7 @@ class Header extends React.Component {
                             placeholder="chiamin@chiamin.com"
                             ref="email"/>
                           <FormControl.Feedback />
-                          {this.state.emailErrMsg !== "" && <HelpBlock><font color="red">{this.state.emailErrMsg}</font></HelpBlock>}
+                          {this.state.emailErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.emailErrMsg}</font></HelpBlock>}
                         </FormGroup>
                         <FormGroup controlId="password" validationState={this.state.passwordVal}>
                           <ControlLabel>Password</ControlLabel>
@@ -226,7 +228,7 @@ class Header extends React.Component {
                             placeholder="Password"
                             ref="password"/>
                           <FormControl.Feedback />
-                          {this.state.passwordErrMsg !== "" && <HelpBlock><font color="red">{this.state.passwordErrMsg}</font></HelpBlock>}
+                          {this.state.passwordErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.passwordErrMsg}</font></HelpBlock>}
                         </FormGroup>
                         <FormGroup controlId="confirmPwd" validationState={this.state.confirmPwdVal}>
                           <ControlLabel>Confirm Password</ControlLabel>
@@ -236,7 +238,7 @@ class Header extends React.Component {
                             placeholder="Confirm Password"
                             ref="confirmPwd"/>
                           <FormControl.Feedback />
-                          {this.state.confirmPwdErrMsg !== "" && <HelpBlock><font color="red">{this.state.confirmPwdErrMsg}</font></HelpBlock>}
+                          {this.state.confirmPwdErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.confirmPwdErrMsg}</font></HelpBlock>}
                         </FormGroup>
                         <Button 
                           onClick={this.handleSignup.bind(this)} 

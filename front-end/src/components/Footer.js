@@ -7,7 +7,7 @@ class Footer extends React.Component {
         return (
           <footer className="footer text-center">
             <div className="container">
-              <Link to='/admin/'>Admin</Link>
+              <a href='http://localhost:8000/admin/'>Admin</a>
               <p className="footer-text">Copyright 2018 Digiedu. All rights reserved.</p>
             </div>
           </footer>
