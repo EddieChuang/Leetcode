@@ -31,21 +31,21 @@ class SigninForm extends React.Component {
   handleSignin(){
     console.log("handleSignin", this);
     
-    let username = ReactDOM.findDOMNode(this.refs.username).value;
-    let password = ReactDOM.findDOMNode(this.refs.key).value;
-    let userInfo = new FormData();
-    userInfo.append("username", username);
-    userInfo.append("password", password);
+    // let username = ReactDOM.findDOMNode(this.refs.username).value;
+    // let password = ReactDOM.findDOMNode(this.refs.key).value;
+    // let userInfo = new FormData();
+    // userInfo.append("username", username);
+    // userInfo.append("password", password);
 
-    console.log(userInfo);
-    const config = {headers: {'Content-Type': 'multipart/form-data'}}
-    axios.post('http://localhost:8000/accounts/login/', userInfo, config)
-      .then(function(response){
-          console.log(response);
-      })
-      .catch(function(error){
-          console.log(error);
-      })
+    // console.log(userInfo);
+    // const config = {headers: {'Content-Type': 'multipart/form-data'}}
+    // axios.post('http://localhost:8000/accounts/login/', userInfo, config)
+    //   .then(function(response){
+    //       console.log(response);
+    //   })
+    //   .catch(function(error){
+    //       console.log(error);
+    //   })
   }
 
   /* handleSignup(){
@@ -113,7 +113,7 @@ class SigninForm extends React.Component {
 
         return(
           
-          <Well>
+          <Well bsSize="large">
             <FormGroup controlId={(this.props.userType==='teacher')?('teacher'):('player')}>
               <ControlLabel>{(this.props.userType==='teacher')?('Teacher'):('Player')} name</ControlLabel>
               <FormControl 

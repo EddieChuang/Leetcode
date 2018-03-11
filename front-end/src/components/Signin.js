@@ -25,8 +25,9 @@ class Signin extends React.Component {
 
         return(
           
+          <div className="center">
           <Col xs={12} sm={6}>
-            <Panel>
+            <Panel bsStyle="success">
               <Panel.Heading>進入桌弄</Panel.Heading>
               <Panel.Body>
               <Tabs id="tabs"  activeKey={this.state.key} onSelect={this.handleSelect.bind(this)} animation={true}>
@@ -40,6 +41,7 @@ class Signin extends React.Component {
             </Panel.Body>
             </Panel>
           </Col>
+          </div>
           )
     }
 }

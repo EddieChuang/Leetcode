@@ -1,13 +1,25 @@
 body {
   font-size: 15px;
+  margin: 40px !important;
+  /* text-align: center; */
+  
 }
 
-.signin {
-    width: 25% !important;
-    /* margin: 10px !important;
-    padding: 0 15px !important; */
+div.center{
+
+  /* width: 200px;
+  height: 100px;
+  margin:0 auto;
+  top:0; bottom:0; left:0; right:0; */
 }
 
-.container .footer-text {
-    margin: 20px 0 !important;
+
+.btn-circle {
+  width: 30px !important;
+  height: 30px !important;
+  text-align: center !important;
+  padding: 6px 0 !important;
+  font-size: 12px !important;
+  line-height: 1.428571429 !important;
+  border-radius: 15px !important;
 }
