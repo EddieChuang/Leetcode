@@ -12,6 +12,8 @@ import os
 from pymongo import MongoClient
 import json
 
+from chat.models import Room
+
 # client = MongoClient('mongodb://yzu_digiedu:yzu_digiedu_2017@140.138.77.91/digiedu?authMechanism=SCRAM-SHA-1')
 client = MongoClient('mongodb://localhost:27017/digiedu')
 db = client['digiedu']
@@ -35,15 +37,16 @@ def hello(request):
 # @csrf_exempt
 @require_POST
 def login(request):
-    print(request)
+    
     name = request.POST.get('username','') # 如果沒有這個key 則使用default
     password = request.POST.get('password','')
     user = auth.authenticate(username=name, password=password)
+
     if user is not None and user.is_active: # find user and back
         auth.login(request,user)
         message = '登入成功'
     else:
-        message = '登入失敗！'
+        message = '登入失敗'
     return HttpResponse(message)
 
 def logout(request):
@@ -55,7 +58,7 @@ def logout(request):
 def addUser(request):
     
     name = request.POST.get('username','')
-    mail = request.POST.get('email','')
+    # mail = request.POST.get('email','')
     password = request.POST.get('password','')
     try:
         user = User.objects.get(username=name)
@@ -66,7 +69,8 @@ def addUser(request):
         message = user.username + " 帳號已存在!"
         return HttpResponse(message)
     else:	# create account			
-        user = User.objects.create_user(name,mail,password)
+        # user = User.objects.create_user(name,mail,password)
+        user = User.objects.create_user(username=name, password=password)
         user.is_staff = True	# 可否登入後台
         user.save()
         return HttpResponse("建立成功")
@@ -129,3 +133,19 @@ def Uploader(request):
             return HttpResponse('File Save Error',status=403)
     else:
         return HttpResponse('QQ error Upload',status=403)
+
+@require_GET
+def get_all_rooms(request):
+
+    rooms = Room.objects.all()
+    res = []
+    for room in rooms:
+        res.append({
+          'teacher': room.teacher,
+          'label': room.label,
+          'game': room.game
+        })
+
+    print(res)
+# getAllRooms
+    return JsonResponse({"rooms":res}, status=200)

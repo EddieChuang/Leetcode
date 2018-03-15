@@ -4,22 +4,37 @@ from django.db import transaction
 from django.shortcuts import render, redirect
 import haikunator
 from .models import Room
+from django.http import HttpResponse,JsonResponse # chiamin added
 
 def about(request):
     return render(request, "chat/about.html")
 
+
+
+# @require_POST
 def new_room(request):
     """
     Randomly create a new room, and redirect to it.
     """
-    new_room = None
-    while not new_room:
-        with transaction.atomic():
-            label = haikunator.haikunate()
-            if Room.objects.filter(label=label).exists():
-                continue
-            new_room = Room.objects.create(label=label)
-    return redirect(chat_room, label=label)
+
+    teacher = request.POST.get("teacher", "")
+    label  = request.POST.get("label", "")
+    game = request.POST.get("game", "")
+
+    if Room.objects.filter(label=label).exists():
+        return HttpResponse("label already exists.")
+
+    new_room = Room.objects.create(teacher=teacher, label=label, game=game)
+
+    return HttpResponse("建立成功")
+    # new_room = None
+    # while not new_room:
+    #     with transaction.atomic():
+    #         label = haikunator.haikunate()
+    #         if Room.objects.filter(label=label).exists():
+    #             continue
+    #         new_room = Room.objects.create(game=game, label=label)
+    # return redirect(chat_room, label=label)
 
 def chat_room(request, label):
     """

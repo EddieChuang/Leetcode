@@ -4,8 +4,13 @@ from django.db import models
 from django.utils import timezone
 
 class Room(models.Model):
-    name = models.TextField()
-    label = models.SlugField(unique=True)
+
+    # name = models.TextField()
+    
+    teacher = models.TextField()
+    label   = models.SlugField(unique=True)
+    game    = models.TextField()
+
 
     def __unicode__(self):
         return self.label

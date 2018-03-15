@@ -1,7 +1,7 @@
 "use strict"
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
 import {Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock, Tab, Tabs, Nav, NavItem} from 'react-bootstrap';
 
@@ -10,7 +10,11 @@ class SigninForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            usernameVal: null
+            usernameVal: null,
+            passwordVal: null,
+            usernameErrMsg: "",
+            passwordErrMsg: ""
+
         }
     }
 
@@ -21,6 +25,10 @@ class SigninForm extends React.Component {
         this.setState({usernameVal: null});
         this.setState({usernameErrMsg: ""});
         break;
+      case 'password':
+        this.setState({passwordVal: null});
+        this.setState({passwordErrMsg: ""});
+        break;
       default:
         console.log("error type:", type);
         break;
@@ -28,24 +36,66 @@ class SigninForm extends React.Component {
 
   }
 
+  validate(username, password){
+      this.setState({usernameVal: username === "" ? 'error' : null});
+      this.setState({passwordVal: password === "" ? 'error' : null});
+      this.setState({usernameErrMsg: username === "" ? '請輸入名稱' : ""});
+      this.setState({passwordErrMsg: password === "" ? '請輸入密碼' : ""});
+      return username === "" || password === "";
+  }
+
   handleSignin(){
     console.log("handleSignin", this);
     
-    // let username = ReactDOM.findDOMNode(this.refs.username).value;
-    // let password = ReactDOM.findDOMNode(this.refs.key).value;
-    // let userInfo = new FormData();
-    // userInfo.append("username", username);
-    // userInfo.append("password", password);
+    let username = ReactDOM.findDOMNode(this.refs.username).value;
+    let password = ReactDOM.findDOMNode(this.refs.password).value;
 
-    // console.log(userInfo);
-    // const config = {headers: {'Content-Type': 'multipart/form-data'}}
-    // axios.post('http://localhost:8000/accounts/login/', userInfo, config)
-    //   .then(function(response){
-    //       console.log(response);
-    //   })
-    //   .catch(function(error){
-    //       console.log(error);
-    //   })
+    if(this.validate(username, password)){
+        return;
+    }
+
+    let userInfo = new FormData();
+    userInfo.append("username", username);
+    userInfo.append("password", password);
+
+    const self = this;
+    const config = {headers: {'Content-Type': 'multipart/form-data'}};
+    axios.post('http://localhost:8000/accounts/login/', userInfo, config)
+      .then(function(response){
+          console.log(response);
+          if(response.data === '登入成功'){
+              console.log('登入成功');            
+              self.props.history.push("/home");
+          } else if(response.data === '登入失敗'){
+              // self.setState({usernameVal: 'error'});
+              // self.setState({passwordVal: 'error'});
+              self.setState({passwordErrMsg: '登入失敗'});
+          }
+      })
+      .catch(function(error){
+          console.log(error);
+      })
+  }
+
+  handleEnterRoom(){
+    console.log("handleEnterRoom", this);
+    
+    let username = ReactDOM.findDOMNode(this.refs.username).value;
+    let password = ReactDOM.findDOMNode(this.refs.password).value;
+    let userInfo = new FormData();
+    userInfo.append("username", username);
+    userInfo.append("password", password);
+
+    console.log(userInfo);
+    const config = {headers: {'Content-Type': 'multipart/form-data'}}
+    axios.post('http://localhost:8000/accounts/login/', userInfo, config)
+      .then(function(response){
+          // this.props.history.push()
+          console.log(response);
+      })
+      .catch(function(err){
+          console.log(err);
+      })
   }
 
   /* handleSignup(){
@@ -114,7 +164,7 @@ class SigninForm extends React.Component {
         return(
           
           <Well bsSize="large">
-            <FormGroup controlId={(this.props.userType==='teacher')?('teacher'):('player')}>
+            <FormGroup controlId={(this.props.userType==='teacher')?('teacher'):('player')} validationState={this.state.usernameVal}>
               <ControlLabel>{(this.props.userType==='teacher')?('Teacher'):('Player')} name</ControlLabel>
               <FormControl 
                 type="text"
@@ -122,23 +172,26 @@ class SigninForm extends React.Component {
                 placeholder="Chiamin"
                 ref="username"/>
                 <FormControl.Feedback />
-                {/* {this.state.usernameErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.usernameErrMsg}</font></HelpBlock>} */}
+                {this.state.usernameErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.usernameErrMsg}</font></HelpBlock>}
             </FormGroup>
 
-            <FormGroup controlId={(this.props.userType==='teacher')?('password'):('roomID')} /*validationState={this.state.emailVal}*/>
+            <FormGroup controlId={(this.props.userType==='teacher')?('password'):('roomID')} validationState={this.state.passwordVal}>
               <ControlLabel>{(this.props.userType==='teacher')?('Password'):('Room ID')}</ControlLabel>
               <FormControl 
                 type={(this.props.userType==='teacher')?('password'):('text')}
-                onChange={this.resetValidationState.bind(this, (this.props.userType==='teacher')?('password'):('roomID'))}
+                onChange={this.resetValidationState.bind(this, 'password')}
                 placeholder={(this.props.userType==='teacher')?('Password'):('game-123')}
-                ref="key"/>
+                ref="password"/>
               <FormControl.Feedback />
-              {/* {this.state.emailErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.emailErrMsg}</font></HelpBlock>} */}
+              {this.state.passwordVal !== "" && <HelpBlock><font size="14px" color="red">{this.state.passwordErrMsg}</font></HelpBlock>}
             </FormGroup>
-            <Button onClick={this.handleSignin.bind(this)} bsStyle="primary">Sign in</Button>
+            <Button onClick={(this.props.userType==='teacher') ? 
+              (this.handleSignin.bind(this)) : (this.handleEnterRoom.bind(this))} bsStyle="primary">
+              {(this.props.userType==='teacher') ? ('登入') : ('進入聊天室')}
+            </Button>
           </Well>
           )
     }
 }
 
-export default SigninForm;
+export default withRouter(SigninForm);
