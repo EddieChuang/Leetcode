@@ -25,46 +25,36 @@ class Home extends React.Component {
       .then(function(response){
           console.log(response);
           self.setState({rooms:response.data.rooms});
-          
       })
       .catch(function(err){
           console.log(err);
       })
-
-    // this.setState({
-    //   rooms: [
-    //     {
-    //       roomId: 1,
-    //       game: 'operating system',
-    //       teacher: 'chiamin',
-    //       player: 'chiamin'
-    //     },
-    //     {
-    //       roomId: 2,
-    //       game: 'algorithm',
-    //       teacher: 'chiamin',
-    //       player: 'chiamin'
-    //     },
-    //     {
-    //       roomId: 3,
-    //       game: 'react.js',
-    //       teacher: 'chiamin',
-    //       player: 'chiamin'
-    //     }
-    //   ]
-    // });
   }
 
-  componentDidMount(){
-    console.log(ReactDOM.findDOMNode(this.refs.xxx));
+  handleUpdateRooms(room){
+
+      let newRoom = {};
+      room.forEach(function(value, key){
+          newRoom[key] = value;
+      })
+      let roomsToUpdate = this.state.rooms;
+      let indexToUpdate = roomsToUpdate.findIndex(function(room_){
+          return newRoom.label === room_.label;
+      });
+      if(indexToUpdate === -1){
+          this.setState({rooms: [...roomsToUpdate, newRoom]});
+      } else{
+          this.setState({rooms: [...roomsToUpdate.slice(0, indexToUpdate), newRoom, ...roomsToUpdate.slice(indexToUpdate+1)]})
+      }
   }
 
   render(){
 
+    const self = this;
     const roomList = this.state.rooms.map(function(room){
         return (
-          <Col xs={4} md={3} md={2}  key={room.label}>
-            <RoomCard roomInfo={room}/>
+          <Col xs={4} md={3} md={2} key={room.label}>
+            <RoomCard roomInfo={room} handleUpdateRooms={self.handleUpdateRooms.bind(self)}/>
           </Col>
         )
     });
@@ -77,7 +67,7 @@ class Home extends React.Component {
             <Row>
               {roomList}
               <Col xs={4} md={3} md={2} >
-                <RoomCard ref="xxx" roomInfo={null}/>
+                <RoomCard ref="xxx" roomInfo={null} handleUpdateRooms={this.handleUpdateRooms.bind(this)}/>
               </Col>
             </Row>
           </Grid>

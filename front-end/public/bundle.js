@@ -50859,12 +50859,16 @@ var SigninForm = function (_React$Component) {
 
             switch (type) {
                 case 'username':
-                    this.setState({ usernameVal: null });
-                    this.setState({ usernameErrMsg: "" });
+                    this.setState({
+                        usernameVal: null,
+                        usernameErrMsg: ""
+                    });
                     break;
                 case 'password':
-                    this.setState({ passwordVal: null });
-                    this.setState({ passwordErrMsg: "" });
+                    this.setState({
+                        passwordVal: null,
+                        passwordErrMsg: ""
+                    });
                     break;
                 default:
                     console.log("error type:", type);
@@ -50874,10 +50878,12 @@ var SigninForm = function (_React$Component) {
     }, {
         key: 'validate',
         value: function validate(username, password) {
-            this.setState({ usernameVal: username === "" ? 'error' : null });
-            this.setState({ passwordVal: password === "" ? 'error' : null });
-            this.setState({ usernameErrMsg: username === "" ? '請輸入名稱' : "" });
-            this.setState({ passwordErrMsg: password === "" ? '請輸入密碼' : "" });
+            this.setState({
+                usernameVal: username === "" ? 'error' : null,
+                passwordVal: password === "" ? 'error' : null,
+                usernameErrMsg: username === "" ? '請輸入名稱' : "",
+                passwordErrMsg: password === "" ? '請輸入密碼' : ""
+            });
             return username === "" || password === "";
         }
     }, {
@@ -51227,6 +51233,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -51260,46 +51268,37 @@ var Home = function (_React$Component) {
       }).catch(function (err) {
         console.log(err);
       });
-
-      // this.setState({
-      //   rooms: [
-      //     {
-      //       roomId: 1,
-      //       game: 'operating system',
-      //       teacher: 'chiamin',
-      //       player: 'chiamin'
-      //     },
-      //     {
-      //       roomId: 2,
-      //       game: 'algorithm',
-      //       teacher: 'chiamin',
-      //       player: 'chiamin'
-      //     },
-      //     {
-      //       roomId: 3,
-      //       game: 'react.js',
-      //       teacher: 'chiamin',
-      //       player: 'chiamin'
-      //     }
-      //   ]
-      // });
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log(_reactDom2.default.findDOMNode(this.refs.xxx));
+    key: 'handleUpdateRooms',
+    value: function handleUpdateRooms(room) {
+
+      var newRoom = {};
+      room.forEach(function (value, key) {
+        newRoom[key] = value;
+      });
+      var roomsToUpdate = this.state.rooms;
+      var indexToUpdate = roomsToUpdate.findIndex(function (room_) {
+        return newRoom.label === room_.label;
+      });
+      if (indexToUpdate === -1) {
+        this.setState({ rooms: [].concat(_toConsumableArray(roomsToUpdate), [newRoom]) });
+      } else {
+        this.setState({ rooms: [].concat(_toConsumableArray(roomsToUpdate.slice(0, indexToUpdate)), [newRoom], _toConsumableArray(roomsToUpdate.slice(indexToUpdate + 1))) });
+      }
     }
   }, {
     key: 'render',
     value: function render() {
 
+      var self = this;
       var roomList = this.state.rooms.map(function (room) {
         var _React$createElement;
 
         return _react2.default.createElement(
           _reactBootstrap.Col,
           (_React$createElement = { xs: 4, md: 3 }, _defineProperty(_React$createElement, 'md', 2), _defineProperty(_React$createElement, 'key', room.label), _React$createElement),
-          _react2.default.createElement(_RoomCard2.default, { roomInfo: room })
+          _react2.default.createElement(_RoomCard2.default, { roomInfo: room, handleUpdateRooms: self.handleUpdateRooms.bind(self) })
         );
       });
 
@@ -51324,7 +51323,7 @@ var Home = function (_React$Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 _defineProperty({ xs: 4, md: 3 }, 'md', 2),
-                _react2.default.createElement(_RoomCard2.default, { ref: 'xxx', roomInfo: null })
+                _react2.default.createElement(_RoomCard2.default, { ref: 'xxx', roomInfo: null, handleUpdateRooms: this.handleUpdateRooms.bind(this) })
               )
             )
           )
@@ -55014,8 +55013,14 @@ var RoomCard = function (_React$Component) {
 
     _this.state = {
       rooms: null,
-      game: '選擇遊戲',
+      teacherVal: null,
+      labelVal: null,
+      gameErrMsg: "",
+      teacherErrMsg: "",
+      labelErrMsg: "",
+      game: "選擇遊戲",
       show: false
+
     };
     return _this;
   }
@@ -55028,7 +55033,17 @@ var RoomCard = function (_React$Component) {
   }, {
     key: 'close',
     value: function close() {
-      this.setState({ show: false });
+      _reactDom2.default.findDOMNode(this.refs.teacher).value = "";
+      _reactDom2.default.findDOMNode(this.refs.label).value = "";
+      this.setState({
+        show: false,
+        game: "選擇遊戲",
+        teacherVal: null,
+        labelVal: null,
+        teacherErrMsg: "",
+        labelErrMsg: "",
+        gameErrMsg: ""
+      });
     }
   }, {
     key: 'open',
@@ -55036,9 +55051,50 @@ var RoomCard = function (_React$Component) {
       this.setState({ show: true });
     }
   }, {
+    key: 'resetValidationState',
+    value: function resetValidationState(type) {
+
+      switch (type) {
+        case 'teacher':
+          this.setState({
+            teacherVal: null,
+            teacherErrMsg: ""
+          });
+          break;
+        case 'label':
+          this.setState({
+            labelVal: null,
+            labelErrMsg: ""
+          });
+          break;
+        default:
+          console.log("error type:", type);
+          break;
+      }
+    }
+  }, {
+    key: 'validate',
+    value: function validate(teacher, label, game) {
+
+      this.setState({
+        teacherVal: teacher === "" ? 'error' : null,
+        labelVal: label === "" ? 'error' : null,
+        teacherErrMsg: teacher === "" ? '請輸入名稱' : "",
+        labelErrMsg: label === "" ? '請輸入標籤' : "",
+        gameErrMsg: game === "選擇遊戲" ? "請選擇遊戲" : ""
+      });
+
+      console.log(_reactDom2.default.findDOMNode(this.refs.gameBtn));
+
+      return teacher === "" || label === "" || game === "選擇遊戲";
+    }
+  }, {
     key: 'handleSelect',
     value: function handleSelect(eventKey) {
-      this.setState({ game: eventKey });
+      this.setState({
+        gameErrMsg: "",
+        game: eventKey
+      });
     }
   }, {
     key: 'handleCreate',
@@ -55049,14 +55105,27 @@ var RoomCard = function (_React$Component) {
       var teacher = _reactDom2.default.findDOMNode(this.refs.teacher).value;
       var label = _reactDom2.default.findDOMNode(this.refs.label).value;
       var game = this.state.game;
+
+      if (this.validate(teacher, label, game)) {
+        return;
+      }
+
       var roomInfo = new FormData();
       roomInfo.append("teacher", teacher);
       roomInfo.append("label", label);
       roomInfo.append("game", game);
 
-      // let self = this;
+      var self = this;
       _axios2.default.post("http://localhost:8000/new/", roomInfo).then(function (response) {
         console.log(response);
+        if (response.data === 'label already exists.') {
+          self.setState({
+            labelVal: "error",
+            labelErrMsg: response.data
+          });
+          return;
+        }
+        self.props.handleUpdateRooms(roomInfo);
         // self.props.history.push("/home");
       }).catch(function (err) {
         console.log(err);
@@ -55132,10 +55201,10 @@ var RoomCard = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactBootstrap.FormGroup,
-              null,
+              { validationState: this.state.gameVal },
               _react2.default.createElement(
                 _reactBootstrap.SplitButton,
-                { componentClass: _reactBootstrap.InputGroup.Button, id: 'split-button-basic', title: this.state.game, onSelect: this.handleSelect.bind(this), bsStyle: 'primary' },
+                { componentClass: _reactBootstrap.InputGroup.Button, id: 'split-button-basic', ref: 'gameBtn', title: this.state.game, onSelect: this.handleSelect.bind(this), bsStyle: 'primary' },
                 _react2.default.createElement(
                   _reactBootstrap.MenuItem,
                   { ref: 'game1', eventKey: 'game1' },
@@ -55151,29 +55220,56 @@ var RoomCard = function (_React$Component) {
                   { ref: 'game3', eventKey: 'game3' },
                   'game3'
                 )
+              ),
+              this.state.gameErrMsg !== "" && _react2.default.createElement(
+                _reactBootstrap.HelpBlock,
+                null,
+                _react2.default.createElement(
+                  'font',
+                  { size: '14px', color: 'red' },
+                  this.state.gameErrMsg
+                )
               )
             ),
             _react2.default.createElement(
               _reactBootstrap.FormGroup,
-              { controlId: 'teacher' },
+              { controlId: 'teacher', validationState: this.state.teacherVal },
               _react2.default.createElement(
                 _reactBootstrap.ControlLabel,
                 null,
                 'Teacher'
               ),
-              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Enter teacher', ref: 'teacher' }),
-              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
+              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Enter teacher', ref: 'teacher', onChange: this.resetValidationState.bind(this, 'teacher') }),
+              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
+              this.state.teacherErrMsg !== "" && _react2.default.createElement(
+                _reactBootstrap.HelpBlock,
+                null,
+                _react2.default.createElement(
+                  'font',
+                  { size: '14px', color: 'red' },
+                  this.state.teacherErrMsg
+                )
+              )
             ),
             _react2.default.createElement(
               _reactBootstrap.FormGroup,
-              { controlId: 'label' },
+              { controlId: 'label', validationState: this.state.labelVal },
               _react2.default.createElement(
                 _reactBootstrap.ControlLabel,
                 null,
                 'Label'
               ),
-              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Enter label', ref: 'label' }),
-              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
+              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Enter label', ref: 'label', onChange: this.resetValidationState.bind(this, 'label') }),
+              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
+              this.state.labelErrMsg !== "" && _react2.default.createElement(
+                _reactBootstrap.HelpBlock,
+                null,
+                _react2.default.createElement(
+                  'font',
+                  { size: '14px', color: 'red' },
+                  this.state.labelErrMsg
+                )
+              )
             )
           ),
           _react2.default.createElement(

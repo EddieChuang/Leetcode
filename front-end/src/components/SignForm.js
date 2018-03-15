@@ -22,25 +22,30 @@ class SigninForm extends React.Component {
 
     switch(type){
       case 'username':
-        this.setState({usernameVal: null});
-        this.setState({usernameErrMsg: ""});
+        this.setState({
+          usernameVal: null,
+          usernameErrMsg: ""
+        });
         break;
       case 'password':
-        this.setState({passwordVal: null});
-        this.setState({passwordErrMsg: ""});
+        this.setState({
+          passwordVal: null,
+          passwordErrMsg: ""
+        });
         break;
       default:
         console.log("error type:", type);
         break;
     }
-
   }
 
   validate(username, password){
-      this.setState({usernameVal: username === "" ? 'error' : null});
-      this.setState({passwordVal: password === "" ? 'error' : null});
-      this.setState({usernameErrMsg: username === "" ? '請輸入名稱' : ""});
-      this.setState({passwordErrMsg: password === "" ? '請輸入密碼' : ""});
+      this.setState({
+        usernameVal: username === "" ? 'error' : null,
+        passwordVal: password === "" ? 'error' : null,
+        usernameErrMsg: username === "" ? '請輸入名稱' : "",
+        passwordErrMsg: password === "" ? '請輸入密碼' : ""
+      });
       return username === "" || password === "";
   }
 
@@ -162,7 +167,6 @@ class SigninForm extends React.Component {
     render(){
 
         return(
-          
           <Well bsSize="large">
             <FormGroup controlId={(this.props.userType==='teacher')?('teacher'):('player')} validationState={this.state.usernameVal}>
               <ControlLabel>{(this.props.userType==='teacher')?('Teacher'):('Player')} name</ControlLabel>
