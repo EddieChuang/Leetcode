@@ -43,7 +43,7 @@ def login(request):
     user = auth.authenticate(username=name, password=password)
 
     if user is not None and user.is_active: # find user and back
-        auth.login(request,user)
+        auth.login(request, user)
         message = '登入成功'
     else:
         message = '登入失敗'
@@ -106,7 +106,7 @@ def addGame(request): # Create [POST]
         return HttpResponse(status=500)
     return HttpResponse(status=200)
 
-@login_required
+# @login_required
 @require_POST
 def addGameData(request):
     try:
@@ -134,6 +134,7 @@ def Uploader(request):
     else:
         return HttpResponse('QQ error Upload',status=403)
 
+# @login_required
 @require_GET
 def get_all_rooms(request):
 

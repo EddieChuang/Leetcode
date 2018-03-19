@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import {withRouter} from 'react-router-dom';
 import {Well, Col, Row, Grid, Panel} from 'react-bootstrap';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardImgOverlay, Button} from 'reactstrap';
 
@@ -12,23 +13,53 @@ class Home extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-         rooms: []
+         rooms: [],
+         username: '',
       }
+      this.logout = this.logout.bind(this);
   }
 
   componentWillMount(){
     // get all rooms
+    console.log("componentWillMount", "Home");
 
-    
+    let location = this.props.location;
+    if(location.state === undefined || !location.state.logined){
+        this.props.history.push('/');
+    } else{
+
+        this.setState({username: location.state.username})
+        let self = this;
+        axios.get('http://localhost:8000/getAllRooms/')
+          .then(function(response){
+              console.log(response);
+              self.setState({rooms:response.data.rooms});
+          })
+          .catch(function(err){
+              console.log(err);
+          })
+    }
+  }
+  componentDidMount(){
+    console.log("componentDidMount", "Home");
+  }
+
+  componentWillUnmount(){
+    console.log("componentWillUnmount", "Home");
+  }
+
+  logout(){
+
     let self = this;
-    axios.get('http://localhost:8000/getAllRooms/')
+    axios.get('http://localhost:8000/accounts/logout/')
       .then(function(response){
-          console.log(response);
-          self.setState({rooms:response.data.rooms});
+          self.setState({username:''});
+          self.props.history.push('/');
       })
       .catch(function(err){
           console.log(err);
       })
+
   }
 
   handleUpdateRooms(room){
@@ -61,7 +92,9 @@ class Home extends React.Component {
 
     return(
       <Panel bsStyle="success">
-        <Panel.Heading>桌弄</Panel.Heading>
+        <Panel.Heading>桌弄    Hi, {this.state.username}  
+          <Button onClick={this.logout}>登出</Button>
+        </Panel.Heading>
         <Panel.Body>
           <Grid>
             <Row>
@@ -78,4 +111,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

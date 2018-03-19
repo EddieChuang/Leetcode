@@ -16,6 +16,18 @@ class Signin extends React.Component {
         }
     }
 
+    componentWillMount(){
+      console.log("componentWillMount", "Signin");
+    }
+
+    componentDidMount(){
+      console.log("componentDidMount", "Signin");
+    }
+  
+    componentWillUnmount(){
+      console.log("componentWillUnmount", "Signin");
+    }
+
 
     handleSelect(key){
       this.setState({key})

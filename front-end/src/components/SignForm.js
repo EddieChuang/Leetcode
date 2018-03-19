@@ -18,6 +18,18 @@ class SigninForm extends React.Component {
         }
     }
 
+    componentWillMount(){
+      console.log("componentWillMount", "SigninForm");
+    }
+
+    componentDidMount(){
+      console.log("componentDidMount", "SigninForm");
+    }
+  
+    componentWillUnmount(){
+      console.log("componentWillUnmount", "SigninForm");
+    }
+
   resetValidationState(type){
 
     switch(type){
@@ -70,7 +82,10 @@ class SigninForm extends React.Component {
           console.log(response);
           if(response.data === '登入成功'){
               console.log('登入成功');            
-              self.props.history.push("/home");
+              self.props.history.push({
+                pathname: '/home',
+                state: {username: username, logined: true}
+              });
           } else if(response.data === '登入失敗'){
               // self.setState({usernameVal: 'error'});
               // self.setState({passwordVal: 'error'});
