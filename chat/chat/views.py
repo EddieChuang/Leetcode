@@ -4,37 +4,46 @@ from django.db import transaction
 from django.shortcuts import render, redirect
 import haikunator
 from .models import Room
-from django.http import HttpResponse,JsonResponse # chiamin added
+from django.http import HttpResponse,JsonResponse
+from django.utils import timezone
+from datetime import datetime
 
 def about(request):
     return render(request, "chat/about.html")
-
-
-
+  
 # @require_POST
 def new_room(request):
     """
     Randomly create a new room, and redirect to it.
     """
 
-    teacher = request.POST.get("teacher", "")
-    label  = request.POST.get("label", "")
+   
+    # label  = request.POST.get("label", "")
+    
+
+    # if Room.objects.filter(label=label).exists():
+    #     return HttpResponse("label already exists.")
+
+    label = ""
     game = request.POST.get("game", "")
-
-    if Room.objects.filter(label=label).exists():
-        return HttpResponse("label already exists.")
-
-    new_room = Room.objects.create(teacher=teacher, label=label, game=game)
-
-    return HttpResponse("建立成功")
-    # new_room = None
-    # while not new_room:
-    #     with transaction.atomic():
-    #         label = haikunator.haikunate()
-    #         if Room.objects.filter(label=label).exists():
-    #             continue
-    #         new_room = Room.objects.create(game=game, label=label)
+    teacher = request.POST.get("teacher", "")
+    new_room = None
+    while not new_room:
+        with transaction.atomic():
+            # label = haikunator.haikunate()
+            label = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+            if Room.objects.filter(label=label).exists():
+                continue
+            new_room = Room.objects.create(teacher=teacher, label=label, game=game, isActive=True)
+    return HttpResponse(label)
     # return redirect(chat_room, label=label)
+
+def update_room(request):
+
+    label    = request.POST.get("label")
+    isActive = request.POST.get("isActive")=="true"
+    Room.objects.filter(label=label).update(isActive=isActive)
+    return HttpResponse("更新成功") 
 
 def chat_room(request, label):
     """
@@ -45,7 +54,7 @@ def chat_room(request, label):
     """
     # If the room with the given label doesn't exist, automatically create it
     # upon first visit (a la etherpad).
-    room, created = Room.objects.get_or_create(label=label)
+    room = Room.objects.get(label=label)
 
     # We want to show the last 50 messages, ordered most-recent-last
     messages = reversed(room.messages.order_by('-timestamp')[:50])

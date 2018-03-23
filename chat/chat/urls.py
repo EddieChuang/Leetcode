@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^game/(?P<GameName>\w+)/$',ReadGame),
     url(r'^addgame/$',addGame),
     url(r'^getAllRooms/$', get_all_rooms),
+    url(r'^updateRoom/$', views.update_room),
     # url(r'Upload/media/$',Uploader,name='Upload Media File'),
     url(r'^$', views.about, name='about'),
     url(r'^new/$', views.new_room, name='new_room'),

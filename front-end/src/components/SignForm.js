@@ -75,24 +75,23 @@ class SigninForm extends React.Component {
     userInfo.append("username", username);
     userInfo.append("password", password);
 
-    const self = this;
     const config = {headers: {'Content-Type': 'multipart/form-data'}};
     axios.post('http://localhost:8000/accounts/login/', userInfo, config)
-      .then(function(response){
+      .then((response) => {
           console.log(response);
           if(response.data === '登入成功'){
               console.log('登入成功');            
-              self.props.history.push({
+              this.props.history.push({
                 pathname: '/home',
                 state: {username: username, logined: true}
               });
           } else if(response.data === '登入失敗'){
-              // self.setState({usernameVal: 'error'});
-              // self.setState({passwordVal: 'error'});
-              self.setState({passwordErrMsg: '登入失敗'});
+              // this.setState({usernameVal: 'error'});
+              // this.setState({passwordVal: 'error'});
+              this.setState({passwordErrMsg: '登入失敗'});
           }
       })
-      .catch(function(error){
+      .catch((error) => {
           console.log(error);
       })
   }
@@ -101,19 +100,17 @@ class SigninForm extends React.Component {
     console.log("handleEnterRoom", this);
     
     let username = ReactDOM.findDOMNode(this.refs.username).value;
-    let password = ReactDOM.findDOMNode(this.refs.password).value;
+    let label = ReactDOM.findDOMNode(this.refs.label).value;
     let userInfo = new FormData();
     userInfo.append("username", username);
     userInfo.append("password", password);
 
-    console.log(userInfo);
-    const config = {headers: {'Content-Type': 'multipart/form-data'}}
-    axios.post('http://localhost:8000/accounts/login/', userInfo, config)
-      .then(function(response){
+    axios.post('http://localhost:8000/'+label+'/', userInfo)
+      .then((response) => {
           // this.props.history.push()
           console.log(response);
       })
-      .catch(function(err){
+      .catch((err) => {
           console.log(err);
       })
   }

@@ -17,25 +17,27 @@ class Home extends React.Component {
          username: '',
       }
       this.logout = this.logout.bind(this);
+      this.handleUpdateRooms = this.handleUpdateRooms.bind(this);
   }
 
   componentWillMount(){
     // get all rooms
     console.log("componentWillMount", "Home");
-
     let location = this.props.location;
     if(location.state === undefined || !location.state.logined){
         this.props.history.push('/');
     } else{
 
-        this.setState({username: location.state.username})
-        let self = this;
-        axios.get('http://localhost:8000/getAllRooms/')
-          .then(function(response){
+        let username = location.state.username;
+        let userInfo = new FormData();
+        userInfo.append("username", username);
+        this.setState({username: username})
+        axios.post('http://localhost:8000/getAllRooms/', userInfo)
+          .then((response) => {
               console.log(response);
-              self.setState({rooms:response.data.rooms});
+              this.setState({rooms:response.data.rooms});
           })
-          .catch(function(err){
+          .catch((err) => {
               console.log(err);
           })
     }
@@ -49,14 +51,15 @@ class Home extends React.Component {
   }
 
   logout(){
-
-    let self = this;
+    if (!confirm('登出')) 
+        return;
     axios.get('http://localhost:8000/accounts/logout/')
-      .then(function(response){
-          self.setState({username:''});
-          self.props.history.push('/');
+      .then((response) => {
+          console.log(response);
+          this.setState({username:''});
+          this.props.history.push('/');
       })
-      .catch(function(err){
+      .catch((err) => {
           console.log(err);
       })
 
@@ -73,7 +76,7 @@ class Home extends React.Component {
           return newRoom.label === room_.label;
       });
       if(indexToUpdate === -1){
-          this.setState({rooms: [...roomsToUpdate, newRoom]});
+          this.setState({rooms: [newRoom, ...roomsToUpdate]});
       } else{
           this.setState({rooms: [...roomsToUpdate.slice(0, indexToUpdate), newRoom, ...roomsToUpdate.slice(indexToUpdate+1)]})
       }
@@ -81,26 +84,25 @@ class Home extends React.Component {
 
   render(){
 
-    const self = this;
-    const roomList = this.state.rooms.map(function(room){
-        return (
-          <Col xs={4} md={3} md={2} key={room.label}>
-            <RoomCard roomInfo={room} handleUpdateRooms={self.handleUpdateRooms.bind(self)}/>
-          </Col>
-        )
-    });
+    let teacher = {name: this.state.username};
+    const roomList = this.state.rooms.map((room) => (
+        
+        <Col xs={4} md={3} md={2} key={room.label}>
+          <RoomCard teacher={teacher} roomInfo={room} handleUpdateRooms={this.handleUpdateRooms}/>
+        </Col>
+      ));
 
     return(
       <Panel bsStyle="success">
         <Panel.Heading>桌弄    Hi, {this.state.username}  
-          <Button onClick={this.logout}>登出</Button>
+          <Button style={{"float":"right", "width":"50px", "height":"25px", "padding":"0px", "backgroundColor":"#ffcccc"}} onClick={this.logout}>登出</Button>
         </Panel.Heading>
         <Panel.Body>
           <Grid>
             <Row>
               {roomList}
               <Col xs={4} md={3} md={2} >
-                <RoomCard ref="xxx" roomInfo={null} handleUpdateRooms={this.handleUpdateRooms.bind(this)}/>
+                <RoomCard teacher={teacher} roomInfo={null} handleUpdateRooms={this.handleUpdateRooms}/>
               </Col>
             </Row>
           </Grid>

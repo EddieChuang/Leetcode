@@ -22,6 +22,7 @@ class Signin extends React.Component {
 
     componentDidMount(){
       console.log("componentDidMount", "Signin");
+      console.log(this);
     }
   
     componentWillUnmount(){

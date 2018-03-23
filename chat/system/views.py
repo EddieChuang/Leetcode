@@ -135,18 +135,17 @@ def Uploader(request):
         return HttpResponse('QQ error Upload',status=403)
 
 # @login_required
-@require_GET
+@require_POST
 def get_all_rooms(request):
 
-    rooms = Room.objects.all()
+    username = request.POST.get('username')
+    rooms = Room.objects.filter(teacher=username).order_by('-timestamp')
     res = []
     for room in rooms:
         res.append({
+          'isActive': room.isActive==1,
           'teacher': room.teacher,
           'label': room.label,
           'game': room.game
         })
-
-    print(res)
-# getAllRooms
     return JsonResponse({"rooms":res}, status=200)

@@ -1655,7 +1655,7 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 var store = __webpack_require__(80)('wks');
 var uid = __webpack_require__(54);
-var Symbol = __webpack_require__(23).Symbol;
+var Symbol = __webpack_require__(24).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
 var $exports = module.exports = function (name) {
@@ -1710,9 +1710,68 @@ module.exports = emptyFunction;
 
 /***/ }),
 /* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(179);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(183);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(110);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(185);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(188);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(191);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(193);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(111);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(69);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(199);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(201);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(203);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(204);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(23);
+var global = __webpack_require__(24);
 var core = __webpack_require__(19);
 var ctx = __webpack_require__(74);
 var hide = __webpack_require__(30);
@@ -1776,7 +1835,7 @@ module.exports = $export;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -1788,7 +1847,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1799,65 +1858,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 module.exports = exports['default'];
-
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(179);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(183);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(110);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(185);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(188);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(191);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(193);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(111);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(69);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(199);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(201);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(203);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(204);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***/ }),
 /* 26 */
@@ -2017,7 +2017,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -4703,7 +4703,7 @@ module.exports = function (key) {
 /* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(23);
+var global = __webpack_require__(24);
 var SHARED = '__core-js_shared__';
 var store = global[SHARED] || (global[SHARED] = {});
 module.exports = function (key) {
@@ -4844,7 +4844,7 @@ exports.f = __webpack_require__(20);
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var global = __webpack_require__(23);
+var global = __webpack_require__(24);
 var core = __webpack_require__(19);
 var LIBRARY = __webpack_require__(85);
 var wksExt = __webpack_require__(88);
@@ -5030,7 +5030,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = undefined;
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -5616,7 +5616,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -5653,7 +5653,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -7183,7 +7183,7 @@ module.exports = !__webpack_require__(33) && !__webpack_require__(44)(function (
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(32);
-var document = __webpack_require__(23).document;
+var document = __webpack_require__(24).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
 module.exports = function (it) {
@@ -7269,7 +7269,7 @@ __webpack_require__(126)(String, 'String', function (iterated) {
 "use strict";
 
 var LIBRARY = __webpack_require__(85);
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 var redefine = __webpack_require__(127);
 var hide = __webpack_require__(30);
 var has = __webpack_require__(27);
@@ -9118,7 +9118,7 @@ exports.default = function (recalc) {
   return size;
 };
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -11222,7 +11222,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _axios = __webpack_require__(42);
 
@@ -11265,6 +11265,7 @@ var Signin = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       console.log("componentDidMount", "Signin");
+      console.log(this);
     }
   }, {
     key: 'componentWillUnmount',
@@ -17059,7 +17060,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _App = __webpack_require__(207);
 
@@ -38071,7 +38072,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _axios = __webpack_require__(42);
 
@@ -39413,7 +39414,7 @@ module.exports = __webpack_require__(19).Object.assign;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 
 $export($export.S + $export.F, 'Object', { assign: __webpack_require__(231) });
 
@@ -39592,7 +39593,7 @@ module.exports = __webpack_require__(33) ? Object.defineProperties : function de
 /* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var document = __webpack_require__(23).document;
+var document = __webpack_require__(24).document;
 module.exports = document && document.documentElement;
 
 
@@ -39620,7 +39621,7 @@ module.exports = Object.getPrototypeOf || function (O) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(242);
-var global = __webpack_require__(23);
+var global = __webpack_require__(24);
 var hide = __webpack_require__(30);
 var Iterators = __webpack_require__(48);
 var TO_STRING_TAG = __webpack_require__(20)('toStringTag');
@@ -39721,10 +39722,10 @@ module.exports = __webpack_require__(19).Symbol;
 "use strict";
 
 // ECMAScript 6 symbols shim
-var global = __webpack_require__(23);
+var global = __webpack_require__(24);
 var has = __webpack_require__(27);
 var DESCRIPTORS = __webpack_require__(33);
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 var redefine = __webpack_require__(127);
 var META = __webpack_require__(248).KEY;
 var $fails = __webpack_require__(44);
@@ -40110,7 +40111,7 @@ module.exports = __webpack_require__(19).Object.setPrototypeOf;
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(258).set });
 
 
@@ -40166,7 +40167,7 @@ module.exports = function create(P, D) {
 /* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 $export($export.S, 'Object', { create: __webpack_require__(86) });
 
@@ -40508,7 +40509,7 @@ module.exports = __webpack_require__(19).Object.entries;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 var $entries = __webpack_require__(132)(true);
 
 $export($export.S, 'Object', {
@@ -40625,7 +40626,7 @@ module.exports = __webpack_require__(19).Object.values;
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 var $values = __webpack_require__(132)(false);
 
 $export($export.S, 'Object', {
@@ -42530,7 +42531,7 @@ module.exports = __webpack_require__(19).Array.from;
 "use strict";
 
 var ctx = __webpack_require__(74);
-var $export = __webpack_require__(22);
+var $export = __webpack_require__(23);
 var toObject = __webpack_require__(83);
 var call = __webpack_require__(291);
 var isArrayIter = __webpack_require__(292);
@@ -44543,7 +44544,7 @@ MenuItem.defaultProps = defaultProps;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_dom_helpers_events___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_dom_helpers_events__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_dom_helpers_ownerDocument__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_dom_helpers_ownerDocument___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_dom_helpers_ownerDocument__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_dom_helpers_util_inDOM__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_helpers_util_scrollbarSize__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_helpers_util_scrollbarSize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_dom_helpers_util_scrollbarSize__);
@@ -44983,7 +44984,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -45030,7 +45031,7 @@ var _contains = __webpack_require__(36);
 
 var _contains2 = _interopRequireDefault(_contains);
 
-var _inDOM = __webpack_require__(24);
+var _inDOM = __webpack_require__(25);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -50834,7 +50835,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _axios = __webpack_require__(42);
 
@@ -50919,6 +50920,8 @@ var SigninForm = function (_React$Component) {
     }, {
         key: 'handleSignin',
         value: function handleSignin() {
+            var _this2 = this;
+
             console.log("handleSignin", this);
 
             var username = _reactDom2.default.findDOMNode(this.refs.username).value;
@@ -50932,20 +50935,19 @@ var SigninForm = function (_React$Component) {
             userInfo.append("username", username);
             userInfo.append("password", password);
 
-            var self = this;
             var config = { headers: { 'Content-Type': 'multipart/form-data' } };
             _axios2.default.post('http://localhost:8000/accounts/login/', userInfo, config).then(function (response) {
                 console.log(response);
                 if (response.data === '登入成功') {
                     console.log('登入成功');
-                    self.props.history.push({
+                    _this2.props.history.push({
                         pathname: '/home',
                         state: { username: username, logined: true }
                     });
                 } else if (response.data === '登入失敗') {
-                    // self.setState({usernameVal: 'error'});
-                    // self.setState({passwordVal: 'error'});
-                    self.setState({ passwordErrMsg: '登入失敗' });
+                    // this.setState({usernameVal: 'error'});
+                    // this.setState({passwordVal: 'error'});
+                    _this2.setState({ passwordErrMsg: '登入失敗' });
                 }
             }).catch(function (error) {
                 console.log(error);
@@ -50957,14 +50959,12 @@ var SigninForm = function (_React$Component) {
             console.log("handleEnterRoom", this);
 
             var username = _reactDom2.default.findDOMNode(this.refs.username).value;
-            var password = _reactDom2.default.findDOMNode(this.refs.password).value;
+            var label = _reactDom2.default.findDOMNode(this.refs.label).value;
             var userInfo = new FormData();
             userInfo.append("username", username);
             userInfo.append("password", password);
 
-            console.log(userInfo);
-            var config = { headers: { 'Content-Type': 'multipart/form-data' } };
-            _axios2.default.post('http://localhost:8000/accounts/login/', userInfo, config).then(function (response) {
+            _axios2.default.post('http://localhost:8000/' + label + '/', userInfo).then(function (response) {
                 // this.props.history.push()
                 console.log(response);
             }).catch(function (err) {
@@ -51119,7 +51119,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51184,7 +51184,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _Home = __webpack_require__(376);
 
@@ -51254,7 +51254,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _reactBootstrap = __webpack_require__(43);
 
@@ -51289,25 +51289,29 @@ var Home = function (_React$Component) {
       username: ''
     };
     _this.logout = _this.logout.bind(_this);
+    _this.handleUpdateRooms = _this.handleUpdateRooms.bind(_this);
     return _this;
   }
 
   _createClass(Home, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      var _this2 = this;
+
       // get all rooms
       console.log("componentWillMount", "Home");
-
       var location = this.props.location;
       if (location.state === undefined || !location.state.logined) {
         this.props.history.push('/');
       } else {
 
-        this.setState({ username: location.state.username });
-        var self = this;
-        _axios2.default.get('http://localhost:8000/getAllRooms/').then(function (response) {
+        var username = location.state.username;
+        var userInfo = new FormData();
+        userInfo.append("username", username);
+        this.setState({ username: username });
+        _axios2.default.post('http://localhost:8000/getAllRooms/', userInfo).then(function (response) {
           console.log(response);
-          self.setState({ rooms: response.data.rooms });
+          _this2.setState({ rooms: response.data.rooms });
         }).catch(function (err) {
           console.log(err);
         });
@@ -51326,11 +51330,13 @@ var Home = function (_React$Component) {
   }, {
     key: 'logout',
     value: function logout() {
+      var _this3 = this;
 
-      var self = this;
+      if (!confirm('登出')) return;
       _axios2.default.get('http://localhost:8000/accounts/logout/').then(function (response) {
-        self.setState({ username: '' });
-        self.props.history.push('/');
+        console.log(response);
+        _this3.setState({ username: '' });
+        _this3.props.history.push('/');
       }).catch(function (err) {
         console.log(err);
       });
@@ -51348,7 +51354,7 @@ var Home = function (_React$Component) {
         return newRoom.label === room_.label;
       });
       if (indexToUpdate === -1) {
-        this.setState({ rooms: [].concat(_toConsumableArray(roomsToUpdate), [newRoom]) });
+        this.setState({ rooms: [newRoom].concat(_toConsumableArray(roomsToUpdate)) });
       } else {
         this.setState({ rooms: [].concat(_toConsumableArray(roomsToUpdate.slice(0, indexToUpdate)), [newRoom], _toConsumableArray(roomsToUpdate.slice(indexToUpdate + 1))) });
       }
@@ -51356,15 +51362,16 @@ var Home = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
 
-      var self = this;
+      var teacher = { name: this.state.username };
       var roomList = this.state.rooms.map(function (room) {
         var _React$createElement;
 
         return _react2.default.createElement(
           _reactBootstrap.Col,
           (_React$createElement = { xs: 4, md: 3 }, _defineProperty(_React$createElement, 'md', 2), _defineProperty(_React$createElement, 'key', room.label), _React$createElement),
-          _react2.default.createElement(_RoomCard2.default, { roomInfo: room, handleUpdateRooms: self.handleUpdateRooms.bind(self) })
+          _react2.default.createElement(_RoomCard2.default, { teacher: teacher, roomInfo: room, handleUpdateRooms: _this4.handleUpdateRooms })
         );
       });
 
@@ -51378,7 +51385,7 @@ var Home = function (_React$Component) {
           this.state.username,
           _react2.default.createElement(
             _reactstrap.Button,
-            { onClick: this.logout },
+            { style: { "float": "right", "width": "50px", "height": "25px", "padding": "0px", "backgroundColor": "#ffcccc" }, onClick: this.logout },
             '\u767B\u51FA'
           )
         ),
@@ -51395,7 +51402,7 @@ var Home = function (_React$Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 _defineProperty({ xs: 4, md: 3 }, 'md', 2),
-                _react2.default.createElement(_RoomCard2.default, { ref: 'xxx', roomInfo: null, handleUpdateRooms: this.handleUpdateRooms.bind(this) })
+                _react2.default.createElement(_RoomCard2.default, { teacher: teacher, roomInfo: null, handleUpdateRooms: this.handleUpdateRooms })
               )
             )
           )
@@ -55061,7 +55068,7 @@ var _axios = __webpack_require__(42);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactRouterDom = __webpack_require__(25);
+var _reactRouterDom = __webpack_require__(22);
 
 var _reactBootstrap = __webpack_require__(43);
 
@@ -55085,35 +55092,54 @@ var RoomCard = function (_React$Component) {
 
     _this.state = {
       rooms: null,
-      teacherVal: null,
-      labelVal: null,
+      //  teacherVal: null,
+      //  labelVal: null,
       gameErrMsg: "",
-      teacherErrMsg: "",
-      labelErrMsg: "",
+      //  teacherErrMsg: "",
+      //  labelErrMsg: "",
       game: "選擇遊戲",
-      show: false
-
+      show: false,
+      isActive: _this.props.roomInfo !== null ? _this.props.roomInfo.isActive : null
     };
+    _this.open = _this.open.bind(_this);
+    _this.close = _this.close.bind(_this);
+    _this.enter = _this.enter.bind(_this);
+    _this.toggleActive = _this.toggleActive.bind(_this);
+    _this.handleCreate = _this.handleCreate.bind(_this);
+    _this.handleSelect = _this.handleSelect.bind(_this);
+    _this.resetValidationState = _this.resetValidationState.bind(_this);
+
+    console.log("constructor", "RoomCard");
     return _this;
   }
 
   _createClass(RoomCard, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      console.log("componentWillMount", "RoomCard");
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      // console.log(ReactDOM.findDOMNode(this.refs.teacher));
+      console.log("componentDidMount", "RoomCard");
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      console.log("componentWillUnmount", "RoomCard");
     }
   }, {
     key: 'close',
     value: function close() {
-      _reactDom2.default.findDOMNode(this.refs.teacher).value = "";
-      _reactDom2.default.findDOMNode(this.refs.label).value = "";
+      // ReactDOM.findDOMNode(this.refs.teacher).value = ""
+      // ReactDOM.findDOMNode(this.refs.label).value = ""
       this.setState({
         show: false,
         game: "選擇遊戲",
-        teacherVal: null,
-        labelVal: null,
-        teacherErrMsg: "",
-        labelErrMsg: "",
+        // teacherVal: null,
+        // labelVal: null,
+        // teacherErrMsg: "",
+        // labelErrMsg: "",
         gameErrMsg: ""
       });
     }
@@ -55121,6 +55147,23 @@ var RoomCard = function (_React$Component) {
     key: 'open',
     value: function open() {
       this.setState({ show: true });
+    }
+  }, {
+    key: 'toggleActive',
+    value: function toggleActive() {
+      var active = this.state.isActive;
+      var comfirmMsg = active ? "關閉遊戲" : "開啟遊戲";
+      if (confirm(comfirmMsg)) {
+        this.setState({ isActive: !active });
+        var roomInfo = new FormData();
+        roomInfo.append("label", this.props.roomInfo.label);
+        roomInfo.append("isActive", !active);
+        _axios2.default.post("http://localhost:8000/updateRoom/", roomInfo).then(function (response) {
+          console.log(response);
+        }).catch(function (response) {
+          console.log(response);
+        });
+      }
     }
   }, {
     key: 'resetValidationState',
@@ -55146,19 +55189,18 @@ var RoomCard = function (_React$Component) {
     }
   }, {
     key: 'validate',
-    value: function validate(teacher, label, game) {
+    value: function validate( /*teacher, label, */game) {
 
       this.setState({
-        teacherVal: teacher === "" ? 'error' : null,
-        labelVal: label === "" ? 'error' : null,
-        teacherErrMsg: teacher === "" ? '請輸入名稱' : "",
-        labelErrMsg: label === "" ? '請輸入標籤' : "",
+        // teacherVal: teacher === "" ? 'error' : null,
+        // labelVal: label === "" ? 'error' : null,
+        // teacherErrMsg: teacher === "" ? '請輸入名稱' : "",
+        // labelErrMsg: label === "" ? '請輸入標籤' : "",
         gameErrMsg: game === "選擇遊戲" ? "請選擇遊戲" : ""
       });
 
-      console.log(_reactDom2.default.findDOMNode(this.refs.gameBtn));
-
-      return teacher === "" || label === "" || game === "選擇遊戲";
+      return (/*teacher === "" || label === "" || */game === "選擇遊戲"
+      );
     }
   }, {
     key: 'handleSelect',
@@ -55171,101 +55213,147 @@ var RoomCard = function (_React$Component) {
   }, {
     key: 'handleCreate',
     value: function handleCreate(event) {
+      var _this2 = this;
+
       // store room in database
       console.log(this);
 
-      var teacher = _reactDom2.default.findDOMNode(this.refs.teacher).value;
-      var label = _reactDom2.default.findDOMNode(this.refs.label).value;
+      var teacher = this.props.teacher.name;
       var game = this.state.game;
 
-      if (this.validate(teacher, label, game)) {
+      if (this.validate(game)) {
         return;
       }
 
       var roomInfo = new FormData();
       roomInfo.append("teacher", teacher);
-      roomInfo.append("label", label);
       roomInfo.append("game", game);
 
-      var self = this;
       _axios2.default.post("http://localhost:8000/new/", roomInfo).then(function (response) {
         console.log(response);
-        if (response.data === 'label already exists.') {
-          self.setState({
-            labelVal: "error",
-            labelErrMsg: response.data
-          });
-          return;
-        }
-        self.props.handleUpdateRooms(roomInfo);
-        // self.props.history.push("/home");
+        // if(response.data === 'label already exists.'){
+        //     this.setState({
+        //       labelVal: "error",
+        //       labelErrMsg: response.data,
+        //     })
+        //     return
+        // }
+        roomInfo.append("label", response.data);
+        roomInfo.append("isActive", true);
+        _this2.props.handleUpdateRooms(roomInfo);
+        _this2.close();
       }).catch(function (err) {
         console.log(err);
       });
     }
   }, {
     key: 'enter',
-    value: function enter() {}
+    value: function enter() {
+
+      var label = this.props.roomInfo.label;
+      this.props.history.push({
+        pathname: 'http://localhost:8000/' + label
+      });
+      // axios.get("http://localhost:8000/"+label+"/")
+      //   .then((response) => {
+      //       console.log(response)
+      //   })
+      //   .catch((err) =>{
+      //       console.log(err)
+      //   })
+    }
   }, {
     key: 'render',
     value: function render() {
 
+      console.log("render", "RoomCard");
       var room = this.props.roomInfo ? _react2.default.createElement(
-        _reactstrap.Card,
-        null,
-        _react2.default.createElement(_reactstrap.CardImg, { top: true, width: '100%', src: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180', alt: 'Card image cap' }),
+        'div',
+        { className: 'room-card' },
         _react2.default.createElement(
-          _reactstrap.CardBody,
+          _reactstrap.Card,
           null,
           _react2.default.createElement(
-            _reactstrap.CardTitle,
-            null,
-            this.props.roomInfo.game
+            'button',
+            { type: 'button', className: 'btn btn-default btn-circle btn-room-remove' },
+            _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' })
           ),
+          _react2.default.createElement(_reactstrap.CardImg, { top: true, width: '100%', src: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180', alt: 'Card image cap' }),
           _react2.default.createElement(
-            _reactstrap.CardText,
+            _reactstrap.CardBody,
             null,
-            this.props.roomInfo.teacher
-          ),
-          _react2.default.createElement(
-            _reactstrap.Button,
-            { onClick: this.enter.bind(this) },
-            '\u9032\u5165\u804A\u5929\u5BA4'
+            _react2.default.createElement(
+              _reactstrap.CardTitle,
+              { style: { 'fontWeight': 'bold' } },
+              '\u904A\u6232: ',
+              this.props.roomInfo.game
+            ),
+            _react2.default.createElement(
+              _reactstrap.CardSubtitle,
+              null,
+              '\u73A9\u5BB6: ',
+              this.props.roomInfo.teacher
+            ),
+            _react2.default.createElement(
+              _reactstrap.CardText,
+              null,
+              '\u6A19\u7C64: ',
+              this.props.roomInfo.label
+            ),
+            _react2.default.createElement(
+              _reactstrap.CardText,
+              null,
+              '\u72C0\u614B: ',
+              _react2.default.createElement(
+                _reactstrap.Button,
+                { className: this.state.isActive ? "btn-success" : "btn-default", onClick: this.toggleActive },
+                this.state.isActive ? "遊戲進行中" : "遊戲已結束"
+              )
+            ),
+            _react2.default.createElement(
+              _reactstrap.Button,
+              { className: 'center-align btn-primary', onClick: this.enter },
+              '\u9032\u5165\u904A\u6232'
+            )
           )
         )
       ) : _react2.default.createElement(
-        _reactstrap.Card,
-        null,
+        'div',
+        { className: 'room-card' },
         _react2.default.createElement(
-          _reactstrap.CardBody,
+          _reactstrap.Card,
           null,
           _react2.default.createElement(
-            'div',
-            { className: 'center' },
+            _reactstrap.CardBody,
+            null,
             _react2.default.createElement(
-              'button',
-              { onClick: this.open.bind(this), type: 'button', className: 'btn btn-default btn-circle' },
-              _react2.default.createElement('i', { className: 'glyphicon glyphicon-plus' })
+              'div',
+              { className: 'center' },
+              _react2.default.createElement(
+                'button',
+                { onClick: this.open, type: 'button', className: 'btn btn-default btn-circle btn-room-create' },
+                _react2.default.createElement('i', { className: 'glyphicon glyphicon-plus' })
+              )
             )
           )
         )
       );
 
-      // const gameList = getGames();
+      // const gameList = getGames()
       return _react2.default.createElement(
         'div',
         null,
         room,
         _react2.default.createElement(
           _reactBootstrap.Modal,
-          { show: this.state.show, onHide: this.close.bind(this) },
+          { show: this.state.show, onHide: this.close },
           _react2.default.createElement(
             _reactBootstrap.Modal.Header,
             { closeButton: true },
             _react2.default.createElement(
               _reactBootstrap.Modal.Title,
               null,
-              '\u5EFA\u7ACB\u804A\u5929\u5BA4'
+              '\u5EFA\u7ACB\u904A\u6232'
             )
           ),
           _react2.default.createElement(
@@ -55276,7 +55364,7 @@ var RoomCard = function (_React$Component) {
               { validationState: this.state.gameVal },
               _react2.default.createElement(
                 _reactBootstrap.SplitButton,
-                { componentClass: _reactBootstrap.InputGroup.Button, id: 'split-button-basic', ref: 'gameBtn', title: this.state.game, onSelect: this.handleSelect.bind(this), bsStyle: 'primary' },
+                { componentClass: _reactBootstrap.InputGroup.Button, id: 'split-button-basic', ref: 'gameBtn', title: this.state.game, onSelect: this.handleSelect, bsStyle: 'primary' },
                 _react2.default.createElement(
                   _reactBootstrap.MenuItem,
                   { ref: 'game1', eventKey: 'game1' },
@@ -55302,46 +55390,6 @@ var RoomCard = function (_React$Component) {
                   this.state.gameErrMsg
                 )
               )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              { controlId: 'teacher', validationState: this.state.teacherVal },
-              _react2.default.createElement(
-                _reactBootstrap.ControlLabel,
-                null,
-                'Teacher'
-              ),
-              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Enter teacher', ref: 'teacher', onChange: this.resetValidationState.bind(this, 'teacher') }),
-              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-              this.state.teacherErrMsg !== "" && _react2.default.createElement(
-                _reactBootstrap.HelpBlock,
-                null,
-                _react2.default.createElement(
-                  'font',
-                  { size: '14px', color: 'red' },
-                  this.state.teacherErrMsg
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              { controlId: 'label', validationState: this.state.labelVal },
-              _react2.default.createElement(
-                _reactBootstrap.ControlLabel,
-                null,
-                'Label'
-              ),
-              _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Enter label', ref: 'label', onChange: this.resetValidationState.bind(this, 'label') }),
-              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-              this.state.labelErrMsg !== "" && _react2.default.createElement(
-                _reactBootstrap.HelpBlock,
-                null,
-                _react2.default.createElement(
-                  'font',
-                  { size: '14px', color: 'red' },
-                  this.state.labelErrMsg
-                )
-              )
             )
           ),
           _react2.default.createElement(
@@ -55349,12 +55397,12 @@ var RoomCard = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactstrap.Button,
-              { onClick: this.handleCreate.bind(this) },
+              { onClick: this.handleCreate },
               '\u5EFA\u7ACB'
             ),
             _react2.default.createElement(
               _reactstrap.Button,
-              { onClick: this.close.bind(this) },
+              { onClick: this.close },
               '\u53D6\u6D88'
             )
           )
@@ -55366,7 +55414,7 @@ var RoomCard = function (_React$Component) {
   return RoomCard;
 }(_react2.default.Component);
 
-exports.default = RoomCard;
+exports.default = (0, _reactRouterDom.withRouter)(RoomCard);
 
 /***/ })
 /******/ ]);
