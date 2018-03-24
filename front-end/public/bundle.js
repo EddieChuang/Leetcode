@@ -11202,129 +11202,7 @@ ToggleButton.propTypes = propTypes;
 /* harmony default export */ __webpack_exports__["a"] = (ToggleButton);
 
 /***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(12);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _reactRouterDom = __webpack_require__(22);
-
-var _axios = __webpack_require__(42);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _reactBootstrap = __webpack_require__(43);
-
-var _SignForm = __webpack_require__(373);
-
-var _SignForm2 = _interopRequireDefault(_SignForm);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Signin = function (_React$Component) {
-  _inherits(Signin, _React$Component);
-
-  function Signin(props) {
-    _classCallCheck(this, Signin);
-
-    var _this = _possibleConstructorReturn(this, (Signin.__proto__ || Object.getPrototypeOf(Signin)).call(this, props));
-
-    _this.state = {
-      key: 1
-    };
-    return _this;
-  }
-
-  _createClass(Signin, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      console.log("componentWillMount", "Signin");
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log("componentDidMount", "Signin");
-      console.log(this);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      console.log("componentWillUnmount", "Signin");
-    }
-  }, {
-    key: 'handleSelect',
-    value: function handleSelect(key) {
-      this.setState({ key: key });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'center' },
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12, sm: 6 },
-          _react2.default.createElement(
-            _reactBootstrap.Panel,
-            { bsStyle: 'success' },
-            _react2.default.createElement(
-              _reactBootstrap.Panel.Heading,
-              null,
-              '\u9032\u5165\u684C\u5F04'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Panel.Body,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Tabs,
-                { id: 'tabs', activeKey: this.state.key, onSelect: this.handleSelect.bind(this), animation: true },
-                _react2.default.createElement(
-                  _reactBootstrap.Tab,
-                  { eventKey: 1, title: 'Teacher' },
-                  _react2.default.createElement(_SignForm2.default, { userType: 'teacher' })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.Tab,
-                  { eventKey: 2, title: 'Player' },
-                  _react2.default.createElement(_SignForm2.default, { userType: 'player' })
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Signin;
-}(_react2.default.Component);
-
-exports.default = Signin;
-
-/***/ }),
+/* 164 */,
 /* 165 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17071,13 +16949,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // const middleware = applyMiddleware(thunk, logger);
 // const store = createStore(reducers, middleware);
 
-
 // import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 // import {Provider} from 'react-redux';
 // import {applyMiddleware, createStore} from 'redux';
 // import reducers from './reducers';
 // import logger from 'redux-logger';
 // import thunk from 'redux-thunk';
+console.log("app");
+
 var Routes =
 // <Provider store={store}>
 _react2.default.createElement(
@@ -17087,7 +16966,6 @@ _react2.default.createElement(
 )
 // </Provider>
 ;
-
 _reactDom2.default.render(Routes, document.getElementById("app"));
 
 /***/ }),
@@ -38002,18 +37880,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Header = __webpack_require__(208);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Signin = __webpack_require__(164);
-
-var _Signin2 = _interopRequireDefault(_Signin);
-
-var _Footer = __webpack_require__(374);
-
-var _Footer2 = _interopRequireDefault(_Footer);
-
 var _Main = __webpack_require__(375);
 
 var _Main2 = _interopRequireDefault(_Main);
@@ -38038,6 +37904,7 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'render',
     value: function render() {
+      console.log(this);
       return _react2.default.createElement(
         'div',
         null,
@@ -38052,428 +37919,7 @@ var App = function (_React$Component) {
 exports.default = App;
 
 /***/ }),
-/* 208 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(12);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _reactRouterDom = __webpack_require__(22);
-
-var _axios = __webpack_require__(42);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _reactBootstrap = __webpack_require__(43);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Header = function (_React$Component) {
-  _inherits(Header, _React$Component);
-
-  function Header(props) {
-    _classCallCheck(this, Header);
-
-    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
-
-    _this.state = {
-      show: false,
-      usernameVal: null,
-      emailVal: null,
-      passwordVal: null,
-      confirmPwdVal: null,
-      usernameSigninVal: null,
-      passwordSigninVal: null,
-      usernameErrMsg: "",
-      emailErrMsg: "",
-      passwordErrMsg: "",
-      confirmPwdErrMsg: ""
-
-    };
-
-    return _this;
-  }
-
-  _createClass(Header, [{
-    key: 'open',
-    value: function open() {
-      this.setState({ show: true });
-    }
-  }, {
-    key: 'close',
-    value: function close() {
-      this.setState({ show: false });
-    }
-  }, {
-    key: 'resetValidationState',
-    value: function resetValidationState(type) {
-
-      switch (type) {
-        case 'username':
-          this.setState({ usernameVal: null });
-          this.setState({ usernameErrMsg: "" });
-          break;
-        case 'email':
-          this.setState({ emailVal: null });
-          this.setState({ emailErrMsg: "" });
-          break;
-        case 'password':
-          this.setState({ passwordVal: null });
-          this.setState({ passwordErrMsg: "" });
-          break;
-        case 'confirmPwd':
-          this.setState({ confirmPwdVal: null });
-          this.setState({ confirmPwdErrMsg: "" });
-          break;
-        default:
-          console.log("error type:", type);
-          break;
-      }
-    }
-  }, {
-    key: 'handleSignin',
-    value: function handleSignin() {
-      console.log("handleSignin", this);
-
-      var username = _reactDom2.default.findDOMNode(this.refs.usernameSignin).value;
-      var password = _reactDom2.default.findDOMNode(this.refs.passwordSignin).value;
-      var userInfo = new FormData();
-      userInfo.append("username", username);
-      userInfo.append("password", password);
-
-      console.log(userInfo);
-      var config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      _axios2.default.post('http://localhost:8000/accounts/login/', userInfo, config).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-  }, {
-    key: 'handleSignup',
-    value: function handleSignup() {
-      var _this2 = this;
-
-      console.log("handleSignup", this);
-      var username = _reactDom2.default.findDOMNode(this.refs.username).value;
-      var email = _reactDom2.default.findDOMNode(this.refs.email).value;
-      var password = _reactDom2.default.findDOMNode(this.refs.password).value;
-      var confirmPwd = _reactDom2.default.findDOMNode(this.refs.confirmPwd).value;
-
-      console.log(username, email, password);
-
-      // data validation
-      var valid = true;
-      if (username === '' || email === '' || password === '' || confirmPwd === '') {
-        this.setState({ usernameVal: username === '' ? 'error' : null });
-        this.setState({ emailVal: email === '' ? 'error' : null });
-        this.setState({ passwordVal: password === '' ? 'error' : null });
-        this.setState({ confirmPwdVal: confirmPwd === '' ? 'error' : null });
-        return;
-      }
-      if (email.indexOf("@") === -1 && email.length < 3) {
-        // a@b
-        this.setState({ emailErrMsg: "Invalid Email format." });
-        this.setState({ emailVal: 'error' });
-        valid = false;
-      }
-      if (password.length < 8) {
-        this.setState({ passwordErrMsg: "At least 8 characters." });
-        this.setState({ passwordVal: 'error' });
-        valid = false;
-      } else if (password !== confirmPwd) {
-        this.setState({ confirmPwdErrMsg: "Does not match password." });
-        this.setState({ confirmPwdVal: 'error' });
-        valid = false;
-      }
-      if (!valid) return;
-      // end data validation
-
-      var userInfo = new FormData();
-      userInfo.append("username", username);
-      userInfo.append("email", email);
-      userInfo.append("password", password);
-
-      // cannot use: localhost:8000/accounts/addUser
-      var config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      _axios2.default.post('http://localhost:8000/accounts/addUser/', userInfo, config).then(function (response) {
-        console.log(response);
-        if (response.data.indexOf("帳號已存在") !== -1) {
-          _this2.setState({ usernameErrMsg: "User name is already existed." });
-          _this2.setState({ usernameVal: 'error' });
-          return;
-        }
-
-        close();
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        _reactBootstrap.Navbar,
-        { inverse: true, collapseOnSelect: true },
-        _react2.default.createElement(
-          _reactBootstrap.Navbar.Header,
-          null,
-          _react2.default.createElement(
-            _reactBootstrap.Navbar.Brand,
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/' },
-              'Digiedu'
-            )
-          ),
-          _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Navbar.Collapse,
-          null,
-          _react2.default.createElement(
-            _reactBootstrap.Nav,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.NavItem,
-              { eventKey: 1, href: '/' },
-              'About'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Navbar.Form,
-            { pullRight: true },
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              { bsStyle: 'primary', onClick: this.open.bind(this) },
-              'Sign up'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Navbar.Form,
-            { pullRight: true },
-            _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              { controlId: 'usernameSignin' },
-              _react2.default.createElement(
-                _reactBootstrap.ControlLabel,
-                null,
-                'Username'
-              ),
-              _react2.default.createElement(_reactBootstrap.FormControl, {
-                type: 'text',
-                placeholder: 'Username',
-                ref: 'usernameSignin' }),
-              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              { controlId: 'passwordSignin' },
-              _react2.default.createElement(
-                _reactBootstrap.ControlLabel,
-                null,
-                'Password'
-              ),
-              _react2.default.createElement(_reactBootstrap.FormControl, {
-                type: 'Password',
-                placeholder: 'Password',
-                ref: 'passwordSignin' }),
-              _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null)
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              { bsStyle: 'success', onClick: this.handleSignin.bind(this) },
-              'Sign in'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Modal,
-          { show: this.state.show, onHide: this.close.bind(this) },
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Header,
-            { closeButton: true },
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Title,
-              null,
-              'Sign up'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Body,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Well,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Row,
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.Col,
-                  { xs: 12, sm: 6 },
-                  _react2.default.createElement(
-                    _reactBootstrap.Panel,
-                    null,
-                    _react2.default.createElement(
-                      _reactBootstrap.FormGroup,
-                      { controlId: 'username', validationState: this.state.usernameVal },
-                      _react2.default.createElement(
-                        _reactBootstrap.ControlLabel,
-                        null,
-                        'User name'
-                      ),
-                      _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'text',
-                        onChange: this.resetValidationState.bind(this, 'username'),
-                        placeholder: 'Chiamin',
-                        ref: 'username' }),
-                      _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-                      this.state.usernameErrMsg !== "" && _react2.default.createElement(
-                        _reactBootstrap.HelpBlock,
-                        null,
-                        _react2.default.createElement(
-                          'font',
-                          { size: '14px', color: 'red' },
-                          this.state.usernameErrMsg
-                        )
-                      )
-                    ),
-                    _react2.default.createElement(
-                      _reactBootstrap.FormGroup,
-                      { controlId: 'email', validationState: this.state.emailVal },
-                      _react2.default.createElement(
-                        _reactBootstrap.ControlLabel,
-                        null,
-                        'Email address'
-                      ),
-                      _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'email',
-                        onChange: this.resetValidationState.bind(this, 'email'),
-                        placeholder: 'chiamin@chiamin.com',
-                        ref: 'email' }),
-                      _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-                      this.state.emailErrMsg !== "" && _react2.default.createElement(
-                        _reactBootstrap.HelpBlock,
-                        null,
-                        _react2.default.createElement(
-                          'font',
-                          { size: '14px', color: 'red' },
-                          this.state.emailErrMsg
-                        )
-                      )
-                    ),
-                    _react2.default.createElement(
-                      _reactBootstrap.FormGroup,
-                      { controlId: 'password', validationState: this.state.passwordVal },
-                      _react2.default.createElement(
-                        _reactBootstrap.ControlLabel,
-                        null,
-                        'Password'
-                      ),
-                      _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'password',
-                        onChange: this.resetValidationState.bind(this, 'password'),
-                        placeholder: 'Password',
-                        ref: 'password' }),
-                      _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-                      this.state.passwordErrMsg !== "" && _react2.default.createElement(
-                        _reactBootstrap.HelpBlock,
-                        null,
-                        _react2.default.createElement(
-                          'font',
-                          { size: '14px', color: 'red' },
-                          this.state.passwordErrMsg
-                        )
-                      )
-                    ),
-                    _react2.default.createElement(
-                      _reactBootstrap.FormGroup,
-                      { controlId: 'confirmPwd', validationState: this.state.confirmPwdVal },
-                      _react2.default.createElement(
-                        _reactBootstrap.ControlLabel,
-                        null,
-                        'Confirm Password'
-                      ),
-                      _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'password',
-                        onChange: this.resetValidationState.bind(this, 'confirmPwd'),
-                        placeholder: 'Confirm Password',
-                        ref: 'confirmPwd' }),
-                      _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-                      this.state.confirmPwdErrMsg !== "" && _react2.default.createElement(
-                        _reactBootstrap.HelpBlock,
-                        null,
-                        _react2.default.createElement(
-                          'font',
-                          { size: '14px', color: 'red' },
-                          this.state.confirmPwdErrMsg
-                        )
-                      )
-                    ),
-                    _react2.default.createElement(
-                      _reactBootstrap.Button,
-                      {
-                        onClick: this.handleSignup.bind(this),
-                        bsStyle: 'primary' },
-                      'Sign up'
-                    )
-                  )
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Footer,
-            null,
-            _react2.default.createElement(
-              'h6',
-              null,
-              'Footer'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              { onClick: this.close.bind(this) },
-              'Close'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Header;
-}(_react2.default.Component);
-
-// function mapStateToProps(state){
-//   return {
-//     validation: state
-//   }
-// }
-
-exports.default = Header;
-
-/***/ }),
+/* 208 */,
 /* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50815,359 +50261,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 373 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(12);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _reactRouterDom = __webpack_require__(22);
-
-var _axios = __webpack_require__(42);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _reactBootstrap = __webpack_require__(43);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SigninForm = function (_React$Component) {
-    _inherits(SigninForm, _React$Component);
-
-    function SigninForm(props) {
-        _classCallCheck(this, SigninForm);
-
-        var _this = _possibleConstructorReturn(this, (SigninForm.__proto__ || Object.getPrototypeOf(SigninForm)).call(this, props));
-
-        _this.state = {
-            usernameVal: null,
-            passwordVal: null,
-            usernameErrMsg: "",
-            passwordErrMsg: ""
-
-        };
-        return _this;
-    }
-
-    _createClass(SigninForm, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            console.log("componentWillMount", "SigninForm");
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            console.log("componentDidMount", "SigninForm");
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            console.log("componentWillUnmount", "SigninForm");
-        }
-    }, {
-        key: 'resetValidationState',
-        value: function resetValidationState(type) {
-
-            switch (type) {
-                case 'username':
-                    this.setState({
-                        usernameVal: null,
-                        usernameErrMsg: ""
-                    });
-                    break;
-                case 'password':
-                    this.setState({
-                        passwordVal: null,
-                        passwordErrMsg: ""
-                    });
-                    break;
-                default:
-                    console.log("error type:", type);
-                    break;
-            }
-        }
-    }, {
-        key: 'validate',
-        value: function validate(username, password) {
-            this.setState({
-                usernameVal: username === "" ? 'error' : null,
-                passwordVal: password === "" ? 'error' : null,
-                usernameErrMsg: username === "" ? '請輸入名稱' : "",
-                passwordErrMsg: password === "" ? '請輸入密碼' : ""
-            });
-            return username === "" || password === "";
-        }
-    }, {
-        key: 'handleSignin',
-        value: function handleSignin() {
-            var _this2 = this;
-
-            console.log("handleSignin", this);
-
-            var username = _reactDom2.default.findDOMNode(this.refs.username).value;
-            var password = _reactDom2.default.findDOMNode(this.refs.password).value;
-
-            if (this.validate(username, password)) {
-                return;
-            }
-
-            var userInfo = new FormData();
-            userInfo.append("username", username);
-            userInfo.append("password", password);
-
-            var config = { headers: { 'Content-Type': 'multipart/form-data' } };
-            _axios2.default.post('http://localhost:8000/accounts/login/', userInfo, config).then(function (response) {
-                console.log(response);
-                if (response.data === '登入成功') {
-                    console.log('登入成功');
-                    _this2.props.history.push({
-                        pathname: '/home',
-                        state: { username: username, logined: true }
-                    });
-                } else if (response.data === '登入失敗') {
-                    // this.setState({usernameVal: 'error'});
-                    // this.setState({passwordVal: 'error'});
-                    _this2.setState({ passwordErrMsg: '登入失敗' });
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    }, {
-        key: 'handleEnterRoom',
-        value: function handleEnterRoom() {
-            console.log("handleEnterRoom", this);
-
-            var username = _reactDom2.default.findDOMNode(this.refs.username).value;
-            var label = _reactDom2.default.findDOMNode(this.refs.label).value;
-            var userInfo = new FormData();
-            userInfo.append("username", username);
-            userInfo.append("password", password);
-
-            _axios2.default.post('http://localhost:8000/' + label + '/', userInfo).then(function (response) {
-                // this.props.history.push()
-                console.log(response);
-            }).catch(function (err) {
-                console.log(err);
-            });
-        }
-
-        /* handleSignup(){
-            console.log("handleSignup", this);
-            let username = ReactDOM.findDOMNode(this.refs.username).value;
-            let email = ReactDOM.findDOMNode(this.refs.email).value;
-            let password = ReactDOM.findDOMNode(this.refs.password).value;
-            let confirmPwd = ReactDOM.findDOMNode(this.refs.confirmPwd).value;
-            
-            console.log(username, email, password)
-            
-            // data validation
-            let valid = true;
-            if(username === '' || email === '' || password === '' || confirmPwd === ''){
-                this.setState({usernameVal: (username==='') ? ('error') : (null)});
-                this.setState({emailVal: (email==='') ? ('error') : (null)});
-                this.setState({passwordVal: (password==='') ? ('error') : (null)});
-                this.setState({confirmPwdVal: (confirmPwd==='') ? ('error') : (null)});
-                return;
-            }
-            if(email.indexOf("@") === -1 && email.length < 3) {// a@b
-                this.setState({emailErrMsg: "Invalid Email format."});
-                this.setState({emailVal: 'error'});                    
-                valid = false;
-            }
-            if(password.length < 8){
-                this.setState({passwordErrMsg: "At least 8 characters."});
-                this.setState({passwordVal: 'error'});                    
-                valid = false;
-            }
-            else if(password !== confirmPwd){
-                this.setState({confirmPwdErrMsg: "Does not match password."});          
-                this.setState({confirmPwdVal: 'error'});
-                valid = false;
-            }
-            if(!valid)
-                return;
-            // end data validation
-            
-            let userInfo = new FormData();        
-            userInfo.append("username", username);
-            userInfo.append("email", email);
-            userInfo.append("password", password);
-            
-            // cannot use: localhost:8000/accounts/addUser
-            const config = {headers: {'Content-Type': 'multipart/form-data'}}
-            axios.post('http://localhost:8000/accounts/addUser/', userInfo, config)
-              .then((response) => {
-                  console.log(response);            
-                  if(response.data.indexOf("帳號已存在") !== -1){
-                      this.setState({usernameErrMsg: "User name is already existed."});          
-                      this.setState({usernameVal: 'error'});
-                      return;
-                  }
-                  
-                  close();
-              })
-              .catch((error) => {
-                  console.log(error);
-              })
-            }*/
-
-    }, {
-        key: 'render',
-        value: function render() {
-
-            return _react2.default.createElement(
-                _reactBootstrap.Well,
-                { bsSize: 'large' },
-                _react2.default.createElement(
-                    _reactBootstrap.FormGroup,
-                    { controlId: this.props.userType === 'teacher' ? 'teacher' : 'player', validationState: this.state.usernameVal },
-                    _react2.default.createElement(
-                        _reactBootstrap.ControlLabel,
-                        null,
-                        this.props.userType === 'teacher' ? 'Teacher' : 'Player',
-                        ' name'
-                    ),
-                    _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'text',
-                        onChange: this.resetValidationState.bind(this, 'username'),
-                        placeholder: 'Chiamin',
-                        ref: 'username' }),
-                    _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-                    this.state.usernameErrMsg !== "" && _react2.default.createElement(
-                        _reactBootstrap.HelpBlock,
-                        null,
-                        _react2.default.createElement(
-                            'font',
-                            { size: '14px', color: 'red' },
-                            this.state.usernameErrMsg
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    _reactBootstrap.FormGroup,
-                    { controlId: this.props.userType === 'teacher' ? 'password' : 'roomID', validationState: this.state.passwordVal },
-                    _react2.default.createElement(
-                        _reactBootstrap.ControlLabel,
-                        null,
-                        this.props.userType === 'teacher' ? 'Password' : 'Room ID'
-                    ),
-                    _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: this.props.userType === 'teacher' ? 'password' : 'text',
-                        onChange: this.resetValidationState.bind(this, 'password'),
-                        placeholder: this.props.userType === 'teacher' ? 'Password' : 'game-123',
-                        ref: 'password' }),
-                    _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
-                    this.state.passwordVal !== "" && _react2.default.createElement(
-                        _reactBootstrap.HelpBlock,
-                        null,
-                        _react2.default.createElement(
-                            'font',
-                            { size: '14px', color: 'red' },
-                            this.state.passwordErrMsg
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    _reactBootstrap.Button,
-                    { onClick: this.props.userType === 'teacher' ? this.handleSignin.bind(this) : this.handleEnterRoom.bind(this), bsStyle: 'primary' },
-                    this.props.userType === 'teacher' ? '登入' : '進入聊天室'
-                )
-            );
-        }
-    }]);
-
-    return SigninForm;
-}(_react2.default.Component);
-
-exports.default = (0, _reactRouterDom.withRouter)(SigninForm);
-
-/***/ }),
-/* 374 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(22);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Footer = function (_React$Component) {
-  _inherits(Footer, _React$Component);
-
-  function Footer() {
-    _classCallCheck(this, Footer);
-
-    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
-  }
-
-  _createClass(Footer, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'footer',
-        { className: 'footer text-center' },
-        _react2.default.createElement(
-          'div',
-          { className: 'container' },
-          _react2.default.createElement(
-            'a',
-            { href: 'http://localhost:8000/admin/' },
-            'Admin'
-          ),
-          _react2.default.createElement(
-            'p',
-            { className: 'footer-text' },
-            'Copyright 2018 Digiedu. All rights reserved.'
-          )
-        )
-      );
-    }
-  }]);
-
-  return Footer;
-}(_react2.default.Component);
-
-exports.default = Footer;
-
-/***/ }),
+/* 373 */,
+/* 374 */,
 /* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51190,9 +50285,13 @@ var _Home = __webpack_require__(376);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Signin = __webpack_require__(164);
+var _Login = __webpack_require__(409);
 
-var _Signin2 = _interopRequireDefault(_Signin);
+var _Login2 = _interopRequireDefault(_Login);
+
+var _auth = __webpack_require__(392);
+
+var _auth2 = _interopRequireDefault(_auth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51201,6 +50300,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import { Redirect } from 'react-router'
+
 
 var Main = function (_React$Component) {
   _inherits(Main, _React$Component);
@@ -51217,9 +50318,12 @@ var Main = function (_React$Component) {
       return _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Signin2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', component: _Home2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '#', component: _Home2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+            return _auth2.default.loggined() ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/home' }) : _react2.default.createElement(_Login2.default, null);
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/home', render: function render() {
+            return !_auth2.default.loggined() ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' }) : _react2.default.createElement(_Home2.default, null);
+          } })
       );
     }
   }]);
@@ -51227,7 +50331,7 @@ var Main = function (_React$Component) {
   return Main;
 }(_react2.default.Component);
 
-exports.default = Main;
+exports.default = (0, _reactRouterDom.withRouter)(Main);
 
 /***/ }),
 /* 376 */
@@ -51264,6 +50368,10 @@ var _RoomCard = __webpack_require__(391);
 
 var _RoomCard2 = _interopRequireDefault(_RoomCard);
 
+var _auth = __webpack_require__(392);
+
+var _auth2 = _interopRequireDefault(_auth);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -51296,26 +50404,26 @@ var Home = function (_React$Component) {
   _createClass(Home, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
-
       // get all rooms
       console.log("componentWillMount", "Home");
-      var location = this.props.location;
-      if (location.state === undefined || !location.state.logined) {
-        this.props.history.push('/');
-      } else {
+      // let location = this.props.location;
+      // if(location.state === undefined || !location.state.logined){
+      //     this.props.history.push('/');
+      // } else{
 
-        var username = location.state.username;
-        var userInfo = new FormData();
-        userInfo.append("username", username);
-        this.setState({ username: username });
-        _axios2.default.post('http://localhost:8000/getAllRooms/', userInfo).then(function (response) {
-          console.log(response);
-          _this2.setState({ rooms: response.data.rooms });
-        }).catch(function (err) {
-          console.log(err);
-        });
-      }
+      //     let username = location.state.username;
+      //     let userInfo = new FormData();
+      //     userInfo.append("username", username);
+      //     this.setState({username: username})
+      //     axios.post('http://localhost:8000/getAllRooms/', userInfo)
+      //       .then((response) => {
+      //           console.log(response);
+      //           this.setState({rooms:response.data.rooms});
+      //       })
+      //       .catch((err) => {
+      //           console.log(err);
+      //       })
+      // }
     }
   }, {
     key: 'componentDidMount',
@@ -51330,16 +50438,10 @@ var Home = function (_React$Component) {
   }, {
     key: 'logout',
     value: function logout() {
-      var _this3 = this;
-
-      if (!confirm('登出')) return;
-      _axios2.default.get('http://localhost:8000/accounts/logout/').then(function (response) {
-        console.log(response);
-        _this3.setState({ username: '' });
-        _this3.props.history.push('/');
-      }).catch(function (err) {
-        console.log(err);
-      });
+      if (confirm("確定登出？")) {
+        _auth2.default.logout();
+        this.props.history.replace('/');
+      }
     }
   }, {
     key: 'handleUpdateRooms',
@@ -51362,7 +50464,7 @@ var Home = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this2 = this;
 
       var teacher = { name: this.state.username };
       var roomList = this.state.rooms.map(function (room) {
@@ -51371,7 +50473,7 @@ var Home = function (_React$Component) {
         return _react2.default.createElement(
           _reactBootstrap.Col,
           (_React$createElement = { xs: 4, md: 3 }, _defineProperty(_React$createElement, 'md', 2), _defineProperty(_React$createElement, 'key', room.label), _React$createElement),
-          _react2.default.createElement(_RoomCard2.default, { teacher: teacher, roomInfo: room, handleUpdateRooms: _this4.handleUpdateRooms })
+          _react2.default.createElement(_RoomCard2.default, { teacher: teacher, roomInfo: room, handleUpdateRooms: _this2.handleUpdateRooms })
         );
       });
 
@@ -55415,6 +54517,460 @@ var RoomCard = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = (0, _reactRouterDom.withRouter)(RoomCard);
+
+/***/ }),
+/* 392 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _axios = __webpack_require__(42);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    login: function login(username, password, callback) {
+        // if(localStorage.token){
+        //     if(callback)
+        //         callback(true)
+        //     return
+        // }
+
+        var user = { "username": username, "password": password };
+        _axios2.default.post('http://localhost:8000/login/', user).then(function (response) {
+            console.log(response);
+            localStorage.token = response.data.token;
+            callback(true);
+        }).catch(function (error) {
+            callback(false);
+        });
+    },
+
+    logout: function logout() {
+        delete localStorage.token;
+    },
+
+    loggined: function loggined() {
+        return !!localStorage.token;
+    }
+};
+
+/***/ }),
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(12);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = __webpack_require__(22);
+
+var _axios = __webpack_require__(42);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactBootstrap = __webpack_require__(43);
+
+var _LoginForm = __webpack_require__(410);
+
+var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Login = function (_React$Component) {
+  _inherits(Login, _React$Component);
+
+  function Login(props) {
+    _classCallCheck(this, Login);
+
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+    _this.state = {
+      key: 1
+    };
+    return _this;
+  }
+
+  _createClass(Login, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      console.log("componentWillMount", "Login");
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log("componentDidMount", "Login");
+      console.log(this);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      console.log("componentWillUnmount", "Login");
+    }
+  }, {
+    key: 'handleSelect',
+    value: function handleSelect(key) {
+      this.setState({ key: key });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'div-login' },
+        _react2.default.createElement(
+          _reactBootstrap.Panel,
+          { bsStyle: 'success' },
+          _react2.default.createElement(
+            _reactBootstrap.Panel.Heading,
+            null,
+            '\u9032\u5165\u684C\u5F04'
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Panel.Body,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Tabs,
+              { id: 'tabs', activeKey: this.state.key, onSelect: this.handleSelect.bind(this), animation: true },
+              _react2.default.createElement(
+                _reactBootstrap.Tab,
+                { eventKey: 1, title: '\u8001\u5E2B' },
+                _react2.default.createElement(_LoginForm2.default, { userType: 'teacher' })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Tab,
+                { eventKey: 2, title: '\u73A9\u5BB6' },
+                _react2.default.createElement(_LoginForm2.default, { userType: 'player' })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Login;
+}(_react2.default.Component);
+
+exports.default = Login;
+
+/***/ }),
+/* 410 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(12);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = __webpack_require__(22);
+
+var _axios = __webpack_require__(42);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactBootstrap = __webpack_require__(43);
+
+var _auth = __webpack_require__(392);
+
+var _auth2 = _interopRequireDefault(_auth);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LoginForm = function (_React$Component) {
+    _inherits(LoginForm, _React$Component);
+
+    function LoginForm(props) {
+        _classCallCheck(this, LoginForm);
+
+        var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+
+        _this.state = {
+            usernameVal: null,
+            passwordVal: null,
+            usernameErrMsg: "",
+            passwordErrMsg: ""
+
+        };
+        return _this;
+    }
+
+    _createClass(LoginForm, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            console.log("componentWillMount", "LoginForm");
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log("componentDidMount", "LoginForm");
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log("componentWillUnmount", "LoginForm");
+        }
+    }, {
+        key: 'resetValidationState',
+        value: function resetValidationState(type) {
+
+            switch (type) {
+                case 'username':
+                    this.setState({
+                        usernameVal: null,
+                        usernameErrMsg: ""
+                    });
+                    break;
+                case 'password':
+                    this.setState({
+                        passwordVal: null,
+                        passwordErrMsg: ""
+                    });
+                    break;
+                default:
+                    console.log("error type:", type);
+                    break;
+            }
+        }
+    }, {
+        key: 'validate',
+        value: function validate(username, password) {
+            this.setState({
+                usernameVal: username === "" ? 'error' : null,
+                passwordVal: password === "" ? 'error' : null,
+                usernameErrMsg: username === "" ? '請輸入名稱' : "",
+                passwordErrMsg: password === "" ? '請輸入密碼' : ""
+            });
+            return username === "" || password === "";
+        }
+    }, {
+        key: 'handleLogin',
+        value: function handleLogin() {
+            var _this2 = this;
+
+            var username = _reactDom2.default.findDOMNode(this.refs.username).value;
+            var password = _reactDom2.default.findDOMNode(this.refs.password).value;
+
+            if (this.validate(username, password)) {
+                return;
+            }
+
+            _auth2.default.login(username, password, function (loggedIn) {
+                if (loggedIn) {
+                    _this2.props.history.push('/home');
+                } else {
+                    _this2.setState({ passwordErrMsg: '登入失敗' });
+                }
+            });
+        }
+    }, {
+        key: 'handleEnterRoom',
+        value: function handleEnterRoom() {
+            console.log("handleEnterRoom", this);
+
+            var username = _reactDom2.default.findDOMNode(this.refs.username).value;
+            var label = _reactDom2.default.findDOMNode(this.refs.label).value;
+            var userInfo = new FormData();
+            userInfo.append("username", username);
+            userInfo.append("password", password);
+
+            _axios2.default.post('http://localhost:8000/' + label + '/', userInfo).then(function (response) {
+                console.log(response);
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+
+        /* handleSignup(){
+            console.log("handleSignup", this);
+            let username = ReactDOM.findDOMNode(this.refs.username).value;
+            let email = ReactDOM.findDOMNode(this.refs.email).value;
+            let password = ReactDOM.findDOMNode(this.refs.password).value;
+            let confirmPwd = ReactDOM.findDOMNode(this.refs.confirmPwd).value;
+            
+            console.log(username, email, password)
+            
+            // data validation
+            let valid = true;
+            if(username === '' || email === '' || password === '' || confirmPwd === ''){
+                this.setState({usernameVal: (username==='') ? ('error') : (null)});
+                this.setState({emailVal: (email==='') ? ('error') : (null)});
+                this.setState({passwordVal: (password==='') ? ('error') : (null)});
+                this.setState({confirmPwdVal: (confirmPwd==='') ? ('error') : (null)});
+                return;
+            }
+            if(email.indexOf("@") === -1 && email.length < 3) {// a@b
+                this.setState({emailErrMsg: "Invalid Email format."});
+                this.setState({emailVal: 'error'});                    
+                valid = false;
+            }
+            if(password.length < 8){
+                this.setState({passwordErrMsg: "At least 8 characters."});
+                this.setState({passwordVal: 'error'});                    
+                valid = false;
+            }
+            else if(password !== confirmPwd){
+                this.setState({confirmPwdErrMsg: "Does not match password."});          
+                this.setState({confirmPwdVal: 'error'});
+                valid = false;
+            }
+            if(!valid)
+                return;
+            // end data validation
+            
+            let userInfo = new FormData();        
+            userInfo.append("username", username);
+            userInfo.append("email", email);
+            userInfo.append("password", password);
+            
+            // cannot use: localhost:8000/accounts/addUser
+            const config = {headers: {'Content-Type': 'multipart/form-data'}}
+            axios.post('http://localhost:8000/accounts/addUser/', userInfo, config)
+              .then((response) => {
+                  console.log(response);            
+                  if(response.data.indexOf("帳號已存在") !== -1){
+                      this.setState({usernameErrMsg: "User name is already existed."});          
+                      this.setState({usernameVal: 'error'});
+                      return;
+                  }
+                  
+                  close();
+              })
+              .catch((error) => {
+                  console.log(error);
+              })
+            }*/
+
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return _react2.default.createElement(
+                _reactBootstrap.Well,
+                { bsSize: 'large' },
+                _react2.default.createElement(
+                    _reactBootstrap.FormGroup,
+                    { controlId: this.props.userType === 'teacher' ? 'teacher' : 'player', validationState: this.state.usernameVal },
+                    _react2.default.createElement(
+                        _reactBootstrap.ControlLabel,
+                        null,
+                        this.props.userType === 'teacher' ? '老師' : '隊伍',
+                        '\u540D\u7A31'
+                    ),
+                    _react2.default.createElement(_reactBootstrap.FormControl, {
+                        type: 'text',
+                        onChange: this.resetValidationState.bind(this, 'username'),
+                        placeholder: 'Chiamin',
+                        ref: 'username' }),
+                    _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
+                    this.state.usernameErrMsg !== "" && _react2.default.createElement(
+                        _reactBootstrap.HelpBlock,
+                        null,
+                        _react2.default.createElement(
+                            'font',
+                            { size: '14px', color: 'red' },
+                            this.state.usernameErrMsg
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactBootstrap.FormGroup,
+                    { controlId: this.props.userType === 'teacher' ? 'password' : 'roomID', validationState: this.state.passwordVal },
+                    _react2.default.createElement(
+                        _reactBootstrap.ControlLabel,
+                        null,
+                        this.props.userType === 'teacher' ? '密碼' : '遊戲ID'
+                    ),
+                    _react2.default.createElement(_reactBootstrap.FormControl, {
+                        type: this.props.userType === 'teacher' ? 'password' : 'text',
+                        onChange: this.resetValidationState.bind(this, 'password'),
+                        placeholder: this.props.userType === 'teacher' ? 'Password' : 'game-123',
+                        ref: 'password' }),
+                    _react2.default.createElement(_reactBootstrap.FormControl.Feedback, null),
+                    this.state.passwordVal !== "" && _react2.default.createElement(
+                        _reactBootstrap.HelpBlock,
+                        null,
+                        _react2.default.createElement(
+                            'font',
+                            { size: '14px', color: 'red' },
+                            this.state.passwordErrMsg
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { style: {}, onClick: this.props.userType === 'teacher' ? this.handleLogin.bind(this) : this.handleEnterRoom.bind(this), bsStyle: 'primary' },
+                    this.props.userType === 'teacher' ? '登入' : '進入遊戲'
+                )
+            );
+        }
+    }]);
+
+    return LoginForm;
+}(_react2.default.Component);
+
+exports.default = (0, _reactRouterDom.withRouter)(LoginForm);
 
 /***/ })
 /******/ ]);
