@@ -11246,6 +11246,10 @@ ToggleButton.propTypes = propTypes;
 /* harmony default export */ __webpack_exports__["a"] = (ToggleButton);
 
 /***/ }),
+<<<<<<< HEAD
+=======
+/* 164 */,
+>>>>>>> 758c2368d9b09b50b853d387cce0acdae76d2bf8
 /* 165 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37923,7 +37927,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+<<<<<<< HEAD
 var _Main = __webpack_require__(208);
+=======
+var _Main = __webpack_require__(375);
+>>>>>>> 758c2368d9b09b50b853d387cce0acdae76d2bf8
 
 var _Main2 = _interopRequireDefault(_Main);
 
@@ -54578,7 +54586,11 @@ var LoginForm = function (_React$Component) {
               .catch((error) => {
                   console.log(error);
               })
+<<<<<<< HEAD
              }*/
+=======
+            }*/
+>>>>>>> 758c2368d9b09b50b853d387cce0acdae76d2bf8
 
     }, {
         key: 'render',
@@ -54650,6 +54662,7 @@ var LoginForm = function (_React$Component) {
 
 exports.default = (0, _reactRouterDom.withRouter)(LoginForm);
 
+<<<<<<< HEAD
 /***/ }),
 /* 391 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -54954,5 +54967,7 @@ var Login = function (_React$Component) {
 
 exports.default = Login;
 
+=======
+>>>>>>> 758c2368d9b09b50b853d387cce0acdae76d2bf8
 /***/ })
 /******/ ]);

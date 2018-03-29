@@ -1,4 +1,5 @@
 node_modules/
+public/bundle.js
 chat/db.sqlite3
 __pycache__/
 chat/media/
