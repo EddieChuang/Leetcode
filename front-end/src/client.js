@@ -13,6 +13,8 @@ import App from './components/App';
 // const middleware = applyMiddleware(thunk, logger);
 // const store = createStore(reducers, middleware);
 
+console.log("app")
+
 
 const Routes = (
   // <Provider store={store}>
@@ -21,7 +23,6 @@ const Routes = (
     </BrowserRouter>
   // </Provider>
 )
-
 ReactDOM.render(
     Routes, document.getElementById("app")
 );

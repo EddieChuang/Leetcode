@@ -7,6 +7,8 @@ import {Well, Col, Row, Grid, Panel} from 'react-bootstrap';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardImgOverlay, Button} from 'reactstrap';
 
 import RoomCard from './RoomCard';
+import auth from '../javascript/auth'
+
 
 class Home extends React.Component {
 
@@ -23,24 +25,24 @@ class Home extends React.Component {
   componentWillMount(){
     // get all rooms
     console.log("componentWillMount", "Home");
-    let location = this.props.location;
-    if(location.state === undefined || !location.state.logined){
-        this.props.history.push('/');
-    } else{
+    // let location = this.props.location;
+    // if(location.state === undefined || !location.state.logined){
+    //     this.props.history.push('/');
+    // } else{
 
-        let username = location.state.username;
-        let userInfo = new FormData();
-        userInfo.append("username", username);
-        this.setState({username: username})
-        axios.post('http://localhost:8000/getAllRooms/', userInfo)
-          .then((response) => {
-              console.log(response);
-              this.setState({rooms:response.data.rooms});
-          })
-          .catch((err) => {
-              console.log(err);
-          })
-    }
+    //     let username = location.state.username;
+    //     let userInfo = new FormData();
+    //     userInfo.append("username", username);
+    //     this.setState({username: username})
+    //     axios.post('http://localhost:8000/getAllRooms/', userInfo)
+    //       .then((response) => {
+    //           console.log(response);
+    //           this.setState({rooms:response.data.rooms});
+    //       })
+    //       .catch((err) => {
+    //           console.log(err);
+    //       })
+    // }
   }
   componentDidMount(){
     console.log("componentDidMount", "Home");
@@ -51,18 +53,10 @@ class Home extends React.Component {
   }
 
   logout(){
-    if (!confirm('登出')) 
-        return;
-    axios.get('http://localhost:8000/accounts/logout/')
-      .then((response) => {
-          console.log(response);
-          this.setState({username:''});
-          this.props.history.push('/');
-      })
-      .catch((err) => {
-          console.log(err);
-      })
-
+      if(confirm("確定登出？")){
+          auth.logout()
+          this.props.history.replace('/')
+      }
   }
 
   handleUpdateRooms(room){

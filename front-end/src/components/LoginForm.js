@@ -4,8 +4,10 @@ import ReactDOM from 'react-dom';
 import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
 import {Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock, Tab, Tabs, Nav, NavItem} from 'react-bootstrap';
+import auth from '../javascript/auth'
 
-class SigninForm extends React.Component {
+
+class LoginForm extends React.Component {
 
     constructor(props){
         super(props);
@@ -19,15 +21,15 @@ class SigninForm extends React.Component {
     }
 
     componentWillMount(){
-      console.log("componentWillMount", "SigninForm");
+      console.log("componentWillMount", "LoginForm");
     }
 
     componentDidMount(){
-      console.log("componentDidMount", "SigninForm");
+      console.log("componentDidMount", "LoginForm");
     }
   
     componentWillUnmount(){
-      console.log("componentWillUnmount", "SigninForm");
+      console.log("componentWillUnmount", "LoginForm");
     }
 
   resetValidationState(type){
@@ -61,8 +63,7 @@ class SigninForm extends React.Component {
       return username === "" || password === "";
   }
 
-  handleSignin(){
-    console.log("handleSignin", this);
+  handleLogin(){
     
     let username = ReactDOM.findDOMNode(this.refs.username).value;
     let password = ReactDOM.findDOMNode(this.refs.password).value;
@@ -71,29 +72,13 @@ class SigninForm extends React.Component {
         return;
     }
 
-    let userInfo = new FormData();
-    userInfo.append("username", username);
-    userInfo.append("password", password);
-
-    const config = {headers: {'Content-Type': 'multipart/form-data'}};
-    axios.post('http://localhost:8000/accounts/login/', userInfo, config)
-      .then((response) => {
-          console.log(response);
-          if(response.data === '登入成功'){
-              console.log('登入成功');            
-              this.props.history.push({
-                pathname: '/home',
-                state: {username: username, logined: true}
-              });
-          } else if(response.data === '登入失敗'){
-              // this.setState({usernameVal: 'error'});
-              // this.setState({passwordVal: 'error'});
-              this.setState({passwordErrMsg: '登入失敗'});
-          }
-      })
-      .catch((error) => {
-          console.log(error);
-      })
+    auth.login(username, password, (loggedIn)=>{
+        if(loggedIn){
+            this.props.history.push('/home')
+        } else {
+            this.setState({passwordErrMsg: '登入失敗'})
+        }
+    })
   }
 
   handleEnterRoom(){
@@ -107,7 +92,6 @@ class SigninForm extends React.Component {
 
     axios.post('http://localhost:8000/'+label+'/', userInfo)
       .then((response) => {
-          // this.props.history.push()
           console.log(response);
       })
       .catch((err) => {
@@ -181,7 +165,7 @@ class SigninForm extends React.Component {
         return(
           <Well bsSize="large">
             <FormGroup controlId={(this.props.userType==='teacher')?('teacher'):('player')} validationState={this.state.usernameVal}>
-              <ControlLabel>{(this.props.userType==='teacher')?('Teacher'):('Player')} name</ControlLabel>
+              <ControlLabel>{(this.props.userType==='teacher')?('老師'):('隊伍')}名稱</ControlLabel>
               <FormControl 
                 type="text"
                 onChange={this.resetValidationState.bind(this, 'username')}
@@ -192,7 +176,7 @@ class SigninForm extends React.Component {
             </FormGroup>
 
             <FormGroup controlId={(this.props.userType==='teacher')?('password'):('roomID')} validationState={this.state.passwordVal}>
-              <ControlLabel>{(this.props.userType==='teacher')?('Password'):('Room ID')}</ControlLabel>
+              <ControlLabel>{(this.props.userType==='teacher')?('密碼'):('遊戲ID')}</ControlLabel>
               <FormControl 
                 type={(this.props.userType==='teacher')?('password'):('text')}
                 onChange={this.resetValidationState.bind(this, 'password')}
@@ -201,13 +185,13 @@ class SigninForm extends React.Component {
               <FormControl.Feedback />
               {this.state.passwordVal !== "" && <HelpBlock><font size="14px" color="red">{this.state.passwordErrMsg}</font></HelpBlock>}
             </FormGroup>
-            <Button onClick={(this.props.userType==='teacher') ? 
-              (this.handleSignin.bind(this)) : (this.handleEnterRoom.bind(this))} bsStyle="primary">
-              {(this.props.userType==='teacher') ? ('登入') : ('進入聊天室')}
+            <Button style={{}} onClick={(this.props.userType==='teacher') ? 
+              (this.handleLogin.bind(this)) : (this.handleEnterRoom.bind(this))} bsStyle="primary">
+              {(this.props.userType==='teacher') ? ('登入') : ('進入遊戲')}
             </Button>
           </Well>
           )
     }
 }
 
-export default withRouter(SigninForm);
+export default withRouter(LoginForm);

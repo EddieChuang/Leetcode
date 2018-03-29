@@ -19,13 +19,14 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from system.views import login,logout,addUser,ReadGame,addGame,hello,Uploader,get_all_rooms
-
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/login/$',login),
-    url(r'^accounts/logout/$',logout),
-    url(r'^accounts/addUser/$',addUser),
+    url(r'^login/$', obtain_auth_token),
+    # url(r'^accounts/login/$',login),
+    # url(r'^accounts/logout/$',logout),
+    # url(r'^accounts/addUser/$',addUser),
     url(r'^game/(?P<GameName>\w+)/$',ReadGame),
     url(r'^addgame/$',addGame),
     url(r'^getAllRooms/$', get_all_rooms),

@@ -12,7 +12,7 @@ class Room(models.Model):
     label     = models.SlugField(unique=True)
     teacher   = models.TextField()
     isActive  = models.BooleanField() 
-    timestamp = models.DateTimeField(default=timezone.now(), db_index=True)
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
 
     def __unicode__(self):
@@ -24,7 +24,7 @@ class Message(models.Model):
     handle    = models.TextField()
     message   = models.TextField()
     username  = models.TextField()
-    timestamp = models.DateTimeField(default=timezone.now(), db_index=True)
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
     def __unicode__(self):
         return '[{timestamp}] {handle}: {message}'.format(**self.as_dict())

@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST,require_GET
 from django.contrib.auth.decorators import login_required, user_passes_test
+from rest_framework.authtoken.models import Token
+
+
 
 import os
 from pymongo import MongoClient
@@ -37,17 +40,16 @@ def hello(request):
 # @csrf_exempt
 @require_POST
 def login(request):
-    
+        
     name = request.POST.get('username','') # 如果沒有這個key 則使用default
     password = request.POST.get('password','')
     user = auth.authenticate(username=name, password=password)
-
+    token = None
     if user is not None and user.is_active: # find user and back
         auth.login(request, user)
-        message = '登入成功'
-    else:
-        message = '登入失敗'
-    return HttpResponse(message)
+        token = Token.objects.get_or_create(user=user)
+    
+    return HttpResponse({"token":token, "username":username})
 
 def logout(request):
     auth.logout(request)

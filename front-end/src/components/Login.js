@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock, Tab, Tabs, Nav, NavItem} from 'react-bootstrap';
 
-import SigninForm from './SignForm';
+import LoginForm from './LoginForm';
 
-class Signin extends React.Component {
+class Login extends React.Component {
 
     constructor(props){
         super(props);
@@ -17,16 +17,16 @@ class Signin extends React.Component {
     }
 
     componentWillMount(){
-      console.log("componentWillMount", "Signin");
+      console.log("componentWillMount", "Login");
     }
 
     componentDidMount(){
-      console.log("componentDidMount", "Signin");
+      console.log("componentDidMount", "Login");
       console.log(this);
     }
   
     componentWillUnmount(){
-      console.log("componentWillUnmount", "Signin");
+      console.log("componentWillUnmount", "Login");
     }
 
 
@@ -38,25 +38,25 @@ class Signin extends React.Component {
 
         return(
           
-          <div className="center">
-          <Col xs={12} sm={6}>
+          <div className="div-login">
+          {/* <Col xs={12} sm={6}> */}
             <Panel bsStyle="success">
               <Panel.Heading>進入桌弄</Panel.Heading>
               <Panel.Body>
               <Tabs id="tabs"  activeKey={this.state.key} onSelect={this.handleSelect.bind(this)} animation={true}>
-                <Tab eventKey={1} title="Teacher">
-                  <SigninForm userType='teacher'/>
+                <Tab eventKey={1} title="老師">
+                  <LoginForm userType='teacher'/>
                 </Tab>
-                <Tab eventKey={2} title="Player">
-                  <SigninForm userType='player'/>
+                <Tab eventKey={2} title="玩家">
+                  <LoginForm userType='player'/>
                 </Tab>
               </Tabs>
             </Panel.Body>
             </Panel>
-          </Col>
+          {/* </Col> */}
           </div>
           )
     }
 }
 
-export default Signin;
+export default Login;
