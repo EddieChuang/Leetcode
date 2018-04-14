@@ -1,8 +1,8 @@
 import React from 'react'
 // import { Redirect } from 'react-router'
 import {Switch, Route, Redirect} from 'react-router-dom'
-import Home from './Home'
-import Login from './Login'
+import Home from './pages/Home'
+import Login from './pages/Login'
 import { withRouter } from "react-router-dom"
 import auth from "../javascript/auth"
 

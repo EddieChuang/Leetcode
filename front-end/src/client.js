@@ -15,6 +15,7 @@ import App from './components/App';
 
 console.log("app")
 
+require('./style/main.scss')
 
 const Routes = (
   // <Provider store={store}>

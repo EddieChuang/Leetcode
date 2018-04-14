@@ -8,7 +8,7 @@ import {MenuItem, Form, Well, Col, Row, Grid, Panel, Modal, InputGroup,
   HelpBlock, FormControl, FormGroup, Image, ControlLabel, SplitButton, DropdownButton} from 'react-bootstrap'
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
   CardImgOverlay, CardDeck, Button, Popover, PopoverHeader, PopoverBody} from 'reactstrap'
-
+import Clipboard from 'react-clipboard.js';
 
 class RoomCard extends React.Component {
 
@@ -22,32 +22,25 @@ class RoomCard extends React.Component {
         labelPopoverOpen: false,
         isActive: this.props.roomInfo!==null ? this.props.roomInfo.isActive : null,
         nTeam: "選擇隊伍上限",
-        teams: [
-          {
-            name: "team1",
-            note: "note1"
-          },
-          {
-            name: "team2",
-            note: "note2"
-          },
-          {
-            name: "team3",
-            note: "note3"
-          },
-        ]
+        teams: []
       }
 
       this.open  = this.open.bind(this)
       this.close = this.close.bind(this)
       this.enter = this.enter.bind(this)
+      this.onCopySuccess = this.onCopySuccess.bind(this)
       this.closeGame = this.closeGame.bind(this)
       this.handleCreate = this.handleCreate.bind(this)
+      this.showTeams = this.showTeams.bind(this)
       this.handleSelectGame = this.handleSelectGame.bind(this)
-      this.handleTeamSelect = this.handleTeamSelect.bind(this)
+      this.handleSelectNTeam = this.handleSelectNTeam.bind(this)
       this.toggleLabelPopover = this.toggleLabelPopover.bind(this)
       this.resetValidationState = this.resetValidationState.bind(this)     
-      this.handleSelectNTeam = this.handleSelectNTeam.bind(this) 
+       
+  }
+
+  onCopySuccess(){
+      alert("複製到剪貼簿")
   }
 
   close(){
@@ -75,7 +68,7 @@ class RoomCard extends React.Component {
           let roomInfo = new FormData()
           roomInfo.append("label", this.props.roomInfo.label)
           roomInfo.append("isActive", false)
-          axios.post("http://localhost:8000/updateRoom/", roomInfo)
+          axios.post("http://localhost:8000/chat/updateRoom/", roomInfo)
             .then((response) => {
                 console.log(response)
             })
@@ -129,15 +122,28 @@ class RoomCard extends React.Component {
   }
 
   handleSelectNTeam(eventKey){
-    this.setState({
-      nTeam: eventKey
-    })
-}
-
-  handleTeamSelect(eventKey, e){
-      console.log(e.target)
-      // e.target.preventDefault()
+      this.setState({
+        nTeam: eventKey
+      })
   }
+
+  showTeams(){
+
+      // let label = this.props.roomInfo.label
+      // let req  = new FormData()
+      // req.append("label", label)
+      // axios.post('http://localhost:8000/chat/getTeams/', req)
+      //   .then((res) => {
+      //       console.log(res)
+      //       this.setState({teams: res.data.teams})
+      //   })
+      //   .catch((err) => {
+      //       console.log(err)
+      //   })
+
+  }
+
+  
 
   handleCreate(event){
     // store room in database
@@ -156,19 +162,11 @@ class RoomCard extends React.Component {
     roomInfo.append("game", game)
     roomInfo.append("nTeam", nTeam)
 
-    axios.post("http://localhost:8000/new/", roomInfo)
+    axios.post("http://localhost:8000/chat/new/", roomInfo)
       .then((response) => {
-        console.log(response)
-        // if(response.data === 'label already exists.'){
-        //     this.setState({
-        //       labelVal: "error",
-        //       labelErrMsg: response.data,
-        //     })
-        //     return
-        // }
-        roomInfo.append("label", response.data)
-        roomInfo.append("isActive", true)
-        this.props.handleUpdateRooms(roomInfo)
+        console.log('respnose: ', response)
+        let newRoom = {...response.data, 'isActive':true}
+        this.props.handleUpdateRooms(newRoom)
         this.close()
       })
       .catch((err) => {
@@ -180,33 +178,43 @@ class RoomCard extends React.Component {
   enter(){
 
       let label = this.props.roomInfo.label
-      this.props.history.push({
-        pathname: 'http://localhost:8000/'+label
-      });
-      // axios.get("http://localhost:8000/"+label+"/")
-      //   .then((response) => {
-      //       console.log(response)
-      //   })
-      //   .catch((err) =>{
-      //       console.log(err)
-      //   })
+      let name  = this.props.teacher.name
+      let user  = {'type':'teacher', 'key':'', 'name':name, 'note':''}
+      this.props.history.replace({
+        pathname:'/chat',
+        state: {'label':label, 'user':user}
+      })
+
+     
   }
 
   render(){
 
       console.log("render", "RoomCard")
-      const teamsMenuItem = this.state.teams.map(function(team, i){
+      const teamsMenuItem = null//this.state.teams.map(function(team, i){
+      //   return (
+      //     <MenuItem eventKey={i} key={i}>
+      //       <span className="glyphicon glyphicon-remove"></span>
+      //       {team.name}
+      //     </MenuItem>
+      //   )
+      // })
+      // console.log(this.props)
+      const keys = this.props.roomInfo!=null ? (this.props.roomInfo.keys.map((key, i)=>{
         return (
-          <MenuItem eventKey={i} key={i}>
-            <span className="glyphicon glyphicon-remove"></span>
-            {team.name}
-          </MenuItem>
+          <li key={key}>
+            {key} 
+            <Clipboard data-clipboard-text={this.props.roomInfo.label} onSuccess={this.onCopySuccess}>
+              複製
+            </Clipboard>
+          </li>
         )
-      })
+      })) : null
+
       const room = (this.props.roomInfo) ? (
         <div className="room-card">
           <Card>
-            <button type="button" id={"popover-"+this.props.roomInfo.label} className="btn btn-default btn-circle btn-room-remove" onClick={this.toggleLabelPopover}>
+            <button type="button" id={"popover-"+this.props.roomInfo.label} className="btn btn-default btn-circle btn-room-status" onClick={this.toggleLabelPopover}>
               <span style={{"fontSize":"17px","right":"3px","top":"-2px"}} className="glyphicon glyphicon-info-sign"></span>
             </button>
             <Popover placement="auto" isOpen={this.state.labelPopoverOpen} target={"popover-"+this.props.roomInfo.label} toggle={this.toggleLabelPopover}>
@@ -214,7 +222,9 @@ class RoomCard extends React.Component {
               <PopoverBody>
                 <ul style={{"padding":"0px 20px"}}>
                   <li>隊伍上限: {this.props.roomInfo.nTeam}</li>
-                  <li>金鑰: {this.props.roomInfo.label}</li>
+                  <li>
+                    金鑰: <ul>{keys}</ul>
+                  </li>
                 </ul>
               </PopoverBody>
             </Popover>
@@ -223,7 +233,7 @@ class RoomCard extends React.Component {
             <CardBody>
               <CardTitle style={{'fontWeight':'bold'}}>{this.props.roomInfo.game}</CardTitle>
               <DropdownButton style={{"marginBottom":"5px"}} title="隊伍" 
-                id="team-dropdown" disabled={!this.state.isActive} onSelect={this.handleTeamSelect}>
+                id="team-dropdown" disabled={!this.state.isActive} onClick={this.showTeams}>
                 {teamsMenuItem}
               </DropdownButton>
               <CardText><Button className={this.state.isActive ? "btn-success" : "btn-default"} onClick={this.closeGame} disabled={!this.state.isActive}>{this.state.isActive ? "遊戲進行中" : "遊戲已結束"}</Button></CardText>

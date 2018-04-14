@@ -165,26 +165,32 @@ class LoginForm extends React.Component {
         return(
           <Well bsSize="large">
             <FormGroup controlId={(this.props.userType==='teacher')?('teacher'):('player')} validationState={this.state.usernameVal}>
-              <ControlLabel>{(this.props.userType==='teacher')?('老師'):('隊伍')}名稱</ControlLabel>
+              <ControlLabel>{(this.props.userType==='teacher')?('老師名稱'):('遊戲金鑰')}</ControlLabel>
               <FormControl 
                 type="text"
                 onChange={this.resetValidationState.bind(this, 'username')}
-                placeholder="Chiamin"
+                // placeholder={(this.props.userType==='teacher')?('Chiamin'):('')}
                 ref="username"/>
                 <FormControl.Feedback />
                 {this.state.usernameErrMsg !== "" && <HelpBlock><font size="14px" color="red">{this.state.usernameErrMsg}</font></HelpBlock>}
             </FormGroup>
 
             <FormGroup controlId={(this.props.userType==='teacher')?('password'):('roomID')} validationState={this.state.passwordVal}>
-              <ControlLabel>{(this.props.userType==='teacher')?('密碼'):('遊戲ID')}</ControlLabel>
+              <ControlLabel>{(this.props.userType==='teacher')?('密碼'):('隊伍名稱')}</ControlLabel>
               <FormControl 
                 type={(this.props.userType==='teacher')?('password'):('text')}
                 onChange={this.resetValidationState.bind(this, 'password')}
-                placeholder={(this.props.userType==='teacher')?('Password'):('game-123')}
+                // placeholder={(this.props.userType==='teacher')?('Password'):('Chiamin')}
                 ref="password"/>
               <FormControl.Feedback />
               {this.state.passwordVal !== "" && <HelpBlock><font size="14px" color="red">{this.state.passwordErrMsg}</font></HelpBlock>}
             </FormGroup>
+            {this.props.userType==='player' ? (
+              <FormGroup controlId="formControlsTextarea">
+                <ControlLabel>備註</ControlLabel>
+                <FormControl componentClass="textarea" placeholder="組員名稱 …" />
+              </FormGroup>) : ("")
+            }
             <Button style={{}} onClick={(this.props.userType==='teacher') ? 
               (this.handleLogin.bind(this)) : (this.handleEnterRoom.bind(this))} bsStyle="primary">
               {(this.props.userType==='teacher') ? ('登入') : ('進入遊戲')}
