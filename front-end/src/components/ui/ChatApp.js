@@ -24,7 +24,7 @@ class ChatApp extends Component {
         let socketURL = 'ws://localhost:8000/ws/chat/' + label + '/'
         
         this.setState({label:label, user:user, socketURL:socketURL})
-        console.log(label, user)
+        // console.log(label, user)
     }
 
     // send message to server
@@ -44,7 +44,7 @@ class ChatApp extends Component {
     receiveMessage(data){
       
         data = JSON.parse(data)
-        console.log(data)
+        // console.log(data)
         if(data.type === 'init'){
             this.setState({messages:[]})
             data.messages.forEach((msg) => {
@@ -59,8 +59,11 @@ class ChatApp extends Component {
               'timestamp': data.timestamp,
               'fromMe':   data.username === this.state.user.name
             }
-            if(data.username !== this.state.user.name)
-                this.props.onUnread(1)
+            console.log(data.username, this.state.user.name)
+            if(data.username !== this.state.user.name){
+                this.props.onUnread(this.state.label, 1)
+            }
+
             this.addMessage(msg)
         }
     }
@@ -73,13 +76,7 @@ class ChatApp extends Component {
 
     componentWillUnmount(){
       
-      alert("unmount")
-        // const socket = this.refs.socket
-        // socket.state.ws.send(JSON.stringify({
-        //   'type': 'leave',
-        //   'username': this.state.user.name,
-        //   'label': this.state.label
-        // }))
+      console.log('chatApp unmount')
     }
 
     render() {

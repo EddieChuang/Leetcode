@@ -18,8 +18,9 @@ class LoginForm extends React.Component {
             passwordErrMsg: ""
         }
         this.resetValidationState = this.resetValidationState.bind(this)
-        this.handleEnterRoom = this.handleEnterRoom.bind(this)
-        this.handleLogin = this.handleLogin.bind(this)
+        this.onEnterRoom = this.onEnterRoom.bind(this)
+        this.onLogin = this.onLogin.bind(this)
+        // this.validate = this.validate.bind(this)
     }
 
 
@@ -54,7 +55,7 @@ class LoginForm extends React.Component {
         return username === "" || password === "";
     }
 
-    handleLogin(){
+    onLogin(){
       
       let username = ReactDOM.findDOMNode(this.refs.input1).value;
       let password = ReactDOM.findDOMNode(this.refs.input2).value;
@@ -63,11 +64,11 @@ class LoginForm extends React.Component {
           return;
       }
 
-      auth.login(username, password, (loggedIn)=>{
+      auth.login(username, password, (loggedIn, err)=>{
           if(loggedIn){
               this.props.history.push('/home')
           } else {
-              this.setState({passwordErrMsg: '登入失敗'})
+              this.setState({passwordErrMsg: err})
           }
       })
     }
@@ -75,7 +76,7 @@ class LoginForm extends React.Component {
     componentWillUnmount(){
     } 
 
-    handleEnterRoom(){
+    onEnterRoom(){
       
       let key  = ReactDOM.findDOMNode(this.refs.input1).value;
       let team = ReactDOM.findDOMNode(this.refs.input2).value;
@@ -84,7 +85,6 @@ class LoginForm extends React.Component {
       auth.authRoom(key, team, note, (valid, res)=>{
         console.log(res)
         if(valid){
-            
             let user = {'type':'team', 'key':res.team.key, 'name':res.team.name, 'note':res.team.note}
             this.props.history.replace({
               pathname:'/chat',
@@ -129,7 +129,7 @@ class LoginForm extends React.Component {
               </FormGroup>) : ("")
             }
             <Button style={{}} onClick={(userType==='teacher') ? 
-              (this.handleLogin) : (this.handleEnterRoom)} bsStyle="primary">
+              (this.onLogin) : (this.onEnterRoom)} bsStyle="primary">
               {(userType==='teacher') ? ('登入') : ('進入遊戲')}
             </Button>
           </Well>

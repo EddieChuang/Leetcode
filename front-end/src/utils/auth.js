@@ -8,7 +8,10 @@ export default {
         //     return
         // }
 
-        let user = {"username": username, "password": password}
+        // let user = {"username": username, "password": password}
+        let user = new FormData()
+        user.append("username", username)
+        user.append("password", password)
         axios.post('http://localhost:8000/login/', user)
           .then((res) => {
               console.log(res)
@@ -17,7 +20,8 @@ export default {
               callback(true)
           })
           .catch((err) => {
-              callback(false)
+              // console.log(err.response.data.res)
+              callback(false, err.response.data.res)
           })
     },
 

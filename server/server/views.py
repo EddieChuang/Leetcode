@@ -13,8 +13,12 @@ def login(request):
     print(username, password)
     user = auth.authenticate(username=username, password=password)
     token = None
-    if user is not None and user.is_active: # find user and back
+    if user is None:
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'res':'密碼錯誤'}, status=403)
+        return JsonResponse({'res':'使用者不存在'}, status=403)
+    if user is not None and user.is_active:
         # auth.login(request, user)
         token = Token.objects.get_or_create(user=user)
-    
-    return JsonResponse({"token":token, "username":username})
+    print(type(str(token[0])))
+    return JsonResponse({"token":str(token[0]), "username":username})

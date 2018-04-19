@@ -5,7 +5,7 @@ import {Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Chatroom from './pages/Chatroom'
-import Game from './pages/Game'
+import Main from './pages/Main'
 import auth from "../utils/auth"
 
 class App extends React.Component {
@@ -21,7 +21,7 @@ class App extends React.Component {
                 !auth.loggined() ? <Redirect to="/"/> : <Home/> 
             )}/>
             <Route exact path="/chat" render={() => (
-                false ? <Redirect to="/"/> : <Game />
+                false ? <Redirect to="/"/> : <Main />
             )}/>
           </Switch>
         )

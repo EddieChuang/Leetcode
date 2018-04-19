@@ -1,8 +1,10 @@
 import React from 'react'
 import Sidebar from 'react-sidebar'
+import {Link, withRouter} from 'react-router-dom'
 import Chatroom from './Chatroom'
+import Header from '../ui/Header'
 import {Navbar, Nav, NavItem, Badge} from 'react-bootstrap'
-
+import styles from '../../style/share.scss'
 
 
 class Game extends React.Component {
@@ -11,53 +13,53 @@ class Game extends React.Component {
     super(props)
 
     this.state = {
+      user: this.props.user ? this.props.user : this.props.location.state.user,
+      label :this.props.label ? this.props.label : this.props.location.state.label,
       sidebarOpen: false,
       sidebarDocked: false,
       unread: 0
     }
 
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this)
-    this.onSidebarDocked = this.onSidebarDocked.bind(this)
-    this.onLeave = this.onLeave.bind(this)
-    this.onUnread = this.onUnread.bind(this)
-    
 
 
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this)    
+  }
+
+  componentWillReceiveProps(props){
+    this.setState({sidebarDocked: props.sidebarDocked})
   }
 
   onSetSidebarOpen(open){
     this.setState({sidebarOpen: open})
   }
 
-  onSidebarDocked(){
-    this.setState({sidebarDocked: !this.state.sidebarDocked})
-    this.setState({unread: 0})
-  }
-
-  onLeave(){
-  }
-
-  onUnread(n){
-    console.log('onUnread', n)
-    if(this.state.sidebarDocked === false)
-        this.setState({unread: n==0 ? 0 : this.state.unread+n})
-  }
 
   render(){
-    let styles = {
+
+    // console.log(this.state)
+    let sideBarStyles = {
+      root: {
+        position: 'relative',
+        width: '100%',//styles.pageContentMainWidth,
+        height: '100%'//styles.pageContentHeight,
+      },
+      sidebar: {overflowY: 'hidden'},
       content:{overflowY: 'hidden'}
     }
+
+
     return(
-      <div>
       
-      <Sidebar sidebar={<Chatroom onUnread={this.onUnread}/>}
+      
+      <Sidebar 
+        sidebar={<Chatroom onUnread={this.props.onUnread} user={this.state.user} label={this.state.label}/>}
         open={this.state.sidebarOpen}
         docked={this.state.sidebarDocked}        
         onSetOpen={this.onSetSidebarOpen}
         pullRight={true}
-        styles={styles}>
+        styles={sideBarStyles}>
 
-        <div>
+        {/* <div>
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
@@ -78,14 +80,14 @@ class Game extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        </div>
-        <h1>hi, game start</h1>
+        </div> */}
+        
+        <h1>hi, game startttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</h1>
         {/* <Chatroom/> */}
         
           
 
       </Sidebar>
-      </div>
     )
 
 
@@ -93,4 +95,4 @@ class Game extends React.Component {
 
 }
 
-export default Game
+export default withRouter(Game)

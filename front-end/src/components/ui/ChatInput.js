@@ -30,7 +30,7 @@ class ChatInput extends Component {
         return (
           <form className="chat-input" onSubmit={this.submitHandler}>
             {/* <div className="input"> */}
-              <div className="fa fa-2x fa-image" onClick={this.imageUpload}>
+              {/* <div className="fa fa-2x fa-image" onClick={this.imageUpload}>
                 <input 
                   ref="imageid" 
                   type="file" 
@@ -38,7 +38,7 @@ class ChatInput extends Component {
                   onChange={this.handleImageChange}
                   hidden 
                 />
-              </div>
+              </div> */}
               <input type="text"
                 className="input-msg"
                 onChange={this.textChangeHandler}

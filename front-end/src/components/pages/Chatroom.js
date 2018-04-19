@@ -8,7 +8,10 @@ import Websocket from 'react-websocket'
 class Chatroom extends Component {
     constructor(props) {
         super(props)
-        this.state = this.props.location.state
+        this.state = {
+          user: this.props.user,
+          label: this.props.label
+        }
     }
     
     render() {

@@ -1,1 +1,21 @@
+$grey: #CCC;
+$dark-grey: #BBB;
 $light-grey: #EEE;
+
+// Spacing
+$space: 1.4rem;
+$large-space: 2.8rem;
+$site-max-width: 100rem;
+
+// Header
+$header-bg: $dark-grey;
+$header-color: black;
+$header-height: 6rem;
+
+// Item list
+$item-list-header-bg: $grey; 
+
+// Page Content
+$page-content-sidebar-width: 20rem;
+$page-content-main-width: calc(#{$site-max-width} - #{$page-content-sidebar-width});
+$page-content-height: calc(100vh - #{$header-height});

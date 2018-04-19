@@ -21,8 +21,6 @@ class Login extends React.Component {
       this.setState({key})
     }
 
-    
-
     render(){
         console.log('login: render')
         return(
