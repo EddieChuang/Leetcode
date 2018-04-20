@@ -1,18 +1,20 @@
 "use strict"
 import React from 'react'
 import axios from 'axios'
-import ReactDOM from 'react-dom'
 import {withRouter} from 'react-router-dom'
-import {Well, Col, Row, Grid, Panel, Navbar, Button, Nav, NavItem} from 'react-bootstrap'
-import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, CardImgOverlay} from 'reactstrap'
-
-import RoomList from '../ui/RoomList'
-import CreateRoomModal from '../ui/CreateRoomModal'
-import auth from '../../utils/auth'
-import {URL_GETALLROOM} from '../../utils/url'
 import Sidebar from 'react-sidebar'
-import Game from './Game'
-import Header from '../ui/Header'
+
+// ui
+import {RoomList, CreateRoomModal} from '../ui/room'
+import {Game} from '../ui/game'
+import {Header} from '../ui/header'
+
+// utils
+import auth from '../../utils/auth'
+
+// constants
+import {URL_GETALLROOM} from '../../constants/url'
+
 
 class Home extends React.Component {
 

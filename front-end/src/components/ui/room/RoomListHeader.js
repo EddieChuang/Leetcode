@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateRoomModal from './CreateRoomModal'
+import {CreateRoomModal} from '.'
 
 class RoomListHeader extends React.Component {
 
@@ -18,7 +18,6 @@ class RoomListHeader extends React.Component {
 
 
   render(){
-    console.log('render')
     return (
       <div className="item-list-header">
         <input type="text" placeholder="搜尋遊戲" />

@@ -1,13 +1,9 @@
 "use strict"
-import React, { createFactory } from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
-import {URL_CREATEROOM} from '../../utils/url'
-
 import {MenuItem, Modal, InputGroup, Button,
   HelpBlock, FormGroup, SplitButton} from 'react-bootstrap'
-
+import {URL_CREATEROOM} from '../../../constants/url'
 
 class CreateRoomModal extends React.Component{
 

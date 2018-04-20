@@ -1,10 +1,9 @@
 "use strict"
 import React from 'react'
-import {Button, Badge} from 'react-bootstrap'
-import {Card, CardImg, CardBody, CardTitle, Popover, PopoverHeader, PopoverBody} from 'reactstrap'
+import {Badge} from 'react-bootstrap'
+import {Popover, PopoverHeader, PopoverBody} from 'reactstrap'
 import {withRouter} from 'react-router-dom'
 import Clipboard from 'react-clipboard.js';
-
 
 class RoomListItem extends React.Component {
 
@@ -21,7 +20,6 @@ class RoomListItem extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    console.log('componentWillReceiveProps', props)
     if(props.unread.label === this.state.room.label){
         console.log('aaa', this.state.unread + props.unread.n)
         this.setState({unread: this.state.unread + props.unread.n})
@@ -77,11 +75,6 @@ class RoomListItem extends React.Component {
           </Popover>
           <h4>{this.state.room.game}</h4>
           {this.state.unread !=0 ? (<Badge style={{color:'orange'}} >{this.state.unread}</Badge>) : ('')}
-          {/* <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" /> */}
-          {/* <CardBody> */}
-            {/* <CardTitle style={{'fontWeight':'bold'}}>{this.state.room.game}</CardTitle>               */}
-            {/* <Button className="center-align btn-primary" onClick={this.props.enter}>進入遊戲</Button> */}
-          {/* </CardBody> */}
         </div>
       )
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom';
-import ChatApp from '../ui/ChatApp'
 import Websocket from 'react-websocket'
+
+// ui
+import {ChatApp} from '.'
 // require('../../style/message.scss')
 // require('../../style/chatroom.scss')
 

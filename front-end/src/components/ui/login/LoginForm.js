@@ -1,10 +1,11 @@
 "use strict"
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link, withRouter} from 'react-router-dom';
-import axios from 'axios';
-import {Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock, Tab, Tabs, Nav, NavItem} from 'react-bootstrap';
-import auth from '../../utils/auth'
+import {withRouter} from 'react-router-dom';
+import {Button, Form, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+
+// utils
+import auth from '../../../utils/auth'
 
 
 class LoginForm extends React.Component {
@@ -83,7 +84,6 @@ class LoginForm extends React.Component {
       let note = ReactDOM.findDOMNode(this.refs.input3).value
 
       auth.authRoom(key, team, note, (valid, res)=>{
-        console.log(res)
         if(valid){
             let user = {'type':'team', 'key':res.team.key, 'name':res.team.name, 'note':res.team.note}
             this.props.history.replace({

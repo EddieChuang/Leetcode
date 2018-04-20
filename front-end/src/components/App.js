@@ -2,10 +2,7 @@
 import React from 'react'
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom'
 
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Chatroom from './pages/Chatroom'
-import Main from './pages/Main'
+import {Home, Login, Main} from './pages'
 import auth from "../utils/auth"
 
 class App extends React.Component {

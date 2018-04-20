@@ -1,11 +1,10 @@
 "use strict"
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
-import {Button, Well, Col, Row, Panel, Form, FormControl, FormGroup, ControlLabel, HelpBlock, Tab, Tabs, Nav, NavItem} from 'react-bootstrap';
+import {Panel, Form, Tab, Tabs} from 'react-bootstrap';
 
-import LoginForm from '../ui/LoginForm';
+// ui
+import {LoginForm} from '../ui/login';
 
 class Login extends React.Component {
 
@@ -22,7 +21,6 @@ class Login extends React.Component {
     }
 
     render(){
-        console.log('login: render')
         return(
           
           <div className="boxed-view">

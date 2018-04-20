@@ -1,10 +1,10 @@
 "use strict"
 import React from 'react'
-import axios from 'axios'
-import ReactDOM from 'react-dom'
 import {withRouter} from 'react-router-dom'
-import Game from './Game'
-import Header from '../ui/Header'
+
+// ui
+import {Game} from '../ui/game'
+import {Header} from '../ui/header'
 
 class Main extends React.Component {
 

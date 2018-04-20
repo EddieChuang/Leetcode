@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Messages from './Messages'
-import ChatInput from './ChatInput'
 import Websocket from 'react-websocket'
 
+// ui
+import {ChatInput} from '.'
 
 // require('../../style/message.scss')
 

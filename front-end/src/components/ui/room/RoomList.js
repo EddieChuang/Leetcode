@@ -1,10 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import RoomListItem from './RoomListItem'
-import RoomListHeader from './RoomListHeader'
 import {withRouter} from 'react-router-dom'
-import {URL_GETALLROOM} from '../../utils/url'
-import {StickyContainer, Sticky} from 'react-sticky'
+import {RoomListItem, RoomListHeader} from '.'
+import {URL_GETALLROOM} from '../../../constants/url'
 import FlipMove from 'react-flip-move'
 
 class RoomList extends React.Component{
