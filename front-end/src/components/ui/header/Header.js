@@ -10,8 +10,10 @@ class Header extends React.Component {
     super(props)
     this.state = {
       user: this.props.user,
-      unread: this.props.unread
+      unread: this.props.unread,
+      page: this.props.page // ['home', 'main']
     }
+
     this.showChatroom = this.showChatroom.bind(this)
     this.logout = this.logout.bind(this)
   }
@@ -26,11 +28,14 @@ class Header extends React.Component {
   }
 
   logout(){
-    let isTeacher = this.state.user.type==='teacher'
-    let msg = isTeacher ? '確定登出嗎？' : '確定離開遊戲嗎？'
+    let isTeacher = this.state.user.type === 'teacher'
+    let isHome    = this.state.page === 'home'
+    let msg = isTeacher && isHome ? '確定登出嗎？' : '確定離開遊戲嗎？'
     if(confirm(msg)){
-        if(isTeacher){
+        if(isTeacher && isHome){
             auth.logout()
+        } else if(isTeacher){
+            window.close()
         } else{
             auth.leaveRoom()
         }
@@ -57,7 +62,7 @@ class Header extends React.Component {
               {this.state.unread > 0 ? (<Badge style={{color:'orange'}}>{this.state.unread}</Badge>) : ('')}聊天室
             </NavItem>
             <NavItem eventKey={1} onClick={this.logout}>
-              {user.type==='teacher' ? '登出' : '離開遊戲'}
+              {user.type==='teacher' && this.state.page==='home' ? '登出' : '離開遊戲'}
             </NavItem>
           </Nav>
         </Navbar.Collapse>

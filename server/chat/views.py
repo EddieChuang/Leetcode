@@ -45,52 +45,21 @@ def auth_room(request):
 
     return JsonResponse({'res':'遊戲金鑰錯誤'}, status=403)
 
-#     @require_POST
-# def auth_room(request):
+# # no use
+# def room(request, room_label):
 
-#     label = request.POST.get('label')
-#     team_name  = request.POST.get('team_name')
-#     note =  request.POST.get('note')
-#     room = Room.objects.get(label=label)
-#     if room :
+#     room = Room.objects.get(label=room_label)
+#     messages = reversed(room.messages.order_by('-timestamp')[:50])
+#     # return render(request, "chat/room.html", {
+#     #     'room': room,
+#     #     'messages': messages,
+#     # })
 
-#         teams = room.teams.all()
-#         nTeam = room.nTeam
-#         isActive = room.isActive
+#     return JsonResponse({'label':room_label})
 
-#         if not isActive:
-#             return JsonRespnose({'res':'遊戲未開啟'}, status=403)
-#         if len(teams) >= nTeam:
-#             return JsonResponse({'res':'遊戲已滿'}, status=403)
-#         for team in teams:
-#             if team_name == team.name:
-#                 return JsonResponse({'res':'隊伍名稱已存在'}, status=403)
-                
-#         while True:
-#             team_id = label + '-'.join(random.choices(string.digits, k=2))
-#             if not Team.objects.filter(team_id=team_id).exists():
-#                 Team.objects.create(room=room, team_id=team_id, name=team_name, note=note)
-#                 break
-#         team = {'id':team_id, 'name':team_name, 'note':note}
-#         return JsonResponse({'res':'歡迎進入遊戲', 'label':label, 'team':team}, status=200)
-  
-#     return JsonResponse({'res':'遊戲不存在'}, status=403)
-
-# no use
-def room(request, room_label):
-
-    room = Room.objects.get(label=room_label)
-    messages = reversed(room.messages.order_by('-timestamp')[:50])
-    # return render(request, "chat/room.html", {
-    #     'room': room,
-    #     'messages': messages,
-    # })
-
-    return JsonResponse({'label':room_label})
-
-    # return render(request, 'chat/room.html', {
-    #     'room_label_json': mark_safe(json.dumps(room_label))
-    # })
+#     # return render(request, 'chat/room.html', {
+#     #     'room_label_json': mark_safe(json.dumps(room_label))
+#     # })
 
 # create a new room by teacher
 def new_room(request):
@@ -122,12 +91,11 @@ def new_room(request):
     return JsonResponse({'teacher':teacher, 'game':game, 'nTeam':nTeam, 'keys': keys, 'label':label})
 
 @require_POST
-def update_room(request):
+def close_game(request):
 
-    label    = request.POST.get("label")
-    isActive = request.POST.get("isActive")=="true"
-    Room.objects.filter(label=label).update(isActive=isActive)
-    return HttpResponse("更新成功") 
+    label = request.POST.get("label")
+    Room.objects.filter(label=label).update(isActive=False)
+    return HttpResponse("遊戲已關閉") 
 
 @require_POST
 def get_all_rooms(request):

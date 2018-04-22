@@ -3966,6 +3966,7 @@ Object.defineProperty(exports, "__esModule", {
 var URL_CHATROOM = exports.URL_CHATROOM = "http://localhost:3000/chat";
 var URL_CREATEROOM = exports.URL_CREATEROOM = "http://localhost:8000/chat/new/";
 var URL_GETALLROOM = exports.URL_GETALLROOM = "http://localhost:8000/chat/getAllRooms/";
+var URL_CLOSEGAME = exports.URL_CLOSEGAME = "http://localhost:8000/chat/closeGame/";
 var URL_AUTHROOM = exports.URL_AUTHROOM = "http://localhost:8000/chat/authRoom/";
 var URL_LOGIN = exports.URL_LOGIN = "http://localhost:8000/login/";
 
@@ -47159,9 +47160,9 @@ var Home = function (_React$Component) {
             id: room.label,
             className: _this3.state.activeLabel == room.label ? 'active-game' : 'inactive-game'
           },
-          _react2.default.createElement(_game.Game, {
+          _react2.default.createElement(_game.GameInfo, {
             user: _this3.state.user,
-            label: room.label,
+            room: room,
             onUnread: _this3.onUnread,
             sidebarDocked: _this3.state.sidebarDocked })
         );
@@ -47170,7 +47171,7 @@ var Home = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_header.Header, { user: this.state.user, onSidebarDocked: this.onSidebarDocked }),
+        _react2.default.createElement(_header.Header, { user: this.state.user, onSidebarDocked: this.onSidebarDocked, page: 'home' }),
         _react2.default.createElement(
           'div',
           { className: 'page-content' },
@@ -60672,8 +60673,10 @@ var Header = function (_React$Component) {
 
     _this.state = {
       user: _this.props.user,
-      unread: _this.props.unread
+      unread: _this.props.unread,
+      page: _this.props.page // ['home', 'main']
     };
+
     _this.showChatroom = _this.showChatroom.bind(_this);
     _this.logout = _this.logout.bind(_this);
     return _this;
@@ -60694,10 +60697,13 @@ var Header = function (_React$Component) {
     key: 'logout',
     value: function logout() {
       var isTeacher = this.state.user.type === 'teacher';
-      var msg = isTeacher ? '確定登出嗎？' : '確定離開遊戲嗎？';
+      var isHome = this.state.page === 'home';
+      var msg = isTeacher && isHome ? '確定登出嗎？' : '確定離開遊戲嗎？';
       if (confirm(msg)) {
-        if (isTeacher) {
+        if (isTeacher && isHome) {
           _auth2.default.logout();
+        } else if (isTeacher) {
+          window.close();
         } else {
           _auth2.default.leaveRoom();
         }
@@ -60745,7 +60751,7 @@ var Header = function (_React$Component) {
             _react2.default.createElement(
               _reactBootstrap.NavItem,
               { eventKey: 1, onClick: this.logout },
-              user.type === 'teacher' ? '登出' : '離開遊戲'
+              user.type === 'teacher' && this.state.page === 'home' ? '登出' : '離開遊戲'
             )
           )
         )
@@ -61001,7 +61007,7 @@ var Main = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_header.Header, { user: this.state.user, onSidebarDocked: this.onSidebarDocked, unread: this.state.unread }),
+        _react2.default.createElement(_header.Header, { user: this.state.user, onSidebarDocked: this.onSidebarDocked, unread: this.state.unread, page: 'main' }),
         _react2.default.createElement(
           'div',
           { className: 'page-content' },
@@ -61150,9 +61156,41 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(19);
+
+var _axios = __webpack_require__(64);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactSidebar = __webpack_require__(169);
+
+var _reactSidebar2 = _interopRequireDefault(_reactSidebar);
+
+var _reactClipboard = __webpack_require__(405);
+
+var _reactClipboard2 = _interopRequireDefault(_reactClipboard);
+
+var _reactBootstrap = __webpack_require__(42);
+
+var _ = __webpack_require__(172);
+
+var _chatroom = __webpack_require__(66);
+
+var _header = __webpack_require__(105);
+
+var _url = __webpack_require__(65);
+
+var _share = __webpack_require__(422);
+
+var _share2 = _interopRequireDefault(_share);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61162,19 +61200,160 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// ui
+
+
+// url
+
+
+// scss
+
+
 var GameInfo = function (_React$Component) {
   _inherits(GameInfo, _React$Component);
 
   function GameInfo(props) {
     _classCallCheck(this, GameInfo);
 
-    return _possibleConstructorReturn(this, (GameInfo.__proto__ || Object.getPrototypeOf(GameInfo)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (GameInfo.__proto__ || Object.getPrototypeOf(GameInfo)).call(this, props));
+
+    _this.state = {
+      user: _this.props.user,
+      room: _this.props.room,
+      sidebarOpen: false,
+      sidebarDocked: false,
+      unread: 0
+    };
+
+    _this.enter = _this.enter.bind(_this);
+    _this.close = _this.close.bind(_this);
+    _this.onSetSidebarOpen = _this.onSetSidebarOpen.bind(_this);
+    _this.onCopySuccess = _this.onCopySuccess.bind(_this);
+    return _this;
   }
+
+  _createClass(GameInfo, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(props) {
+      this.setState({ sidebarDocked: props.sidebarDocked });
+    }
+  }, {
+    key: 'onSetSidebarOpen',
+    value: function onSetSidebarOpen(open) {
+      this.setState({ sidebarOpen: open });
+    }
+  }, {
+    key: 'onCopySuccess',
+    value: function onCopySuccess() {
+      alert("複製到剪貼簿");
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      var _this2 = this;
+
+      var comfirmMsg = "遊戲關閉後將無法重啟，確定關閉遊戲？";
+      if (confirm(comfirmMsg)) {
+
+        var room = new FormData();
+        room.append("label", this.state.room.label);
+        _axios2.default.post(_url.URL_CLOSEGAME, room).then(function (response) {
+          _this2.setState({ room: _extends({}, _this2.state.room, { isActive: false }) });
+          console.log(_this2);
+          console.log(response);
+        }).catch(function (response) {
+          console.log(response);
+        });
+      }
+    }
+  }, {
+    key: 'enter',
+    value: function enter() {
+
+      sessionStorage.label = this.state.room.label;
+      window.open(_url.URL_CHATROOM);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var sideBarStyles = {
+        root: {
+          position: 'relative',
+          width: '100%', //styles.pageContentMainWidth,
+          height: '100%' //styles.pageContentHeight,
+        },
+        sidebar: { overflowY: 'hidden' },
+        content: { overflowY: 'hidden' }
+      };
+
+      var room = this.state.room;
+      var keys = room.keys.map(function (key, i) {
+        return _react2.default.createElement(
+          'li',
+          { key: key },
+          _react2.default.createElement(
+            _reactClipboard2.default,
+            { 'data-clipboard-text': key, onSuccess: _this3.onCopySuccess },
+            _react2.default.createElement('span', { className: 'glyphicon glyphicon-copy' })
+          ),
+          key
+        );
+      });
+
+      console.log(room);
+      return _react2.default.createElement(
+        _reactSidebar2.default,
+        {
+          sidebar: _react2.default.createElement(_chatroom.Chatroom, { onUnread: this.props.onUnread, user: this.state.user, label: room.label }),
+          open: this.state.sidebarOpen,
+          docked: this.state.sidebarDocked,
+          onSetOpen: this.onSetSidebarOpen,
+          pullRight: true,
+          styles: sideBarStyles },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'hi, game start'
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          '\u623F\u9593\u7DE8\u865F: ',
+          room.label
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          '\u904A\u6232\u540D\u7A31: ',
+          room.game
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          '\u5EFA\u7ACB\u8001\u5E2B: ',
+          room.teacher
+        ),
+        keys,
+        _react2.default.createElement(
+          _reactBootstrap.Button,
+          { className: 'btn-primary', onClick: this.close, disabled: !room.isActive },
+          '\u95DC\u9589\u904A\u6232'
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Button,
+          { className: 'btn-primary', onClick: this.enter, disabled: !room.isActive },
+          '\u9032\u5165\u904A\u6232'
+        )
+      );
+    }
+  }]);
 
   return GameInfo;
 }(_react2.default.Component);
 
-exports.default = GameInfo;
+exports.default = (0, _reactRouterDom.withRouter)(GameInfo);
 
 /***/ })
 /******/ ]);

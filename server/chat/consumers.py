@@ -26,8 +26,10 @@ class ChatConsumer(WebsocketConsumer):
 
       room = Room.objects.get(label=self.room_label)
       
-      room.teams.filter(name=self.username).update(inRoom=True) #如果登入的是老師，老師名字不會和隊伍名稱重複，filter不會過
-      msg = room.messages.create(usertype='system', text=self.username+'加入遊戲')
+      #如果登入的是老師，老師名字不會和隊伍名稱重複，filter不會過
+      if room.teams.filter(name=self.username).exists():
+          room.teams.filter(name=self.username).update(inRoom=True)
+          room.messages.create(usertype='system', text=self.username+'加入遊戲')
       messages = room.messages.order_by('timestamp')
       msgList = []
       for message in messages:
@@ -91,9 +93,13 @@ class ChatConsumer(WebsocketConsumer):
 
     def disconnect(self, close_code):
 
+        msg = None
         room = Room.objects.get(label=self.room_label)
-        room.teams.filter(name=self.username).update(inRoom=False) #如果登入的是老師，老師名字不會和隊伍名稱重複，filter不會過
-        msg = room.messages.create(usertype='system', text=self.username + '離開遊戲')
+        #如果登入的是老師，老師名字不會和隊伍名稱重複，filter不會過
+        if room.teams.filter(name=self.username).exists():
+            room.teams.filter(name=self.username).update(inRoom=False)
+            room.messages.create(usertype='system', text=self.username+'離開遊戲')
+        
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {

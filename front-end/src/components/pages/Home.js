@@ -6,7 +6,7 @@ import Sidebar from 'react-sidebar'
 
 // ui
 import {RoomList, CreateRoomModal} from '../ui/room'
-import {Game} from '../ui/game'
+import {GameInfo} from '../ui/game'
 import {Header} from '../ui/header'
 
 // constants
@@ -100,9 +100,9 @@ class Home extends React.Component {
         id={room.label} 
         className={this.state.activeLabel==room.label?'active-game':'inactive-game'}
       >
-        <Game 
+        <GameInfo 
           user={this.state.user} 
-          label={room.label} 
+          room={room} 
           onUnread={this.onUnread} 
           sidebarDocked={this.state.sidebarDocked}/>
       </div>
@@ -110,7 +110,7 @@ class Home extends React.Component {
 
     return(<div>
 
-      <Header user={this.state.user} onSidebarDocked={this.onSidebarDocked}/>
+      <Header user={this.state.user} onSidebarDocked={this.onSidebarDocked} page="home"/>
       <div className="page-content">
         <div className="page-content-sidebar">
           <RoomList 

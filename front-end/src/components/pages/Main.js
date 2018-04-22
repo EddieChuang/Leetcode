@@ -36,7 +36,7 @@ class Main extends React.Component {
 
     return(
       <div>
-        <Header user={this.state.user} onSidebarDocked={this.onSidebarDocked} unread={this.state.unread}/>
+        <Header user={this.state.user} onSidebarDocked={this.onSidebarDocked} unread={this.state.unread} page="main"/>
         <div className="page-content">
           <div className="page-content-main">
             <Game 
