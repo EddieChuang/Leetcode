@@ -9,21 +9,24 @@ class RoomList extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      rooms: [],
+      rooms: this.props.rooms,
+      user: this.props.user,
       unread: this.props.unread
     }
-    this.handleUpdateRooms = this.handleUpdateRooms.bind(this)
+    this.onUpdateRooms = this.onUpdateRooms.bind(this)
+    this.getAllRooms = this.getAllRooms.bind(this)
   }
 
   componentDidMount(){
     // get all rooms
-    let username = localStorage.username
+    this.getAllRooms()
+  }
+
+  getAllRooms(){
     let userInfo = new FormData()
-    userInfo.append("username", username)
-    this.setState({username: username})
+    userInfo.append("username", this.state.user.name)
     axios.post(URL_GETALLROOM, userInfo)
       .then((response) => {
-          console.log(response)
           this.setState({rooms:response.data.rooms})
       })
       .catch((err) => {
@@ -31,12 +34,11 @@ class RoomList extends React.Component{
       })
   }
   
-  componentWillReceiveProps(props){
-    console.log('roomList', props)
+  componentWillReceiveProps(props){    
     this.setState({unread: props.unread})
   }
 
-  handleUpdateRooms(newRoom){
+  onUpdateRooms(newRoom){
     
     // let newRoom = {}
     // room.forEach(function(value, key){
@@ -46,11 +48,11 @@ class RoomList extends React.Component{
     let indexToUpdate = roomsToUpdate.findIndex(function(room_){
         return newRoom.label === room_.label
     })
-    // console.log('newRoom: ', newRoom)
+
     if(indexToUpdate === -1){
-        this.setState({rooms: [newRoom, ...roomsToUpdate]})
+        this.setState({rooms: [newRoom, ...roomsToUpdate], unread: {}})
     } else{
-        this.setState({rooms: [...roomsToUpdate.slice(0, indexToUpdate), newRoom, ...roomsToUpdate.slice(indexToUpdate+1)]})
+        this.setState({rooms: [...roomsToUpdate.slice(0, indexToUpdate), newRoom, ...roomsToUpdate.slice(indexToUpdate+1)], unread: {}})
     }
   }
 
@@ -64,12 +66,13 @@ class RoomList extends React.Component{
         onEnter={this.props.onEnter} 
         onClick={this.enter}
         unread={this.state.unread}
+        activeLabel={this.props.activeLabel}
       />
     ))
 
     return (
       <div>
-        <RoomListHeader handleUpdateRooms={this.handleUpdateRooms}/>
+        <RoomListHeader onUpdateRooms={this.onUpdateRooms}/>
         <div className="item-list">
           
           {/* <FlipMove duration={750} easing="ease-out">  */}

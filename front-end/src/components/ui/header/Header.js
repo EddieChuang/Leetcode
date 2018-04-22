@@ -1,5 +1,8 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import {Navbar, Nav, NavItem, Badge} from 'react-bootstrap'
+import auth from '../../../utils/auth'
+
 
 class Header extends React.Component {
 
@@ -14,7 +17,6 @@ class Header extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    // console.log(props)
     this.setState({unread: props.unread})
   }
 
@@ -24,8 +26,14 @@ class Header extends React.Component {
   }
 
   logout(){
-    if(confirm(this.state.user.type==='teacher' ? '確定登出嗎？' : '確定離開遊戲嗎？')){
-        auth.logout()
+    let isTeacher = this.state.user.type==='teacher'
+    let msg = isTeacher ? '確定登出嗎？' : '確定離開遊戲嗎？'
+    if(confirm(msg)){
+        if(isTeacher){
+            auth.logout()
+        } else{
+            auth.leaveRoom()
+        }
         this.props.history.replace('/')
     }
   }
@@ -66,4 +74,4 @@ class Header extends React.Component {
 
 }
 
-export default Header
+export default withRouter(Header)

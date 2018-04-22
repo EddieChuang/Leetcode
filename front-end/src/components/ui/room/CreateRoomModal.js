@@ -34,11 +34,9 @@ class CreateRoomModal extends React.Component{
       gameErrMsg: "",
       nTeam: "選擇隊伍上限"
     })
-
+    this.props.closeCreateRoom();
   }
 
-
-  
   onSelectGame(eventKey){
     this.setState({
       gameErrMsg: "",
@@ -81,7 +79,7 @@ class CreateRoomModal extends React.Component{
     axios.post(URL_CREATEROOM, roomInfo)
       .then((response) => {
         let newRoom = {...response.data, 'isActive':true}
-        this.props.handleUpdateRooms(newRoom)
+        this.props.onUpdateRooms(newRoom)
         this.close()
       })
       .catch((err) => {

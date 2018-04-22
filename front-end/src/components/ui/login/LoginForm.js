@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {withRouter} from 'react-router-dom';
-import {Button, Form, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+import {Button, Form, FormControl, FormGroup, ControlLabel, HelpBlock, Well} from 'react-bootstrap';
 
 // utils
 import auth from '../../../utils/auth'

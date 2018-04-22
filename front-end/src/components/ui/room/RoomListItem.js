@@ -21,12 +21,12 @@ class RoomListItem extends React.Component {
 
   componentWillReceiveProps(props){
     if(props.unread.label === this.state.room.label){
-        console.log('aaa', this.state.unread + props.unread.n)
         this.setState({unread: this.state.unread + props.unread.n})
     }
   }
 
-  toggleLabelPopover(){
+  toggleLabelPopover(e){
+    // e.stopPropagation()
     this.setState({labelPopoverOpen: !this.state.labelPopoverOpen})
   }
 
@@ -34,11 +34,13 @@ class RoomListItem extends React.Component {
     alert("複製到剪貼簿")
   }
 
-  onEnter(){
+  onEnter(e){
     // console.log('onEnter', this.state.room.label)
     // this.setState({unread: 0})
     this.setState({unread: 0})
+    
     this.props.onEnter(this.state.room.label)
+    
     // this.props.enter(localStorage.username, this.state.room.label)
   }
   
@@ -48,27 +50,28 @@ class RoomListItem extends React.Component {
       const keys = this.state.room!=null ? (this.state.room.keys.map((key, i)=>{
         return (
           <li key={key}>
-            {key} 
+             
             <Clipboard data-clipboard-text={key} onSuccess={this.onCopySuccess}>
-              複製
+              <span className="glyphicon glyphicon-copy"/>
             </Clipboard>
+            {key}
           </li>
         )
       })) : null
       
-      console.log(this.state)
+      let isActive = this.state.room.label===this.props.activeLabel
       return(
-        <div className="item" onClick={this.onEnter}>
+        <div className={"item" + (isActive ? " item-active" : "")} onClick={this.onEnter}>
           <button type="button" id={"popover-"+this.state.room.label} className="btn btn-default btn-circle btn-room-status" onClick={this.toggleLabelPopover}>
             <span style={{"fontSize":"14px","right":"4px","top":"-3px"}} className="glyphicon glyphicon-info-sign"></span>
           </button>
           <Popover placement="right" isOpen={this.state.labelPopoverOpen} target={"popover-"+this.state.room.label} toggle={this.toggleLabelPopover}>
             <PopoverHeader style={{"fontSize":"15px", "textAlign":"center"}}>遊戲資訊</PopoverHeader>
             <PopoverBody>
-              <ul style={{"padding":"0px 20px"}}>
+              <ul >
                 <li>隊伍上限: {this.state.room.nTeam}</li>
                 <li>
-                  金鑰: <ul>{keys}</ul>
+                  金鑰: <ul style={{"paddingLeft":"5px"}}>{keys}</ul>
                 </li>
               </ul>
             </PopoverBody>

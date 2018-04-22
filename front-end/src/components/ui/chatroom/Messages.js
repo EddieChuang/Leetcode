@@ -9,17 +9,18 @@ class Messages extends Component {
 
     render() {
         return (
-            <div className="messages" id="messageList">
-                {this.props.messages.map((message, i) => (
-                    <Message 
-                        key={i}
-                        username={message.username}
-                        message={message.message}
-                        timestamp={message.timestamp}
-                        fromMe={message.fromMe}
-                    />
-                ))}
-            </div>
+          <div className="messages" id="messageList">
+            {this.props.messages.map((message, i) => (
+              <Message 
+                key={i}
+                usertype={message.usertype}
+                username={message.username}
+                text={message.text}
+                timestamp={message.timestamp}
+                fromMe={message.fromMe}
+              />
+            ))}
+          </div>
         )
     }
 }

@@ -11,60 +11,58 @@ class ChatApp extends Component {
     constructor(props) {
         super(props)
         this.state = { 
-          label: '',
-          user: null,  //{'type', 'key', 'name', 'note}
+          label: this.props.label,
+          user: this.props.user,  //{'type', 'key', 'name', 'note}
           socketURL: '',
-          messages: [] 
+          messages: [] // [{'key', 'usertype', 'username', 'message', 'timestamp'}, ...]
         }
         this.receiveMessage = this.receiveMessage.bind(this)
     }
 
     componentWillMount(){
       
-        let {label, user} = this.props
-        let socketURL = 'ws://localhost:8000/ws/chat/' + label + '/'
+        let {label, user} = this.state
+        let socketURL = 'ws://localhost:8000/ws/chat/' + label + '/' + user.name + '/'
         
         this.setState({label:label, user:user, socketURL:socketURL})
-        // console.log(label, user)
     }
 
     // send message to server
-    sendHandler = message => {
+    sendHandler = text => {
         
+        let {label, user} = this.state
         const socket = this.refs.socket
         socket.state.ws.send(JSON.stringify({
           'type': 'chat',
-          'key': this.state.user.key,
-          'username': this.state.user.name,
-          'message': message,
-          'label': this.state.label
+          'key': user.key,
+          'usertype': user.type,
+          'username': user.name,
+          'text': text,
+          'label': label
         }))
     }
 
     // receive message from server
     receiveMessage(data){
-      
+
+        let {label, user} = this.state
+        
         data = JSON.parse(data)
-        // console.log(data)
         if(data.type === 'init'){
             this.setState({messages:[]})
             data.messages.forEach((msg) => {
-                msg.fromMe = msg.username === this.state.user.name
+                msg.fromMe = msg.username === user.name
                 this.addMessage(msg)
             })
         } else if(data.type === 'chat' || data.type === 'leave'){
-            let msg = {
-              'username': data.username,
-              'key': data.key,
-              'message':  data.message,
-              'timestamp': data.timestamp,
-              'fromMe':   data.username === this.state.user.name
+            let msg = data.message
+            msg.fromMe = msg.username === user.name
+            
+            console.log(data, user)
+            if(msg.username !== user.name && data.type === 'chat'){
+                this.props.onUnread(label, 1)
             }
-            console.log(data.username, this.state.user.name)
-            if(data.username !== this.state.user.name){
-                this.props.onUnread(this.state.label, 1)
-            }
-
+            
             this.addMessage(msg)
         }
     }
@@ -73,11 +71,6 @@ class ChatApp extends Component {
         const { messages } = this.state
         messages.push(message)
         this.setState({ messages })
-    }
-
-    componentWillUnmount(){
-      
-      console.log('chatApp unmount')
     }
 
     render() {

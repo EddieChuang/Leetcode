@@ -11,18 +11,16 @@ class Main extends React.Component {
   constructor(props){
       super(props)
       this.state = {
-        user: this.props.location.state.user,
-        label: this.props.location.state.label,
+        user: JSON.parse(sessionStorage.user), //this.props.location.state.user,
+        label: sessionStorage.label, //this.props.location.state.label,
         sidebarDocked: false,
         unread: 0
       }
-
       this.onUnread = this.onUnread.bind(this)
       this.onSidebarDocked = this.onSidebarDocked.bind(this)
   }
 
   onUnread(label, n){
-    console.log('onUnread', label, n)
     if(!this.state.sidebarDocked)
         this.setState({unread: this.state.unread + n})
   }

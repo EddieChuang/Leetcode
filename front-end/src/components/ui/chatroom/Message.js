@@ -26,13 +26,16 @@ class Message extends Component {
         </div>
         
         <div className="message-box">
-          <div style={{'maxWidth':'90%'}}>{ this.props.message }</div>
-          <br/>
-          <span className={fromMe?'time-right':'time-left'}>
+          <div className="message-text">
+            { this.props.text }
+          </div>
+          {/* <br/> */}
+          <div className={fromMe?'time-left':'time-right'}>
             {this.props.timestamp}
-          </span>
+          </div>
+            
         </div>
-        
+                
         {/* <div className='message-body'> */}
           
           {/* <div className='message-body-text'> */}

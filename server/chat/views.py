@@ -16,29 +16,33 @@ def index(request):
 @require_POST
 def auth_room(request):
 
-    print('auth_room')
     key  = request.POST.get('key')
     name = request.POST.get('team_name')
     note =  request.POST.get('note')
     team = Team.objects.filter(key=key)
     
     if team :
-        team  = team[0]
+        team = team[0]
         room  = team.room
         teams = room.teams.all()  # all teams in the room
         isActive = room.isActive
 
         if not isActive:
             return JsonRespnose({'res':'遊戲未開啟'}, status=403)
-        for team in teams:
-            if name == team.name and not(key == team.key):
+        for t in teams:
+            if name == t.name and not(key == t.key):
                 return JsonResponse({'res':'隊伍名稱已存在'}, status=403)
 
-        Team.objects.filter(key=key).update(name=name)
-        Team.objects.filter(key=key).update(note=note)               
-        res_team = {'key':key, 'name':name, 'note':note}
-        return JsonResponse({'res':'歡迎進入遊戲', 'label':room.label, 'team':res_team}, status=200)
-  
+        if not team.name or team.name == name:
+            Team.objects.filter(key=key).update(name=name)
+            if note:
+                Team.objects.filter(key=key).update(note=note)               
+            res_team = {'key':key, 'name':name, 'note':note}
+            return JsonResponse({'res':'歡迎進入遊戲', 'label':room.label, 'team':res_team}, status=200)
+        else:
+            return JsonResponse({'res':'隊伍名稱錯誤'}, status=403)
+
+
     return JsonResponse({'res':'遊戲金鑰錯誤'}, status=403)
 
 #     @require_POST

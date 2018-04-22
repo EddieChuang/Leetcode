@@ -16,14 +16,12 @@ class Game extends React.Component {
     super(props)
 
     this.state = {
-      user: this.props.user ? this.props.user : this.props.location.state.user,
-      label :this.props.label ? this.props.label : this.props.location.state.label,
+      user: this.props.user,
+      label: this.props.label,
       sidebarOpen: false,
       sidebarDocked: false,
       unread: 0
     }
-
-
 
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this)    
   }
@@ -39,7 +37,6 @@ class Game extends React.Component {
 
   render(){
 
-    // console.log(this.state)
     let sideBarStyles = {
       root: {
         position: 'relative',
@@ -49,7 +46,6 @@ class Game extends React.Component {
       sidebar: {overflowY: 'hidden'},
       content:{overflowY: 'hidden'}
     }
-
 
     return(
       
@@ -62,7 +58,8 @@ class Game extends React.Component {
         pullRight={true}
         styles={sideBarStyles}>
         
-        <h1>hi, game startttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</h1>
+        <h1>hi, game start</h1>
+        <h2>{this.state.label}</h2>
         {/* <Chatroom/> */}
         
           

@@ -1,5 +1,5 @@
 .item-list-header {
-  height: auto;
+  height: 7rem;
   width: $page-content-sidebar-width;
   padding: 10px;
   background: $item-list-header-bg;
@@ -8,20 +8,25 @@
 .item-list {
   overflow-y: scroll;
   width: 100%;
-  height: 100%;
+  height: 89%;
 }
 
 .item {
   position: relative;
   padding: 3px;
-  border-bottom: 1px solid $grey;
+  border-bottom: 1px solid $gray;
+   
 }
+.item-active{
+  background-color: $gray;
+}
+
 
 .item:hover {
   cursor: pointer;
-  background-color: #EEE;
+  background-color: $gray;
 }
 
 .item:active {
-  background-color: #CCC;
+  background-color: $gray;
 }

@@ -9,9 +9,6 @@ import {RoomList, CreateRoomModal} from '../ui/room'
 import {Game} from '../ui/game'
 import {Header} from '../ui/header'
 
-// utils
-import auth from '../../utils/auth'
-
 // constants
 import {URL_GETALLROOM} from '../../constants/url'
 
@@ -24,39 +21,37 @@ class Home extends React.Component {
         activeLabel: '',
         show: false,
         rooms: [],
-        username: '',
+        user: JSON.parse(sessionStorage.user),
         unread:{},
         sidebarDocked: false
       }
 
       this.onEnter = this.onEnter.bind(this)
       this.onUnread = this.onUnread.bind(this)
+      this.getAllRooms = this.getAllRooms.bind(this)
       this.openCreateRoom = this.openCreateRoom.bind(this)
       this.onUpdateRooms = this.onUpdateRooms.bind(this)
       this.onSidebarDocked = this.onSidebarDocked.bind(this)
   }
 
-  componentWillMount(){
-      // get all rooms
-      // console.log("componentWillMount", "Home")
-      let username = localStorage.username
-      let userInfo = new FormData()
-      userInfo.append("username", username)
-      this.setState({username: username})
-      axios.post(URL_GETALLROOM, userInfo)
-        .then((response) => {
-            // console.log(response)
-            this.setState({rooms:response.data.rooms})
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+  componentDidMount(){
+    this.getAllRooms()
   }
-
-  
 
   openCreateRoom(){
     this.setState({show: true})
+  }
+
+  getAllRooms(){
+    let userInfo = new FormData()
+    userInfo.append("username", this.state.user.name)
+    axios.post(URL_GETALLROOM, userInfo)
+      .then((response) => {
+          this.setState({rooms:response.data.rooms})
+      })
+      .catch((err) => {
+          console.log(err)
+      })
   }
 
   onUpdateRooms(newRoom){
@@ -88,8 +83,7 @@ class Home extends React.Component {
     }
 
     onUnread(label, n){
-      console.log('onUnread', label, n)
-      if(this.state.activeLabel !== label){
+      if(this.state.activeLabel !== label){ 
         this.setState({unread: {label:label, n:n}})
       }
     }
@@ -100,23 +94,32 @@ class Home extends React.Component {
   
     render(){
 
-      let user  = {'type':'teacher', 'key':'', 'name':this.state.username, 'note':''}
       const gameList = this.state.rooms.map((room) => (
       <div 
         key={room.label} 
         id={room.label} 
         className={this.state.activeLabel==room.label?'active-game':'inactive-game'}
       >
-        <Game user={user} label={room.label} onUnread={this.onUnread} sidebarDocked={this.state.sidebarDocked}/>
+        <Game 
+          user={this.state.user} 
+          label={room.label} 
+          onUnread={this.onUnread} 
+          sidebarDocked={this.state.sidebarDocked}/>
       </div>
       ))
 
     return(<div>
 
-      <Header user={user} onSidebarDocked={this.onSidebarDocked}/>
+      <Header user={this.state.user} onSidebarDocked={this.onSidebarDocked}/>
       <div className="page-content">
         <div className="page-content-sidebar">
-          <RoomList onEnter={this.onEnter} unread={this.state.unread}/>
+          <RoomList 
+            onEnter={this.onEnter}
+            user={this.state.user} 
+            rooms={this.state.rooms}
+            unread={this.state.unread}
+            activeLabel={this.state.activeLabel}
+            />
         </div>
         <div className="page-content-main">
           {gameList}

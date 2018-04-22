@@ -12,13 +12,13 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" render={() => (
                 auth.loggined() ? <Redirect to="/home"/> : 
-                false   ? <Redirect to="/chat"/> : <Login/> 
+                auth.inRoom()   ? <Redirect to="/chat"/> : <Login/> 
             )}/>
             <Route exact path="/home" render={() => (
-                !auth.loggined() ? <Redirect to="/"/> : <Home/> 
+                auth.loggined() ? <Home/> :  <Redirect to="/"/>
             )}/>
             <Route exact path="/chat" render={() => (
-                false ? <Redirect to="/"/> : <Main />
+                auth.inRoom() ? <Main /> :  <Redirect to="/"/>
             )}/>
           </Switch>
         )

@@ -47,7 +47,11 @@ class ChatInput extends Component {
                 required>
                 
               </input>
-              <div className="fa fa-2x fa-arrow-circle-right" onClick={this.submitHandler}></div> 
+              <div 
+                className="fa fa-2x fa-arrow-circle-right" 
+                onClick={this.submitHandler}
+                style={{position:'relative', top:'4px'}}
+                />
             {/* </div> */}
         </form>
         )

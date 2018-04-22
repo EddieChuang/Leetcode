@@ -1,8 +1,9 @@
 import axios from 'axios';
+import {URL_AUTHROOM, URL_LOGIN} from '../constants/url'
 
 export default {
-    login: function(username, password, callback){
-        // if(localStorage.token){
+    login: (username, password, callback) => {
+        // if(sessionStorage.token){
         //     if(callback)
         //         callback(true)
         //     return
@@ -12,11 +13,17 @@ export default {
         let user = new FormData()
         user.append("username", username)
         user.append("password", password)
-        axios.post('http://localhost:8000/login/', user)
+        axios.post(URL_LOGIN, user)
           .then((res) => {
               console.log(res)
-              localStorage.token = res.data.token
-              localStorage.username = username
+              let user = {
+                'type': 'teacher', 
+                'key': '', 
+                'name': username, 
+                'note': ''
+              }
+              sessionStorage.token = res.data.token
+              sessionStorage.user = JSON.stringify(user)
               callback(true)
           })
           .catch((err) => {
@@ -25,23 +32,33 @@ export default {
           })
     },
 
-    logout: function(){
-        delete localStorage.token
-        delete localStorage.username
+    logout: () => {
+        delete sessionStorage.token
+        delete sessionStorage.user
     },
 
-    loggined: function(){
-        return !!localStorage.token
+    loggined: () => {
+        return !!sessionStorage.token
     },
 
-    authRoom: function(key, team, note, callback){
+    
+
+    authRoom: (key, team, note, callback) => {
 
         let req = new FormData()
         req.append("key", key)
         req.append("team_name", team)
         req.append("note", note)
-        axios.post('http://localhost:8000/chat/authRoom/', req)
+        axios.post(URL_AUTHROOM, req)
           .then((res) => {
+              let user = {
+                'type': 'team', 
+                'key': res.data.team.key, 
+                'name': res.data.team.name, 
+                'note': res.data.team.note
+              }
+              sessionStorage.user = JSON.stringify(user)
+              sessionStorage.label = res.data.label
               callback(true, res.data)
           })
           .catch((err) => {
@@ -49,13 +66,12 @@ export default {
               callback(false, err.response)
           })
     },
-
-    // inRoom: function(){
-    //     return !!localStorage.user
-    // },
-
-    // leaveRoom: function(){
-    //     delete localStorage.user
-    // }
+    leaveRoom: () => {
+      delete sessionStorage.user
+      delete sessionStorage.label
+    },
+    inRoom: () => {
+      return !!sessionStorage.user
+    }
 
 }

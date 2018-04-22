@@ -19,9 +19,10 @@ class Room(models.Model):
 class Message(models.Model):
 
     room      = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='messages')
-    key       = models.CharField(max_length=20)
+    key       = models.CharField(max_length=20, default='')
+    usertype  = models.CharField(max_length=20, default='') # ['teacher', 'team', 'system']
     username  = models.CharField(max_length=20, default='')
-    message   = models.TextField()
+    text   = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
     def __unicode__(self):
@@ -41,6 +42,7 @@ class Team(models.Model):
     key       = models.CharField(max_length=20)
     name      = models.CharField(max_length=20, default='')
     note      = models.TextField(default='')
+    inRoom    = models.BooleanField(default=False)
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
     
