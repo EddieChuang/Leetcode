@@ -89,23 +89,31 @@ class GameInfo extends React.Component {
 
     let room = this.state.room
     let keys = room.keys.map((key, i)=>{
+      // console.log(room)
       return (
         <li key={key}>
           <Clipboard data-clipboard-text={key} onSuccess={this.onCopySuccess}>
             <span className="glyphicon glyphicon-copy"/>
           </Clipboard>
-          {key}
+          {key + ':' + room.keyToTeam[key].name}
         </li>
       )
     })
 
     
-    console.log(room)
+    // console.log(room)
     return(
       
       
       <Sidebar 
-        sidebar={<Chatroom onUnread={this.props.onUnread} user={this.state.user} label={room.label}/>}
+        sidebar={
+          <Chatroom 
+            onUnread={this.props.onUnread} 
+            onJoin={this.props.onJoin}
+            user={this.state.user} 
+            label={room.label}
+          />
+        }
         open={this.state.sidebarOpen}
         docked={this.state.sidebarDocked}        
         onSetOpen={this.onSetSidebarOpen}

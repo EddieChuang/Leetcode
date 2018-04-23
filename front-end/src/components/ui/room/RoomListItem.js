@@ -83,4 +83,4 @@ class RoomListItem extends React.Component {
   }
 }
 
-export default withRouter(RoomListItem)
+export default RoomListItem// withRouter(RoomListItem)

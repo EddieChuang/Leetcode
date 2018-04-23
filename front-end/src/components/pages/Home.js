@@ -21,20 +21,22 @@ class Home extends React.Component {
         activeLabel: '',
         show: false,
         rooms: [],
+        matchedRooms: [], // 符合搜尋結果的rooms
         user: JSON.parse(sessionStorage.user),
         unread:{},
         sidebarDocked: false
       }
 
-      this.onEnter = this.onEnter.bind(this)
-      this.onUnread = this.onUnread.bind(this)
-      this.getAllRooms = this.getAllRooms.bind(this)
-      this.openCreateRoom = this.openCreateRoom.bind(this)
-      this.onUpdateRooms = this.onUpdateRooms.bind(this)
-      this.onSidebarDocked = this.onSidebarDocked.bind(this)
+      this.onEnter = this.onEnter.bind(this)   // 點擊room item，進入遊戲資訊頁面
+      this.onUnread = this.onUnread.bind(this) // 有未讀訊息
+      this.onJoin = this.onJoin.bind(this)          // 有隊伍加入遊戲
+      this.getAllRooms = this.getAllRooms.bind(this) // 取得資料庫中該老師所屬的遊戲，
+      this.openCreateRoom = this.openCreateRoom.bind(this) // 開啟建立遊戲視窗
+      this.onUpdateRooms = this.onUpdateRooms.bind(this)   // 關閉遊戲時，更新遊戲資訊
+      this.onSidebarDocked = this.onSidebarDocked.bind(this) // 開關 chatroom sidebar
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.getAllRooms()
   }
 
@@ -47,7 +49,10 @@ class Home extends React.Component {
     userInfo.append("username", this.state.user.name)
     axios.post(URL_GETALLROOM, userInfo)
       .then((response) => {
-          this.setState({rooms:response.data.rooms})
+          this.setState({
+            rooms: response.data.rooms,
+            matchedRooms: response.data.rooms
+          })
       })
       .catch((err) => {
           console.log(err)
@@ -61,7 +66,7 @@ class Home extends React.Component {
     //     newRoom[key] = value
     // })
     let roomsToUpdate = this.state.rooms
-    let indexToUpdate = roomsToUpdate.findIndex(function(room_){
+    let indexToUpdate = roomsToUpdate.findIndex(room_ => {
         return newRoom.label === room_.label
     })
     // console.log('newRoom: ', newRoom)
@@ -88,12 +93,27 @@ class Home extends React.Component {
       }
     }
 
+    onJoin(label, key, teamname){
+      // console.log(label, key, teamname)
+      let rooms = this.state.rooms
+      let indexToUpdate = rooms.findIndex(room => (label === room.label))
+      let roomToUpdate  = rooms[indexToUpdate]
+      roomToUpdate.keyToTeam[key].name = teamname
+      rooms[indexToUpdate] = roomToUpdate
+      this.setState({rooms: rooms})
+    }
+
     onSidebarDocked(){
       this.setState({sidebarDocked: !this.state.sidebarDocked})
     }
+
+    
+
+    
   
     render(){
-
+      
+      console.log('Home', this.state)
       const gameList = this.state.rooms.map((room) => (
       <div 
         key={room.label} 
@@ -104,13 +124,19 @@ class Home extends React.Component {
           user={this.state.user} 
           room={room} 
           onUnread={this.onUnread} 
+          onJoin={this.onJoin}
           sidebarDocked={this.state.sidebarDocked}/>
       </div>
       ))
-
+      
     return(<div>
 
-      <Header user={this.state.user} onSidebarDocked={this.onSidebarDocked} page="home"/>
+      <Header 
+        user={this.state.user}
+        onSidebarDocked={this.onSidebarDocked} 
+        page="home"
+         
+        />
       <div className="page-content">
         <div className="page-content-sidebar">
           <RoomList 

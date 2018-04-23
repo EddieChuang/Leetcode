@@ -51,7 +51,13 @@ class Game extends React.Component {
       
       
       <Sidebar 
-        sidebar={<Chatroom onUnread={this.props.onUnread} user={this.state.user} label={this.state.label}/>}
+        sidebar={
+          <Chatroom 
+            onUnread={this.props.onUnread} 
+            onJoin={this.props.onJoin}
+            user={this.state.user}
+            label={this.state.label}/>
+        }
         open={this.state.sidebarOpen}
         docked={this.state.sidebarDocked}        
         onSetOpen={this.onSetSidebarOpen}

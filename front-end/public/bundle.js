@@ -47068,23 +47068,25 @@ var Home = function (_React$Component) {
       activeLabel: '',
       show: false,
       rooms: [],
+      matchedRooms: [], // 符合搜尋結果的rooms
       user: JSON.parse(sessionStorage.user),
       unread: {},
       sidebarDocked: false
     };
 
-    _this.onEnter = _this.onEnter.bind(_this);
-    _this.onUnread = _this.onUnread.bind(_this);
-    _this.getAllRooms = _this.getAllRooms.bind(_this);
-    _this.openCreateRoom = _this.openCreateRoom.bind(_this);
-    _this.onUpdateRooms = _this.onUpdateRooms.bind(_this);
-    _this.onSidebarDocked = _this.onSidebarDocked.bind(_this);
+    _this.onEnter = _this.onEnter.bind(_this); // 點擊room item，進入遊戲資訊頁面
+    _this.onUnread = _this.onUnread.bind(_this); // 有未讀訊息
+    _this.onJoin = _this.onJoin.bind(_this); // 有隊伍加入遊戲
+    _this.getAllRooms = _this.getAllRooms.bind(_this); // 取得資料庫中該老師所屬的遊戲，
+    _this.openCreateRoom = _this.openCreateRoom.bind(_this); // 開啟建立遊戲視窗
+    _this.onUpdateRooms = _this.onUpdateRooms.bind(_this); // 關閉遊戲時，更新遊戲資訊
+    _this.onSidebarDocked = _this.onSidebarDocked.bind(_this); // 開關 chatroom sidebar
     return _this;
   }
 
   _createClass(Home, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       this.getAllRooms();
     }
   }, {
@@ -47100,7 +47102,10 @@ var Home = function (_React$Component) {
       var userInfo = new FormData();
       userInfo.append("username", this.state.user.name);
       _axios2.default.post(_url.URL_GETALLROOM, userInfo).then(function (response) {
-        _this2.setState({ rooms: response.data.rooms });
+        _this2.setState({
+          rooms: response.data.rooms,
+          matchedRooms: response.data.rooms
+        });
       }).catch(function (err) {
         console.log(err);
       });
@@ -47143,6 +47148,19 @@ var Home = function (_React$Component) {
       }
     }
   }, {
+    key: 'onJoin',
+    value: function onJoin(label, key, teamname) {
+      // console.log(label, key, teamname)
+      var rooms = this.state.rooms;
+      var indexToUpdate = rooms.findIndex(function (room) {
+        return label === room.label;
+      });
+      var roomToUpdate = rooms[indexToUpdate];
+      roomToUpdate.keyToTeam[key].name = teamname;
+      rooms[indexToUpdate] = roomToUpdate;
+      this.setState({ rooms: rooms });
+    }
+  }, {
     key: 'onSidebarDocked',
     value: function onSidebarDocked() {
       this.setState({ sidebarDocked: !this.state.sidebarDocked });
@@ -47152,6 +47170,7 @@ var Home = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      console.log('Home', this.state);
       var gameList = this.state.rooms.map(function (room) {
         return _react2.default.createElement(
           'div',
@@ -47164,6 +47183,7 @@ var Home = function (_React$Component) {
             user: _this3.state.user,
             room: room,
             onUnread: _this3.onUnread,
+            onJoin: _this3.onJoin,
             sidebarDocked: _this3.state.sidebarDocked })
         );
       });
@@ -47171,7 +47191,12 @@ var Home = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_header.Header, { user: this.state.user, onSidebarDocked: this.onSidebarDocked, page: 'home' }),
+        _react2.default.createElement(_header.Header, {
+          user: this.state.user,
+          onSidebarDocked: this.onSidebarDocked,
+          page: 'home'
+
+        }),
         _react2.default.createElement(
           'div',
           { className: 'page-content' },
@@ -47724,11 +47749,15 @@ var RoomList = function (_React$Component) {
 
     _this.state = {
       rooms: _this.props.rooms,
+      matchedRooms: _this.props.rooms,
       user: _this.props.user,
       unread: _this.props.unread
     };
+
     _this.onUpdateRooms = _this.onUpdateRooms.bind(_this);
     _this.getAllRooms = _this.getAllRooms.bind(_this);
+    _this.renderRoomItem = _this.renderRoomItem.bind(_this);
+    _this.onSearch = _this.onSearch.bind(_this);
     return _this;
   }
 
@@ -47736,7 +47765,8 @@ var RoomList = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // get all rooms
-      this.getAllRooms();
+      // this.getAllRooms()
+
     }
   }, {
     key: 'getAllRooms',
@@ -47754,7 +47784,11 @@ var RoomList = function (_React$Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(props) {
-      this.setState({ unread: props.unread });
+      this.setState({
+        unread: props.unread,
+        rooms: props.rooms,
+        matchedRooms: props.rooms
+      });
     }
   }, {
     key: 'onUpdateRooms',
@@ -47776,29 +47810,60 @@ var RoomList = function (_React$Component) {
       }
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'onSearch',
+    value: function onSearch(matchedRooms) {
+      this.setState({ matchedRooms: matchedRooms });
+    }
+  }, {
+    key: 'renderRoomItem',
+    value: function renderRoomItem() {
       var _this3 = this;
 
-      var roomList = this.state.rooms.map(function (room) {
-        return _react2.default.createElement(_.RoomListItem, {
-          key: room.label,
-          room: room,
-          onEnter: _this3.props.onEnter,
-          onClick: _this3.enter,
-          unread: _this3.state.unread,
-          activeLabel: _this3.props.activeLabel
-        });
+      return this.state.matchedRooms.map(function (room) {
+        return (
+          // <h3 key={room.label}>{room.label}</h3>
+          _react2.default.createElement(_.RoomListItem, {
+            key: room.label,
+            room: room,
+            onEnter: _this3.props.onEnter,
+            unread: _this3.state.unread,
+            activeLabel: _this3.props.activeLabel
+          })
+        );
       });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      console.log('render');
 
+      // const roomList = this.state.rooms.map((room) => (
+      //   <RoomListItem 
+      //     key={room.label} 
+      //     room={room} 
+      //     onEnter={this.props.onEnter} 
+      //     onClick={this.enter}
+      //     unread={this.state.unread}
+      //     activeLabel={this.props.activeLabel}
+      //   />
+      // ))
+      // console.log(this.state)
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_.RoomListHeader, { onUpdateRooms: this.onUpdateRooms }),
+        _react2.default.createElement(_.RoomListHeader, {
+          onUpdateRooms: this.onUpdateRooms,
+          onSearch: this.onSearch,
+          rooms: this.state.rooms
+        }),
         _react2.default.createElement(
           'div',
           { className: 'item-list' },
-          roomList
+          _react2.default.createElement(
+            _reactFlipMove2.default,
+            null,
+            this.renderRoomItem()
+          )
         )
       );
     }
@@ -49427,7 +49492,7 @@ var RoomListItem = function (_React$Component) {
   return RoomListItem;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRouterDom.withRouter)(RoomListItem);
+exports.default = RoomListItem; // withRouter(RoomListItem)
 
 /***/ }),
 /* 390 */
@@ -59860,6 +59925,8 @@ var RoomListHeader = function (_React$Component) {
     _this.state = {
       show: false
     };
+
+    _this.search = _this.search.bind(_this);
     _this.openCreateRoom = _this.openCreateRoom.bind(_this);
     _this.closeCreateRoom = _this.closeCreateRoom.bind(_this);
     return _this;
@@ -59876,18 +59943,43 @@ var RoomListHeader = function (_React$Component) {
       this.setState({ show: false });
     }
   }, {
+    key: 'search',
+    value: function search(e) {
+
+      var keyword = e.target.value.trim();
+      if (keyword === "") {
+        this.props.onSearch(this.props.rooms);
+        return;
+      }
+
+      var matchedRooms = this.props.rooms.filter(function (room, i, arr) {
+        console.log(room, i, arr);
+        if (room.game.indexOf(keyword) !== -1) {
+          // match room's game
+          return true;
+        } else if (room.teacher.indexOf(keyword) !== -1) {
+          // match room's teacher
+          return true;
+        } else if (room.teams.indexOf(keyword) !== -1) {
+          // match room's teams
+          return true;
+        }
+        return false;
+      });
+      this.props.onSearch(matchedRooms);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { className: 'item-list-header' },
-        _react2.default.createElement('input', { type: 'text', placeholder: '\u641C\u5C0B\u904A\u6232' }),
+        _react2.default.createElement('input', { type: 'text', placeholder: '\u641C\u5C0B\u904A\u6232', onKeyUp: this.search }),
         _react2.default.createElement(
           'button',
           { className: 'btn btn-xs', onClick: this.openCreateRoom },
           '\u5EFA\u7ACB\u904A\u6232'
         ),
-        ' ',
         _react2.default.createElement(_.CreateRoomModal, {
           show: this.state.show,
           closeCreateRoom: this.closeCreateRoom,
@@ -60228,7 +60320,11 @@ var Game = function (_React$Component) {
       return _react2.default.createElement(
         _reactSidebar2.default,
         {
-          sidebar: _react2.default.createElement(_chatroom.Chatroom, { onUnread: this.props.onUnread, user: this.state.user, label: this.state.label }),
+          sidebar: _react2.default.createElement(_chatroom.Chatroom, {
+            onUnread: this.props.onUnread,
+            onJoin: this.props.onJoin,
+            user: this.state.user,
+            label: this.state.label }),
           open: this.state.sidebarOpen,
           docked: this.state.sidebarDocked,
           onSetOpen: this.onSetSidebarOpen,
@@ -60310,7 +60406,11 @@ var Chatroom = function (_Component) {
     _createClass(Chatroom, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_.ChatApp, { user: this.state.user, label: this.state.label, onUnread: this.props.onUnread });
+            return _react2.default.createElement(_.ChatApp, {
+                user: this.state.user,
+                label: this.state.label,
+                onUnread: this.props.onUnread,
+                onJoin: this.props.onJoin });
         }
     }]);
 
@@ -60434,16 +60534,18 @@ var ChatApp = function (_Component) {
                     msg.fromMe = msg.username === user.name;
                     _this2.addMessage(msg);
                 });
-            } else if (data.type === 'chat' || data.type === 'leave') {
+            } else if (data.type === 'join') {
                 var msg = data.message;
-                msg.fromMe = msg.username === user.name;
+                this.props.onJoin(this.state.label, msg.key, msg.username);
+            } else if (data.type === 'chat' || data.type === 'leave') {
+                var _msg = data.message;
+                _msg.fromMe = _msg.username === user.name;
 
-                console.log(data, user);
-                if (msg.username !== user.name && data.type === 'chat') {
+                if (_msg.username !== user.name && data.type === 'chat') {
                     this.props.onUnread(label, 1);
                 }
 
-                this.addMessage(msg);
+                this.addMessage(_msg);
             }
         }
     }, {
@@ -61290,6 +61392,7 @@ var GameInfo = function (_React$Component) {
 
       var room = this.state.room;
       var keys = room.keys.map(function (key, i) {
+        // console.log(room)
         return _react2.default.createElement(
           'li',
           { key: key },
@@ -61298,15 +61401,20 @@ var GameInfo = function (_React$Component) {
             { 'data-clipboard-text': key, onSuccess: _this3.onCopySuccess },
             _react2.default.createElement('span', { className: 'glyphicon glyphicon-copy' })
           ),
-          key
+          key + ':' + room.keyToTeam[key].name
         );
       });
 
-      console.log(room);
+      // console.log(room)
       return _react2.default.createElement(
         _reactSidebar2.default,
         {
-          sidebar: _react2.default.createElement(_chatroom.Chatroom, { onUnread: this.props.onUnread, user: this.state.user, label: room.label }),
+          sidebar: _react2.default.createElement(_chatroom.Chatroom, {
+            onUnread: this.props.onUnread,
+            onJoin: this.props.onJoin,
+            user: this.state.user,
+            label: room.label
+          }),
           open: this.state.sidebarOpen,
           docked: this.state.sidebarDocked,
           onSetOpen: this.onSetSidebarOpen,

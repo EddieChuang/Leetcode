@@ -105,16 +105,25 @@ def get_all_rooms(request):
     res = []
     for room in rooms:
         teams = room.teams.all()
-        keys = []
+        keys, teamname = [], []
+        keyToTeam = {}
         for team in teams:
             keys.append(team.key)
+            teamname.append(team.name)
+            keyToTeam[team.key] = {
+                'name': team.name,
+                'note': team.note
+            }
+           
         res.append({
           'isActive': room.isActive==1,
           'teacher': room.teacher,
           'label': room.label,
           'keys': keys,
           'nTeam': room.nTeam,
-          'game': room.game
+          'game': room.game,
+          'keyToTeam': keyToTeam,
+          'teams': teamname
         })
     return JsonResponse({"rooms":res}, status=200)
 

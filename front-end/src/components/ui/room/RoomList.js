@@ -10,16 +10,21 @@ class RoomList extends React.Component{
     super(props)
     this.state = {
       rooms: this.props.rooms,
+      matchedRooms: this.props.rooms,
       user: this.props.user,
       unread: this.props.unread
     }
+
     this.onUpdateRooms = this.onUpdateRooms.bind(this)
     this.getAllRooms = this.getAllRooms.bind(this)
+    this.renderRoomItem = this.renderRoomItem.bind(this)
+    this.onSearch = this.onSearch.bind(this)
   }
 
   componentDidMount(){
     // get all rooms
-    this.getAllRooms()
+    // this.getAllRooms()
+    
   }
 
   getAllRooms(){
@@ -35,7 +40,11 @@ class RoomList extends React.Component{
   }
   
   componentWillReceiveProps(props){    
-    this.setState({unread: props.unread})
+    this.setState({
+      unread: props.unread,
+      rooms: props.rooms,
+      matchedRooms: props.rooms
+    })
   }
 
   onUpdateRooms(newRoom){
@@ -56,28 +65,50 @@ class RoomList extends React.Component{
     }
   }
 
+  onSearch(matchedRooms){
+    this.setState({matchedRooms: matchedRooms})
+  }
 
-  render(){
-    
-    const roomList = this.state.rooms.map((room) => (
+  renderRoomItem(){
+    return this.state.matchedRooms.map((room) => (
+      // <h3 key={room.label}>{room.label}</h3>
       <RoomListItem 
         key={room.label} 
         room={room} 
         onEnter={this.props.onEnter} 
-        onClick={this.enter}
         unread={this.state.unread}
         activeLabel={this.props.activeLabel}
       />
     ))
+  }
 
+
+  render(){
+    console.log('render')
+    
+    // const roomList = this.state.rooms.map((room) => (
+    //   <RoomListItem 
+    //     key={room.label} 
+    //     room={room} 
+    //     onEnter={this.props.onEnter} 
+    //     onClick={this.enter}
+    //     unread={this.state.unread}
+    //     activeLabel={this.props.activeLabel}
+    //   />
+    // ))
+    // console.log(this.state)
     return (
       <div>
-        <RoomListHeader onUpdateRooms={this.onUpdateRooms}/>
+        <RoomListHeader 
+          onUpdateRooms={this.onUpdateRooms} 
+          onSearch={this.onSearch} 
+          rooms={this.state.rooms}
+        />
         <div className="item-list">
           
-          {/* <FlipMove duration={750} easing="ease-out">  */}
-            {roomList}
-           {/* </FlipMove>      */}
+          <FlipMove> 
+            {this.renderRoomItem()}
+           </FlipMove>     
         </div>
       </div>
     )

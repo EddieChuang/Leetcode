@@ -17,7 +17,13 @@ class Chatroom extends Component {
     }
     
     render() {
-        return <ChatApp user={this.state.user} label={this.state.label} onUnread={this.props.onUnread}/>
+        return (
+          <ChatApp 
+            user={this.state.user} 
+            label={this.state.label} 
+            onUnread={this.props.onUnread}
+            onJoin={this.props.onJoin}/>
+        )
     }
 
 }

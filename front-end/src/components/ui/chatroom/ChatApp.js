@@ -54,11 +54,13 @@ class ChatApp extends Component {
                 msg.fromMe = msg.username === user.name
                 this.addMessage(msg)
             })
+        } else if(data.type === 'join'){
+            let msg = data.message
+            this.props.onJoin(this.state.label, msg.key, msg.username)
         } else if(data.type === 'chat' || data.type === 'leave'){
             let msg = data.message
             msg.fromMe = msg.username === user.name
-            
-            console.log(data, user)
+
             if(msg.username !== user.name && data.type === 'chat'){
                 this.props.onUnread(label, 1)
             }

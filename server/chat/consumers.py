@@ -30,6 +30,17 @@ class ChatConsumer(WebsocketConsumer):
       if room.teams.filter(name=self.username).exists():
           room.teams.filter(name=self.username).update(inRoom=True)
           room.messages.create(usertype='system', text=self.username+'加入遊戲')
+          team = room.teams.get(name=self.username)
+          async_to_sync(self.channel_layer.group_send)(
+              self.room_group_name,
+              {
+                  'type': 'join_message',
+                  'key': team.key,
+                  'usertype': 'team',
+                  'username': team.name
+              }
+          )
+      
       messages = room.messages.order_by('timestamp')
       msgList = []
       for message in messages:
@@ -143,7 +154,6 @@ class ChatConsumer(WebsocketConsumer):
 
     def leave_message(self, event):
 
-        print(event)
         # Send message to WebSocket
         self.send(text_data=json.dumps({
             'type': 'leave',
@@ -153,5 +163,17 @@ class ChatConsumer(WebsocketConsumer):
               'username': event['username'],
               'text': event['text'],
               'timestamp': event['timestamp']
+            }
+        }))
+
+    def join_message(self, event):
+
+        # Send message to WebSocket
+        self.send(text_data=json.dumps({
+            'type': 'join',
+            'message': {
+              'key': event['key'],
+              'usertype': event['usertype'],
+              'username': event['username'],
             }
         }))
