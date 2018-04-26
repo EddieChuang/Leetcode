@@ -1,12 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment  } from 'react'
 
 class Message extends Component {
 
 
-  parseMessage(){
-
-
-
+  createImgurblock = (url) => {
+    
+    return (
+      <Fragment>
+        <a onClick={(e) => this.props.openLightbox(this.props.indexOfImg, e)}>
+          <img src={url} height="100%" width="100%"/>
+        </a>
+      </Fragment>
+    )
   }
 
   render() {
@@ -18,7 +23,6 @@ class Message extends Component {
     //   </div>
     //   <font>{this.props.timestamp}</font>) : ()
 
-
     return (
       <div className={`message ${fromMe}`}>
         <div className='username'>
@@ -27,7 +31,7 @@ class Message extends Component {
         
         <div className="message-box">
           <div className="message-text">
-            { this.props.text }
+          { this.props.msgtype==='image' ? this.createImgurblock(this.props.text) : this.props.text }
           </div>
           {/* <br/> */}
           <div className={fromMe?'time-left':'time-right'}>

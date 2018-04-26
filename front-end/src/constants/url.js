@@ -4,4 +4,5 @@ export const URL_GETALLROOM = "http://localhost:8000/chat/getAllRooms/"
 export const URL_CLOSEGAME = "http://localhost:8000/chat/closeGame/"
 export const URL_AUTHROOM = "http://localhost:8000/chat/authRoom/"
 export const URL_LOGIN = "http://localhost:8000/login/"
+export const URL_UPLOADFILE = "http://localhost:8000/chat/upload/"
 

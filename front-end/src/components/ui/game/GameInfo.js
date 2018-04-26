@@ -101,10 +101,9 @@ class GameInfo extends React.Component {
     })
 
     
-    // console.log(room)
     return(
       
-      
+     
       <Sidebar 
         sidebar={
           <Chatroom 

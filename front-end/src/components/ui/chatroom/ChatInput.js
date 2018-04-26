@@ -1,44 +1,87 @@
 
 import React, { Component } from 'react'
+import axios from 'axios'
 // require('font-awesome/scss/font-awesome.scss')
+// url
+import {URL_UPLOADFILE} from '../../../constants/url'
 
 class ChatInput extends Component {
     constructor(props) {
         super(props)
-        this.state = { chatInput: '' }
+        this.state = { 
+          label: this.props.label,
+          user: this.props.user,
+          chatInput: '',
+          image: undefined
+        }
     }
     
-    submitHandler = e  => {
+    onSubmit = e => {
         e.preventDefault()
         this.setState({ chatInput: '' })
-        this.props.onSend(this.state.chatInput);
+        let text = this.state.chatInput
+        let image = this.state.image
+
+        // send file
+        if(typeof image !== 'undefined'){
+            this.uploadImage(image)
+        }
+        
+        // send text
+        if(text.trim() !== "")
+            this.props.onSend(text)
     }
 
     textChangeHandler = e => {
-        this.setState({ chatInput: e.target.value })
+      this.setState({ chatInput: e.target.value })
     }
 
-    imageUpload = () => {
+    uploadImage = (image) => {
+      console.log('uploadImage', image)
+      let data = new FormData()
+      data.append("file", image)
+      data.append("label", this.state.label)
+      data.append("fileType", "image")
+      axios.post(URL_UPLOADFILE, data)
+        .then( res => {
+          console.log(res)
+          this.props.onSendImage(res.data.url)
+        })
+        .catch( err => {
+          console.log(err.response)
+        })
+    }
+
+    onSelectImage = () => {
+      console.log('onSelectFile')
       this.refs.imageid.click()
+
     }
 
-    handleImageChange = e => {
-        // const image = await axios.post(e.target.files[0])
+    onChangeImage = e => {
+        console.log("onChangeImage", e.target.files[0])
+        let image = e.target.files[0]
+        this.setState({image})
+        this.refs.imageName.innerText = 
+          typeof image !== 'undefined' ? image.name : ""
+        
     }
 
     render() {
         return (
-          <form className="chat-input" onSubmit={this.submitHandler}>
+          <form className="chat-input" onSubmit={this.onSubmit}>
             {/* <div className="input"> */}
-              {/* <div className="fa fa-2x fa-image" onClick={this.imageUpload}>
+              <div style={{display:'inline-block'}} className="fa fa-2x fa-image" onClick={this.onSelectImage}>
                 <input 
                   ref="imageid" 
                   type="file" 
                   accept="image/*"
-                  onChange={this.handleImageChange}
+                  onChange={this.onChangeImage}
+                  style={{display:'none'}}
                   hidden 
                 />
-              </div> */}
+              </div>
+              <label style={{fontSize:"14px"}} ref="imageName"></label>
               <input type="text"
                 className="input-msg"
                 onChange={this.textChangeHandler}
@@ -47,11 +90,13 @@ class ChatInput extends Component {
                 required>
                 
               </input>
+              {/* <button> */}
               <div 
                 className="fa fa-2x fa-arrow-circle-right" 
-                onClick={this.submitHandler}
+                onClick={this.onSubmit}
                 style={{position:'relative', top:'4px'}}
                 />
+              {/* </button> */}
             {/* </div> */}
         </form>
         )

@@ -113,7 +113,6 @@ class Home extends React.Component {
   
     render(){
       
-      console.log('Home', this.state)
       const gameList = this.state.rooms.map((room) => (
       <div 
         key={room.label} 

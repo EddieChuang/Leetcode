@@ -3,12 +3,16 @@ from django.views.decorators.http import require_POST,require_GET
 from django.utils.safestring import mark_safe
 from django.http import HttpResponse,JsonResponse
 from django.db import transaction
-from .models import Room, Team
+from .models import Room, Team, Image
 import random
 import string
 import json
+import os
+
 
 # Create your views here.
+
+media_dir = 'media/'
 
 def index(request):
     return render(request, 'chat/index.html', {})
@@ -140,3 +144,45 @@ def get_teams(request):
           'name': team.name
         })
     return JsonResponse({"teams":res}, status=200)
+
+
+@require_POST
+def uploader(request):
+    print('uploader')
+    print(request.FILES)
+    if request.FILES['file']:
+        file = request.FILES['file']
+        label = request.POST.get('label') # room label
+        fileType = request.POST.get('fileType','another')
+        print('label: ' + label)
+        try:
+            
+            room = Room.objects.get(label=label)
+            print(room)
+            num  = Image.objects.filter(room=room).count()
+            print(num)
+            name = str(num) + file.name 
+            print(name)
+            url  =  handle_uploaded_file(file, name, label, fileType)
+            
+            print(url)
+            Image.objects.create(room=room, name=name, url=url)
+            return JsonResponse({'url': url, 'name': name, 'type': fileType}, status=200)
+        except:
+            return HttpResponse('File Save Error', status=403)
+    else:
+        return HttpResponse('QQ error Upload', status=403)
+
+
+def handle_uploaded_file(file, name, label, fileType): # ensure that large file doesn't overwhelm memory    
+    path = media_dir + label + '/' + fileType + '/'
+    print(path)
+    os.makedirs(path, exist_ok=True)
+    
+    with open(path + name,'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
+    
+    
+
+    return "http://localhost:8000/chat/" + path + name

@@ -49,6 +49,7 @@ class ChatConsumer(WebsocketConsumer):
             'key': message.key,
             'usertype': message.usertype,
             'username': message.username,
+            'msgtype': message.msgtype,
             'text':  message.text,
             'timestamp': message.timestamp.strftime("%H:%M")
           })
@@ -83,12 +84,13 @@ class ChatConsumer(WebsocketConsumer):
         key      = data['key']
         usertype = data['usertype']
         username = data['username']
-        text  = data['text']
+        msgtype  = data['msgtype']
+        text     = data['text']
         label    = data['label']
 
         if msg_type == 'chat':
             room = Room.objects.get(label=label)
-            msg = room.messages.create(key=key, usertype=usertype, username=username, text=text)
+            msg = room.messages.create(key=key, usertype=usertype, username=username, msgtype=msgtype, text=text)
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
                 {
@@ -96,6 +98,7 @@ class ChatConsumer(WebsocketConsumer):
                     'key': key,
                     'usertype': usertype,
                     'username': username,
+                    'msgtype': msgtype,
                     'text': text,
                     'timestamp': msg.timestamp.strftime("%H:%M")
                 }
@@ -118,6 +121,7 @@ class ChatConsumer(WebsocketConsumer):
                 'key': '',
                 'usertype': 'system',
                 'username': '',
+                'msgtype': 'text',
                 'text': self.username + '離開遊戲',
                 'timestamp': msg.timestamp.strftime("%H:%M")
             }
@@ -147,6 +151,7 @@ class ChatConsumer(WebsocketConsumer):
               'key': event['key'],
               'usertype': event['usertype'],
               'username': event['username'],
+              'msgtype': event['msgtype'],
               'text': event['text'],
               'timestamp': event['timestamp']
             }
@@ -161,6 +166,7 @@ class ChatConsumer(WebsocketConsumer):
               'key': event['key'],
               'usertype': event['usertype'],
               'username': event['username'],
+              'msgtype': event['msgtype'],
               'text': event['text'],
               'timestamp': event['timestamp']
             }

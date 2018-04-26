@@ -22,6 +22,7 @@ class Message(models.Model):
     key       = models.CharField(max_length=20, default='')
     usertype  = models.CharField(max_length=20, default='') # ['teacher', 'team', 'system']
     username  = models.CharField(max_length=20, default='')
+    msgtype   = models.CharField(max_length=20, default='text')
     text   = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
@@ -44,5 +45,13 @@ class Team(models.Model):
     note      = models.TextField(default='')
     inRoom    = models.BooleanField(default=False)
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+
+class Image(models.Model):
+
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='images', default=None)
+    name = models.CharField(max_length=100, default='')
+    url  = models.CharField(max_length=1000, default='')
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+
 
     

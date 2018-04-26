@@ -8,18 +8,26 @@ class Messages extends Component {
     }
 
     render() {
+        let indexOfImg = -1 // num of image
         return (
           <div className="messages" id="messageList">
-            {this.props.messages.map((message, i) => (
-              <Message 
-                key={i}
-                usertype={message.usertype}
-                username={message.username}
-                text={message.text}
-                timestamp={message.timestamp}
-                fromMe={message.fromMe}
-              />
-            ))}
+            {this.props.messages.map((message, i) => {
+              indexOfImg = message.msgtype==='image' ? indexOfImg + 1 : indexOfImg
+              // console.log(indexOfImg)
+              return (
+                <Message 
+                  key={i}
+                  usertype={message.usertype}
+                  username={message.username}
+                  msgtype={message.msgtype}
+                  text={message.text}
+                  timestamp={message.timestamp}
+                  fromMe={message.fromMe}
+                  openLightbox={this.props.openLightbox}
+                  indexOfImg={indexOfImg}
+                />
+              )
+            })}
           </div>
         )
     }
